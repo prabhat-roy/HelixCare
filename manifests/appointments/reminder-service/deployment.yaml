@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reminder-service
+  namespace: helixcare
+  labels:
+    app.kubernetes.io/name: reminder-service
+    app.kubernetes.io/part-of: helixcare
+    helixcare.io/domain: appointments
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: reminder-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: reminder-service, helixcare.io/domain: appointments }
+    spec:
+      serviceAccountName: reminder-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: reminder-service
+          image: harbor.helixcare.internal/helixcare/reminder-service:latest
+          ports: [{ containerPort: 50062, name: http }]
+          envFrom: [{ configMapRef: { name: reminder-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50062 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50062 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

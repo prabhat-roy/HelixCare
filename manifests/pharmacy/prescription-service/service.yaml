@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prescription-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: prescription-service, helixcare.io/domain: pharmacy }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50120, targetPort: 50120 }]
+  selector: { app.kubernetes.io/name: prescription-service }

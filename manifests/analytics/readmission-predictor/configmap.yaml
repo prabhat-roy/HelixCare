@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: readmission-predictor
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: readmission-predictor, helixcare.io/domain: analytics }
+data:
+  LOG_LEVEL: info
+  PORT: "50302"

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demographics-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: demographics-service, helixcare.io/domain: patient }
+data:
+  LOG_LEVEL: info
+  PORT: "50043"

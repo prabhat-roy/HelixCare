@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: equipment-service
+  namespace: helixcare
+  labels:
+    app.kubernetes.io/name: equipment-service
+    app.kubernetes.io/part-of: helixcare
+    helixcare.io/domain: inventory
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: equipment-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: equipment-service, helixcare.io/domain: inventory }
+    spec:
+      serviceAccountName: equipment-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: equipment-service
+          image: harbor.helixcare.internal/helixcare/equipment-service:latest
+          ports: [{ containerPort: 50261, name: http }]
+          envFrom: [{ configMapRef: { name: equipment-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50261 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50261 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

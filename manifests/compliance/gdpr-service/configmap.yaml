@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gdpr-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: gdpr-service, helixcare.io/domain: compliance }
+data:
+  LOG_LEVEL: info
+  PORT: "50323"

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shift-management
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: shift-management, helixcare.io/domain: staff }
+data:
+  LOG_LEVEL: info
+  PORT: "50240"

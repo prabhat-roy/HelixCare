@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hipaa-audit
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: hipaa-audit, helixcare.io/domain: compliance }
+data:
+  LOG_LEVEL: info
+  PORT: "50322"

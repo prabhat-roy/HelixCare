@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reminder-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: reminder-service, helixcare.io/domain: appointments }
+data:
+  LOG_LEVEL: info
+  PORT: "50062"

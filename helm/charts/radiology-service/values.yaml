@@ -1,0 +1,49 @@
+image:
+  repository: helixcare/radiology-service
+  tag: ""
+  pullPolicy: IfNotPresent
+
+replicaCount: 2
+
+service:
+  type: ClusterIP
+  port: 50101
+  targetPort: 50101
+
+resources:
+  requests: { cpu: 100m, memory: 128Mi }
+  limits:   { cpu: 1000m, memory: 512Mi }
+
+probes:
+  liveness:
+    httpGet: { path: /healthz, port: 50101 }
+    initialDelaySeconds: 15
+  readiness:
+    httpGet: { path: /healthz, port: 50101 }
+    initialDelaySeconds: 5
+
+serviceAccount: { create: true, annotations: {} }
+
+podLabels:
+  app.kubernetes.io/name: radiology-service
+  app.kubernetes.io/part-of: helixcare
+  helixcare.io/domain: diagnostics
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+  seccompProfile: { type: RuntimeDefault }
+
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities: { drop: ["ALL"] }
+
+config:
+  LOG_LEVEL: info
+
+cloud:
+  provider: ""
+  storageClass: ""
+  ingressClass: ""

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demographics-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: demographics-service, helixcare.io/domain: patient }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50043, targetPort: 50043 }]
+  selector: { app.kubernetes.io/name: demographics-service }

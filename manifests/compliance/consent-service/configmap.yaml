@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: consent-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: consent-service, helixcare.io/domain: compliance }
+data:
+  LOG_LEVEL: info
+  PORT: "50320"

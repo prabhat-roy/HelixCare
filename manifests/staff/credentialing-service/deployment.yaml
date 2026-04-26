@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credentialing-service
+  namespace: helixcare
+  labels:
+    app.kubernetes.io/name: credentialing-service
+    app.kubernetes.io/part-of: helixcare
+    helixcare.io/domain: staff
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: credentialing-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: credentialing-service, helixcare.io/domain: staff }
+    spec:
+      serviceAccountName: credentialing-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: credentialing-service
+          image: harbor.helixcare.internal/helixcare/credentialing-service:latest
+          ports: [{ containerPort: 50242, name: http }]
+          envFrom: [{ configMapRef: { name: credentialing-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50242 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50242 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

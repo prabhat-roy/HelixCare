@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: icu-management
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: icu-management, helixcare.io/domain: ward-management }
+data:
+  LOG_LEVEL: info
+  PORT: "50222"

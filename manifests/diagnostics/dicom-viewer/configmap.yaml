@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dicom-viewer
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: dicom-viewer, helixcare.io/domain: diagnostics }
+data:
+  LOG_LEVEL: info
+  PORT: "50103"

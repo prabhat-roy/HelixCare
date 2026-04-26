@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: push-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: push-service, helixcare.io/domain: communications }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50282, targetPort: 50282 }]
+  selector: { app.kubernetes.io/name: push-service }

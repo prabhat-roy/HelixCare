@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: radiology-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: radiology-service, helixcare.io/domain: diagnostics }
+data:
+  LOG_LEVEL: info
+  PORT: "50101"

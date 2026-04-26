@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: refund-service
+  namespace: helixcare
+  labels:
+    app.kubernetes.io/name: refund-service
+    app.kubernetes.io/part-of: helixcare
+    helixcare.io/domain: billing
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: refund-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: refund-service, helixcare.io/domain: billing }
+    spec:
+      serviceAccountName: refund-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: refund-service
+          image: harbor.helixcare.internal/helixcare/refund-service:latest
+          ports: [{ containerPort: 50163, name: http }]
+          envFrom: [{ configMapRef: { name: refund-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50163 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50163 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

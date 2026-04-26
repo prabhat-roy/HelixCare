@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: medical-supply-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: medical-supply-service, helixcare.io/domain: inventory }
+data:
+  LOG_LEVEL: info
+  PORT: "50260"

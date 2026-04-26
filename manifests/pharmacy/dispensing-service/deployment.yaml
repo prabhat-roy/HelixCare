@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dispensing-service
+  namespace: helixcare
+  labels:
+    app.kubernetes.io/name: dispensing-service
+    app.kubernetes.io/part-of: helixcare
+    helixcare.io/domain: pharmacy
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: dispensing-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: dispensing-service, helixcare.io/domain: pharmacy }
+    spec:
+      serviceAccountName: dispensing-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: dispensing-service
+          image: harbor.helixcare.internal/helixcare/dispensing-service:latest
+          ports: [{ containerPort: 50123, name: http }]
+          envFrom: [{ configMapRef: { name: dispensing-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50123 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50123 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

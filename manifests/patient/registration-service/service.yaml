@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: registration-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: registration-service, helixcare.io/domain: patient }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50040, targetPort: 50040 }]
+  selector: { app.kubernetes.io/name: registration-service }

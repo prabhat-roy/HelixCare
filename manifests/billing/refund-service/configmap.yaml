@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: refund-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: refund-service, helixcare.io/domain: billing }
+data:
+  LOG_LEVEL: info
+  PORT: "50163"

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: risk-stratification
+  namespace: helixcare
+  labels:
+    app.kubernetes.io/name: risk-stratification
+    app.kubernetes.io/part-of: helixcare
+    helixcare.io/domain: analytics
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: risk-stratification } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: risk-stratification, helixcare.io/domain: analytics }
+    spec:
+      serviceAccountName: risk-stratification
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: risk-stratification
+          image: harbor.helixcare.internal/helixcare/risk-stratification:latest
+          ports: [{ containerPort: 50301, name: http }]
+          envFrom: [{ configMapRef: { name: risk-stratification } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50301 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50301 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

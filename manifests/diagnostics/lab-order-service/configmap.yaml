@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lab-order-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: lab-order-service, helixcare.io/domain: diagnostics }
+data:
+  LOG_LEVEL: info
+  PORT: "50100"

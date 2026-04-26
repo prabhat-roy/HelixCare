@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-management
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: order-management, helixcare.io/domain: clinical }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50083, targetPort: 50083 }]
+  selector: { app.kubernetes.io/name: order-management }

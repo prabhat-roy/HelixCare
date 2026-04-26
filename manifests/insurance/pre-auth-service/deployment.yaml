@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pre-auth-service
+  namespace: helixcare
+  labels:
+    app.kubernetes.io/name: pre-auth-service
+    app.kubernetes.io/part-of: helixcare
+    helixcare.io/domain: insurance
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: pre-auth-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: pre-auth-service, helixcare.io/domain: insurance }
+    spec:
+      serviceAccountName: pre-auth-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: pre-auth-service
+          image: harbor.helixcare.internal/helixcare/pre-auth-service:latest
+          ports: [{ containerPort: 50181, name: http }]
+          envFrom: [{ configMapRef: { name: pre-auth-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50181 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50181 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

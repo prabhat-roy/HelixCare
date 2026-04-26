@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sms-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: sms-service, helixcare.io/domain: communications }
+data:
+  LOG_LEVEL: info
+  PORT: "50280"

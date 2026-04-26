@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ward-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: ward-service, helixcare.io/domain: ward-management }
+data:
+  LOG_LEVEL: info
+  PORT: "50221"

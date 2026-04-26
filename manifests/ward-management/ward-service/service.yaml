@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ward-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: ward-service, helixcare.io/domain: ward-management }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50221, targetPort: 50221 }]
+  selector: { app.kubernetes.io/name: ward-service }

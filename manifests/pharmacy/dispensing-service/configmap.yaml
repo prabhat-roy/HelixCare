@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dispensing-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: dispensing-service, helixcare.io/domain: pharmacy }
+data:
+  LOG_LEVEL: info
+  PORT: "50123"

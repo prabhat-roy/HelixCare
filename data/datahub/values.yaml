@@ -1,0 +1,6 @@
+﻿# DataHub — open data catalog + lineage
+datahub-gms: { image: { repository: acryldata/datahub-gms, tag: latest }, replicas: 2 }
+datahub-frontend: { image: { repository: acryldata/datahub-frontend-react, tag: latest } }
+elasticsearch: { enabled: true }
+postgresql: { enabled: true }
+ingress: { enabled: true, hosts: [{ host: datahub.helixcare.internal }] }

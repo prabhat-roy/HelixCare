@@ -1,0 +1,6 @@
+﻿# Magistrala (formerly Mainflux) — IoT platform with NATS + multi-protocol adapters
+image: { repository: magistrala/magistrala, tag: latest }
+magistrala:
+  protocols: [http, mqtt, ws, coap, opcua]
+  nats: { enabled: true }
+  postgres: { enabled: true }

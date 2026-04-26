@@ -1,0 +1,7 @@
+﻿# ZITADEL — developer-platform auth (API keys, OAuth clients, dev portal SSO)
+image: { repository: ghcr.io/zitadel/zitadel, tag: latest }
+zitadel:
+  externalDomain: zitadel.helixcare.internal
+  externalSecure: true
+  database: { postgres: { host: postgres.helixcare.svc, database: zitadel } }
+ingress: { enabled: true, hosts: [{ host: zitadel.helixcare.internal }] }

@@ -1,0 +1,5 @@
+﻿# OpenCost — per-namespace / per-team / per-service cloud cost attribution
+image: { repository: quay.io/kubecost1/kubecost-cost-model, tag: latest }
+opencost:
+  prometheus: { external: { enabled: true, url: http://mimir-querier.helixcare.svc:8080/prometheus } }
+  exporter: { defaultClusterId: helixcare-prod }

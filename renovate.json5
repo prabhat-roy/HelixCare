@@ -1,0 +1,13 @@
+﻿{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["config:recommended", ":dependencyDashboard", ":semanticCommits", "group:allNonMajor"],
+  timezone: "Asia/Kolkata",
+  schedule: ["before 7am on monday"],
+  prHourlyLimit: 5,
+  vulnerabilityAlerts: { enabled: true, labels: ["security"] },
+  packageRules: [
+    { matchManagers: ["dockerfile", "kubernetes", "helm-values"], groupName: "infra-images" },
+    { matchManagers: ["gomod"], groupName: "go-deps" },
+    { matchManagers: ["npm"], groupName: "node-deps" }
+  ]
+}

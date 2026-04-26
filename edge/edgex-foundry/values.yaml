@@ -1,0 +1,5 @@
+﻿# EdgeX Foundry — open IoT edge platform (LF Edge)
+image: { repository: edgexfoundry/core-data, tag: 3.1.0 }
+edgex:
+  services: [core-data, core-metadata, core-command, support-notifications, support-scheduler, app-rules-engine, device-virtual]
+  message-bus: { type: mqtt, host: mosquitto.helixcare.svc, port: 1883 }

@@ -1,0 +1,7 @@
+﻿# Ory Hydra — OAuth 2.0 / OIDC provider (lightweight, no UI)
+image: { repository: oryd/hydra, tag: v2.2.0 }
+hydra:
+  config:
+    urls:
+      self: { issuer: https://hydra.helixcare.internal/, public: https://hydra.helixcare.internal/ }
+    secrets: { system: ["__CHANGE_ME__"] }

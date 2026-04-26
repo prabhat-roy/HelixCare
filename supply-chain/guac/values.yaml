@@ -1,0 +1,7 @@
+﻿# GUAC — Graph for Understanding Artifact Composition
+image: { repository: ghcr.io/guacsec/guac, tag: latest }
+guac:
+  graphql: { port: 8080 }
+  collectors: [{ type: deps_dev }, { type: certifier_osv }, { type: file_collector, path: /sboms }]
+  ingester: { backend: arangodb, host: arangodb.helixcare.svc, port: 8529 }
+ingress: { enabled: true, hosts: [{ host: guac.helixcare.internal }] }

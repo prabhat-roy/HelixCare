@@ -1,0 +1,5 @@
+﻿# OpenMetadata — alternative open data catalog (more discovery + governance focus)
+image: { repository: openmetadata/server, tag: latest }
+mysql: { enabled: true }
+elasticsearch: { enabled: true }
+ingress: { enabled: true, hosts: [{ host: openmetadata.helixcare.internal }] }

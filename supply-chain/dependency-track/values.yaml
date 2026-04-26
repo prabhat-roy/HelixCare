@@ -1,0 +1,5 @@
+﻿# Dependency-Track — continuous SBOM ingestion + CVE correlation
+image: { repository: dependencytrack/apiserver, tag: latest }
+frontend: { image: { repository: dependencytrack/frontend, tag: latest } }
+postgres: { enabled: true, auth: { database: dtrack } }
+ingress: { enabled: true, hosts: [{ host: dtrack.helixcare.internal }] }

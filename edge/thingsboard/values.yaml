@@ -1,0 +1,7 @@
+﻿# ThingsBoard CE — alternative IoT platform with rule chains + dashboards
+image: { repository: thingsboard/tb-postgres, tag: 3.7.0 }
+postgres: { enabled: true }
+thingsboard:
+  rule-engine: { enabled: true }
+  dashboards: { default: true }
+ingress: { enabled: true, hosts: [{ host: thingsboard.helixcare.internal }] }

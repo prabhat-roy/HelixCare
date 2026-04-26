@@ -1,0 +1,8 @@
+﻿# ScanCode Toolkit — license + copyright + dependency scanning
+scancode:
+  scan:
+    inputs: ["src/", "frontend/", "mobile/"]
+    output: "scancode-report.json"
+    options: ["--license", "--copyright", "--package", "--info", "--license-clarity-score"]
+    processes: 4
+    timeout: 300

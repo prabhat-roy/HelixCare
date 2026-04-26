@@ -1,0 +1,6 @@
+﻿# Sourcegraph (OSS) — universal code search across HelixCare
+image: { repository: sourcegraph/server, tag: 5.5.0 }
+sourcegraph:
+  externalURL: https://sourcegraph.helixcare.internal
+  repositoriesToAdd: [github.com/prabhat-roy/HelixCare]
+ingress: { enabled: true, hosts: [{ host: sourcegraph.helixcare.internal }] }

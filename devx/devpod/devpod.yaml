@@ -1,0 +1,6 @@
+﻿# DevPod workspace for HelixCare
+name: helixcare
+provider: kubernetes
+ide: vscode
+features: [{ id: ghcr.io/devcontainers/features/docker-in-docker:2 }, { id: ghcr.io/devcontainers/features/kubectl-helm-minikube:1 }]
+machine: { cpu: 4, memory: 8Gi, disk: 50Gi }

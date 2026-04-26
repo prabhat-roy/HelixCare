@@ -1,0 +1,16 @@
+﻿# Skaffold pipeline for HelixCare
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata: { name: helixcare }
+build:
+  artifacts:
+    - { image: helixcare/api-gateway, context: src/api-gateway }
+    - { image: helixcare/identity-service, context: src/identity-service }
+  local: { push: false }
+deploy:
+  helm:
+    releases:
+      - { name: api-gateway, chartPath: helm/charts/api-gateway, namespace: helixcare }
+profiles:
+  - name: prod
+    deploy: { kubectl: { manifests: ["manifests/prod/*.yaml"] } }

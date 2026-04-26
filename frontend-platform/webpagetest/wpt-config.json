@@ -1,0 +1,7 @@
+﻿{
+  "server": "https://wpt.helixcare.internal",
+  "tests": [
+    { "url": "https://www.helixcare.internal/", "location": "Dulles:Chrome", "runs": 3, "connectivity": "4G" },
+    { "url": "https://app.helixcare.internal/", "location": "Mumbai:Chrome", "runs": 3, "connectivity": "Cable" }
+  ]
+}

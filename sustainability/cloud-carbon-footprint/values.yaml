@@ -1,0 +1,8 @@
+﻿# Cloud Carbon Footprint — measure carbon emissions from AWS + GCP + Azure usage
+image: { repository: ccfltd/cloud-carbon-footprint, tag: latest }
+ccf:
+  config:
+    aws: { useBillingData: true, athenaDb: ccf_db, athenaTable: cur_table, athenaRegion: us-east-1 }
+    gcp: { useBillingData: true, bigQueryTable: helixcare-billing.gcp_billing_export }
+    azure: { useBillingData: true, billingExportContainer: ccf-billing }
+ingress: { enabled: true, hosts: [{ host: ccf.helixcare.internal }] }

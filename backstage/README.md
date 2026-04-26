@@ -1,6 +1,4 @@
-# Backstage — HelixCare
+﻿# Backstage — Developer Portal for HelixCare
 
-Developer portal — Backstage catalog, TechDocs, plugins.
-
-> Skeleton placeholder. Content will be added as the project takes shape.
-> See [../README.md](../README.md) for the HelixCare project overview.
+Self-hosted Spotify Backstage. Service catalog, TechDocs, software templates, scorecards.
+Run: `yarn install && yarn dev`. Upstream: https://github.com/backstage/backstage

@@ -1,0 +1,7 @@
+﻿# Benthos (now Redpanda Connect) — declarative stream processing for ETL / enrichment
+image: { repository: redpandadata/connect, tag: latest }
+benthos:
+  config:
+    input: { kafka: { addresses: [kafka.helixcare.svc:9092], topics: [events.raw] } }
+    pipeline: { processors: [{ bloblang: "root = this" }] }
+    output: { kafka: { addresses: [kafka.helixcare.svc:9092], topic: events.enriched } }

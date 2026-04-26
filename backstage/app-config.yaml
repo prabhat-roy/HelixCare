@@ -1,0 +1,12 @@
+﻿app:
+  title: HelixCare Developer Portal
+  baseUrl: http://localhost:3000
+backend:
+  baseUrl: http://localhost:7007
+  cors: { origin: http://localhost:3000 }
+catalog:
+  rules: [ { allow: [Component, System, API, Resource, Location, Domain, User, Group] } ]
+  locations:
+    - { type: file, target: ../catalog-info.yaml }
+techdocs: { builder: local, generator: { runIn: docker }, publisher: { type: local } }
+auth: { providers: { guest: dangerouslyAllowOutsideDevelopment: true } }

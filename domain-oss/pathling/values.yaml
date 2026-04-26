@@ -1,0 +1,3 @@
+﻿# Pathling — FHIR analytics server (CSIRO)
+image: { repository: aehrc/pathling, tag: latest }
+pathling: { fhir: { server: hapi-fhir.helixcare.svc:8080 }, query: { cache: { enabled: true } } }

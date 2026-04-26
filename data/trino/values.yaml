@@ -1,0 +1,12 @@
+﻿# Trino — federated SQL across Iceberg, Hudi, Postgres, Mongo, Kafka
+image: { repository: trinodb/trino, tag: 458 }
+coordinator: { jvm: { maxHeapSize: 8G } }
+worker: { replicas: 3, jvm: { maxHeapSize: 16G } }
+catalogs:
+  iceberg: |
+    connector.name=iceberg
+    iceberg.catalog.type=rest
+    iceberg.rest-catalog.uri=http://polaris.helixcare.svc:8181
+  postgres: |
+    connector.name=postgresql
+    connection-url=jdbc:postgresql://postgres.helixcare.svc:5432/helixcare

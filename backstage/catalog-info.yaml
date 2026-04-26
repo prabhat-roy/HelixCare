@@ -1,0 +1,9 @@
+﻿apiVersion: backstage.io/v1alpha1
+kind: System
+metadata: { name: helixcare, description: HelixCare enterprise platform }
+spec: { owner: platform-team, domain: helixcare }
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata: { name: helixcare }
+spec: { owner: platform-team }

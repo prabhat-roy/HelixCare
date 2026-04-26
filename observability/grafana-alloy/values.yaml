@@ -1,0 +1,9 @@
+﻿# Grafana Alloy — single OTel-compatible agent (replaces Promtail + OTel collector + node-exporter glue)
+image: { repository: grafana/alloy, tag: latest }
+alloy:
+  configMap: { create: true, content: |
+    prometheus.scrape "k8s" { targets = discovery.kubernetes.pods.targets, forward_to = [prometheus.remote_write.mimir.receiver] }
+    prometheus.remote_write "mimir" { endpoint { url = "http://mimir-distributor.helixcare.svc:8080/api/v1/push" } }
+    loki.source.kubernetes "logs" { targets = discovery.kubernetes.pods.targets, forward_to = [loki.write.loki.receiver] }
+    loki.write "loki" { endpoint { url = "http://loki.helixcare.svc:3100/loki/api/v1/push" } }
+  }

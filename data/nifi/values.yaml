@@ -1,0 +1,6 @@
+﻿# Apache NiFi — visual data-flow orchestration (heavier than Benthos, drag-and-drop UI)
+image: { repository: apache/nifi, tag: 2.0.0 }
+nifi:
+  cluster: { enabled: true, nodeCount: 3 }
+  postgres: { enabled: true, auth: { database: nifi_registry } }
+ingress: { enabled: true, hosts: [{ host: nifi.helixcare.internal }] }

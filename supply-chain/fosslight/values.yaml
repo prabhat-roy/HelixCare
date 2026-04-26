@@ -1,0 +1,4 @@
+﻿# FOSSlight Hub — OSS license compliance management (LF AI&Data project)
+image: { repository: fosslight/fosslight_hub, tag: latest }
+postgres: { enabled: true, auth: { database: fosslight } }
+ingress: { enabled: true, hosts: [{ host: fosslight.helixcare.internal }] }

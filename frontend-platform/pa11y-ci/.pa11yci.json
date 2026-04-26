@@ -1,0 +1,9 @@
+﻿{
+  "defaults": { "standard": "WCAG2AA", "timeout": 30000, "concurrency": 4, "chromeLaunchConfig": { "args": ["--no-sandbox"] } },
+  "urls": [
+    "https://www.helixcare.internal/",
+    "https://www.helixcare.internal/about",
+    "https://app.helixcare.internal/login",
+    "https://app.helixcare.internal/dashboard"
+  ]
+}

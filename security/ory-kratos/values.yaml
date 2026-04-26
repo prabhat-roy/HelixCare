@@ -1,0 +1,7 @@
+﻿# Ory Kratos — identity / user management (registration, login, recovery)
+image: { repository: oryd/kratos, tag: v1.2.0 }
+kratos:
+  development: false
+  config:
+    serve: { public: { base_url: https://kratos.helixcare.internal/ } }
+    selfservice: { default_browser_return_url: https://helixcare.internal/ }

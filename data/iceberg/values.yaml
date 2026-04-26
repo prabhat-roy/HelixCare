@@ -1,0 +1,6 @@
+﻿# Apache Iceberg — open table format for huge analytic datasets
+catalog:
+  type: rest
+  uri: http://polaris.helixcare.svc:8181
+  warehouse: s3://helixcare-iceberg-warehouse/
+  s3: { endpoint: http://minio.helixcare.svc:9000, access_key: __MINIO_ACCESS__, secret_key: __MINIO_SECRET__ }

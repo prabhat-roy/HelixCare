@@ -1,0 +1,9 @@
+﻿# in-toto layout — supply-chain step attestations for HelixCare
+expires: "2027-01-01T00:00:00Z"
+keys: { project-key: { keyid: helixcare-key, keytype: ed25519, scheme: ed25519 } }
+steps:
+  - { name: source, expected_command: ["git", "clone"], pubkeys: [helixcare-key] }
+  - { name: build, expected_command: ["docker", "build"], pubkeys: [helixcare-key] }
+  - { name: test, expected_command: ["make", "test"], pubkeys: [helixcare-key] }
+inspect:
+  - { name: signed-image, run: ["cosign", "verify"], expected_materials: [], expected_products: [] }

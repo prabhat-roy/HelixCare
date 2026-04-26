@@ -1,0 +1,5 @@
+﻿# Daytona workspace template for HelixCare
+name: helixcare
+repositoryUrl: https://github.com/prabhat-roy/HelixCare
+image: ghcr.io/devcontainers/images/universal:2
+ports: [{ port: 3000, protocol: HTTP }, { port: 8080, protocol: HTTP }]

@@ -1,0 +1,7 @@
+﻿# Apache Hudi — alternative table format with strong upsert / CDC support
+hudi:
+  basePath: s3://helixcare-hudi-warehouse/
+  tableType: COPY_ON_WRITE
+  recordKey: id
+  partitionPath: dt
+  precombineField: ts

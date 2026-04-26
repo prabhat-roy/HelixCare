@@ -1,0 +1,3 @@
+﻿# Synapse FHIR — federated FHIR analytics across hospitals
+image: { repository: googlecloudplatform/synapse, tag: latest }
+synapse: { fhir: { server: hapi-fhir.helixcare.svc:8080 } }

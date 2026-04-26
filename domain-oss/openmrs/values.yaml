@@ -1,0 +1,4 @@
+﻿# OpenMRS bridge
+image: { repository: openmrs/openmrs-reference-application, tag: 3.x }
+openmrs: { fhir: { enabled: true } }
+ingress: { enabled: true, hosts: [{ host: openmrs.helixcare.internal }] }

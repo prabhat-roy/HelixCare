@@ -1,0 +1,9 @@
+﻿{
+  "target": { "namespace": "helixcare", "path": { "deployment": "api-gateway" } },
+  "feature": {
+    "network": { "incoming": "mirror", "outgoing": true, "dns": true },
+    "fs": "read",
+    "env": true
+  },
+  "agent": { "log_level": "info", "ttl": 60 }
+}

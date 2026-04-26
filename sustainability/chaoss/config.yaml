@@ -1,0 +1,9 @@
+﻿# CHAOSS metrics — community health analytics
+chaoss:
+  augur:
+    repos: [https://github.com/helixcare/helixcare]
+    metrics:
+      - { focus_area: "Common", name: "code_changes" }
+      - { focus_area: "Common", name: "issues_new" }
+      - { focus_area: "DEI", name: "contributor_diversity" }
+      - { focus_area: "Risk", name: "license_coverage" }

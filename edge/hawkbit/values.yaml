@@ -1,0 +1,7 @@
+﻿# Eclipse hawkBit — firmware / model / config OTA delivery
+image: { repository: hawkbit/hawkbit-update-server, tag: latest }
+mysql: { enabled: true }
+hawkbit:
+  rabbitmq: { enabled: true }
+  artifact: { repository: { type: file, path: /artifactrepo } }
+ingress: { enabled: true, hosts: [{ host: hawkbit.helixcare.internal }] }

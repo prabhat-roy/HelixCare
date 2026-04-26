@@ -1,0 +1,6 @@
+﻿# Kepler — Kubernetes-based Efficient Power Level Exporter (eBPF energy + carbon metrics per pod)
+image: { repository: quay.io/sustainable_computing_io/kepler, tag: latest }
+kepler:
+  daemonset: { hostNetwork: true, hostPID: true }
+  exporter: { metricsPort: 9102 }
+  modelServer: { enabled: false }

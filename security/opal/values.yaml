@@ -1,0 +1,6 @@
+﻿# OPAL — Open Policy Administration Layer for OPA
+image: { repository: permitio/opal-server, tag: latest }
+opal:
+  policySource: { type: git, url: "https://github.com/helixcare/policies", branch: main }
+  dataSources: [{ url: "http://config-service.helixcare.svc/policy-data", topics: ["policy_data"] }]
+clients: { autoStart: true }

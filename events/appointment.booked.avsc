@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.appointments.events",
+  "name": "AppointmentBooked",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "appointment_ref","type": "com.helixcare.common.events.FhirReference" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

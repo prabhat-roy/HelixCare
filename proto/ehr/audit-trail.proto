@@ -1,0 +1,20 @@
+syntax = "proto3";
+package helixcare.ehr.v1;
+import "common/types.proto";
+import "google/protobuf/timestamp.proto";
+option java_package = "com.helixcare.ehr.v1";
+option java_multiple_files = true;
+
+// audit-trail — HIPAA §164.312(b) immutable audit log writer (Cassandra-backed).
+service AuditTrailService {
+  rpc Health(HealthRequest) returns (HealthResponse);
+  rpc Record(RecordRequest)  returns (RecordResponse);
+}
+message HealthRequest  {}
+message HealthResponse { string status = 1; string version = 2; google.protobuf.Timestamp checked_at = 3; }
+message RecordRequest  {
+  helixcare.common.v1.AuditMetadata audit  = 1;
+  helixcare.common.v1.FhirReference target = 2;
+  string action = 3;  // read | create | update | delete
+}
+message RecordResponse { string event_id = 1; }

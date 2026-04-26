@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.clinical.events",
+  "name": "EncounterCompleted",
+  "doc": "clinical.encounter.completed — emitted when an Encounter reaches finished state. Payload is a FHIR Bundle reference; downstream services resolve via fhir-gateway with audit + consent enforced.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "encounter_ref",  "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" },
+    { "name": "encrypted_payload_kek_id", "type": ["null","string"], "default": null,
+      "doc": "Vault transit key id used to envelope-encrypt any PHI-bearing payload referenced by this event." }
+  ]
+}

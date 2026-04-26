@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.insurance.events",
+  "name": "ClaimAdjudicated",
+  "doc": "claims.claim.adjudicated — payer ERA/EOB outcome.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "claim_ref",      "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "outcome",        "type": { "type": "enum", "name": "AdjudicationOutcome", "symbols": ["queued","complete","error","partial"] } },
+    { "name": "amount_minor_units", "type": "long" },
+    { "name": "currency_code",  "type": "string" },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

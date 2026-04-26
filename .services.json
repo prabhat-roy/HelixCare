@@ -1,0 +1,190 @@
+{
+  "version": "0.1.0",
+  "comment": "HelixCare service catalogue. Gitignored. Drives generation across proto/, src/, helm/.",
+  "domains": [
+    {
+      "domain": "platform",
+      "owner": "platform-team",
+      "services": [
+        { "name": "api-gateway",       "lang": "go",   "port": 50000, "desc": "FHIR-aware HTTP+gRPC ingress, OAuth2/SMART-on-FHIR, mTLS, rate limit" },
+        { "name": "patient-bff",       "lang": "go",   "port": 50001, "desc": "Backend-for-frontend: patient portal (React)" },
+        { "name": "clinician-bff",     "lang": "go",   "port": 50002, "desc": "Backend-for-frontend: clinician dashboard (Angular)" },
+        { "name": "admin-bff",         "lang": "go",   "port": 50003, "desc": "Backend-for-frontend: hospital admin console" },
+        { "name": "graphql-gateway",   "lang": "go",   "port": 50004, "desc": "GraphQL federation across BFFs" },
+        { "name": "fhir-gateway",      "lang": "go",   "port": 50005, "desc": "HL7 FHIR R4 REST facade — translates internal gRPC to FHIR Bundle" }
+      ]
+    },
+    {
+      "domain": "patient",
+      "owner": "patient-team",
+      "services": [
+        { "name": "patient-registration", "lang": "java",   "port": 50010, "desc": "Patient enrolment, MRN issuance, demographics" },
+        { "name": "patient-profile",      "lang": "java",   "port": 50011, "desc": "Profile, contact info, allergies, preferences" },
+        { "name": "medical-history",      "lang": "java",   "port": 50012, "desc": "Longitudinal medical history, problem list" },
+        { "name": "demographics",         "lang": "java",   "port": 50013, "desc": "Patient demographics service (FHIR Patient resource)" }
+      ]
+    },
+    {
+      "domain": "appointments",
+      "owner": "scheduling-team",
+      "services": [
+        { "name": "appointment-service", "lang": "java", "port": 50020, "desc": "FHIR Appointment lifecycle (booking, confirmation, cancellation)" },
+        { "name": "slot-management",     "lang": "java", "port": 50021, "desc": "FHIR Slot inventory per practitioner / room / equipment" },
+        { "name": "waitlist-service",    "lang": "java", "port": 50022, "desc": "Waitlist with priority + SLA" },
+        { "name": "reminder-service",    "lang": "node", "port": 50023, "desc": "Pre-appointment reminders (SMS / push / email)" }
+      ]
+    },
+    {
+      "domain": "clinical",
+      "owner": "clinical-team",
+      "services": [
+        { "name": "encounter-service",   "lang": "java",   "port": 50030, "desc": "FHIR Encounter — visit lifecycle (admit, transfer, discharge)" },
+        { "name": "clinical-notes",      "lang": "java",   "port": 50031, "desc": "FHIR DocumentReference for SOAP notes" },
+        { "name": "care-plan",           "lang": "java",   "port": 50032, "desc": "FHIR CarePlan, Goal, CareTeam" },
+        { "name": "order-management",    "lang": "java",   "port": 50033, "desc": "FHIR ServiceRequest — labs, imaging, referrals" },
+        { "name": "vitals-service",      "lang": "go",     "port": 50034, "desc": "FHIR Observation ingestion for vitals (TimescaleDB)" }
+      ]
+    },
+    {
+      "domain": "diagnostics",
+      "owner": "diagnostics-team",
+      "services": [
+        { "name": "lab-order-service",   "lang": "java",   "port": 50040, "desc": "Lab order workflow, LIS integration (HL7 v2 / FHIR)" },
+        { "name": "lab-result-service",  "lang": "java",   "port": 50041, "desc": "FHIR DiagnosticReport / Observation for lab results" },
+        { "name": "radiology-service",   "lang": "java",   "port": 50042, "desc": "Radiology orders, RIS integration" },
+        { "name": "pathology-service",   "lang": "java",   "port": 50043, "desc": "Pathology workflow & specimen tracking" },
+        { "name": "dicom-viewer",        "lang": "rust",   "port": 50044, "desc": "DICOM streaming (WADO-RS) + OHIF integration" },
+        { "name": "dicom-store",         "lang": "rust",   "port": 50045, "desc": "DICOM storage SCP (Orthanc-compatible)" }
+      ]
+    },
+    {
+      "domain": "pharmacy",
+      "owner": "pharmacy-team",
+      "services": [
+        { "name": "prescription-service", "lang": "kotlin", "port": 50050, "desc": "FHIR MedicationRequest lifecycle" },
+        { "name": "drug-inventory",       "lang": "kotlin", "port": 50051, "desc": "Pharmacy stock, lot tracking, expiry" },
+        { "name": "drug-interaction",     "lang": "kotlin", "port": 50052, "desc": "Drug-drug + drug-allergy interaction checker (Neo4j + RxNorm)" },
+        { "name": "dispensing-service",   "lang": "kotlin", "port": 50053, "desc": "FHIR MedicationDispense — pharmacy dispense events" },
+        { "name": "formulary-service",    "lang": "kotlin", "port": 50054, "desc": "Hospital formulary + tier mapping" }
+      ]
+    },
+    {
+      "domain": "telehealth",
+      "owner": "telehealth-team",
+      "services": [
+        { "name": "video-consultation",  "lang": "go",   "port": 50060, "desc": "Video consult orchestration; integrates with SFU" },
+        { "name": "telehealth-signalling","lang": "go",   "port": 50061, "desc": "WebRTC signalling over NATS JetStream" },
+        { "name": "telehealth-sfu",      "lang": "rust", "port": 50062, "desc": "Selective forwarding unit — stateless media router" },
+        { "name": "telechat-service",    "lang": "go",   "port": 50063, "desc": "Secure asynchronous chat with PHI redaction at boundary" },
+        { "name": "remote-monitoring",   "lang": "go",   "port": 50064, "desc": "RPM ingest — TimescaleDB sink for device vitals" },
+        { "name": "e-prescription",      "lang": "node", "port": 50065, "desc": "Electronic Rx delivery to pharmacy chain via FHIR" }
+      ]
+    },
+    {
+      "domain": "billing",
+      "owner": "rcm-team",
+      "services": [
+        { "name": "billing-service",  "lang": "java", "port": 50070, "desc": "Charge capture, FHIR ChargeItem" },
+        { "name": "invoice-service",  "lang": "java", "port": 50071, "desc": "FHIR Invoice generation" },
+        { "name": "payment-service",  "lang": "java", "port": 50072, "desc": "Payment capture, refunds, settlement" },
+        { "name": "co-pay-service",   "lang": "java", "port": 50073, "desc": "Co-pay calculation + collection at registration" },
+        { "name": "refund-service",   "lang": "java", "port": 50074, "desc": "Refund workflow with audit trail" }
+      ]
+    },
+    {
+      "domain": "insurance",
+      "owner": "rcm-team",
+      "services": [
+        { "name": "eligibility-service",  "lang": "java", "port": 50080, "desc": "FHIR CoverageEligibilityRequest/Response" },
+        { "name": "pre-auth-service",     "lang": "java", "port": 50081, "desc": "Pre-authorisation workflow" },
+        { "name": "claim-submission",     "lang": "java", "port": 50082, "desc": "FHIR Claim submission to payer" },
+        { "name": "adjudication-service", "lang": "java", "port": 50083, "desc": "Adjudication outcome handling, ERA/EOB" }
+      ]
+    },
+    {
+      "domain": "ehr",
+      "owner": "ehr-team",
+      "services": [
+        { "name": "ehr-core",          "lang": "java", "port": 50090, "desc": "Longitudinal EHR aggregation (FHIR Bundle)" },
+        { "name": "fhir-resource-cache","lang": "go",  "port": 50091, "desc": "Read-through FHIR cache backed by MongoDB" },
+        { "name": "document-service",  "lang": "java", "port": 50092, "desc": "Clinical document storage (CDA, CCDA, PDF)" },
+        { "name": "audit-trail",       "lang": "java", "port": 50093, "desc": "HIPAA §164.312(b) immutable audit (Cassandra)" },
+        { "name": "hl7v2-adapter",     "lang": "java", "port": 50094, "desc": "HL7 v2 ↔ FHIR via Mirth Connect bridge" }
+      ]
+    },
+    {
+      "domain": "ward-management",
+      "owner": "ops-team",
+      "services": [
+        { "name": "bed-service",        "lang": "java", "port": 50100, "desc": "Bed inventory + assignment" },
+        { "name": "ward-service",       "lang": "java", "port": 50101, "desc": "Ward, room, unit hierarchy" },
+        { "name": "icu-management",     "lang": "java", "port": 50102, "desc": "ICU bed tracking, ventilator inventory" },
+        { "name": "discharge-planning", "lang": "java", "port": 50103, "desc": "Discharge readiness + post-discharge handoff" }
+      ]
+    },
+    {
+      "domain": "staff",
+      "owner": "hr-team",
+      "services": [
+        { "name": "staff-service",        "lang": "java", "port": 50110, "desc": "FHIR Practitioner / PractitionerRole" },
+        { "name": "shift-management",     "lang": "java", "port": 50111, "desc": "Shift assignment + handover" },
+        { "name": "duty-roster",          "lang": "java", "port": 50112, "desc": "Duty roster planner" },
+        { "name": "credentialing-service","lang": "java", "port": 50113, "desc": "Provider credentialing & license verification" }
+      ]
+    },
+    {
+      "domain": "inventory",
+      "owner": "supply-chain-team",
+      "services": [
+        { "name": "medical-supply-service","lang": "java", "port": 50120, "desc": "Consumables + medical supply tracking" },
+        { "name": "equipment-service",     "lang": "java", "port": 50121, "desc": "Capital equipment, maintenance schedules" },
+        { "name": "purchase-order",        "lang": "java", "port": 50122, "desc": "PO lifecycle" },
+        { "name": "vendor-service",        "lang": "java", "port": 50123, "desc": "Vendor master + contracts" }
+      ]
+    },
+    {
+      "domain": "communications",
+      "owner": "platform-team",
+      "services": [
+        { "name": "notification-orchestrator", "lang": "node", "port": 50130, "desc": "Patient + staff notification routing" },
+        { "name": "sms-service",               "lang": "node", "port": 50131, "desc": "SMS gateway" },
+        { "name": "email-service",             "lang": "node", "port": 50132, "desc": "Email gateway with templating" },
+        { "name": "push-service",              "lang": "node", "port": 50133, "desc": "Mobile push (FCM / APNS)" },
+        { "name": "in-app-alert",              "lang": "node", "port": 50134, "desc": "In-app alerts (clinician + patient)" }
+      ]
+    },
+    {
+      "domain": "analytics",
+      "owner": "ds-team",
+      "services": [
+        { "name": "population-health",        "lang": "python", "port": 50140, "desc": "Population health cohorts + dashboards" },
+        { "name": "risk-stratification",      "lang": "python", "port": 50141, "desc": "Risk-stratification ML scoring API" },
+        { "name": "readmission-predictor",    "lang": "python", "port": 50142, "desc": "30-day readmission risk model serving" },
+        { "name": "clinical-nlp-service",     "lang": "python", "port": 50143, "desc": "Clinical NLP (NER on physician notes, BERT)" },
+        { "name": "dicom-anomaly-service",    "lang": "python", "port": 50144, "desc": "Medical imaging anomaly detection (PyTorch + MONAI)" },
+        { "name": "sepsis-alert-service",     "lang": "python", "port": 50145, "desc": "Real-time NEWS2 + ML sepsis early warning" }
+      ]
+    },
+    {
+      "domain": "identity",
+      "owner": "security-team",
+      "services": [
+        { "name": "auth-service",   "lang": "java", "port": 50150, "desc": "OAuth2 / OIDC issuer (Keycloak adapter)" },
+        { "name": "user-service",   "lang": "java", "port": 50151, "desc": "User identity + session" },
+        { "name": "rbac-service",   "lang": "java", "port": 50152, "desc": "Role/permission resolution, scope mapping" },
+        { "name": "mfa-service",    "lang": "go",   "port": 50153, "desc": "TOTP / WebAuthn MFA" },
+        { "name": "sso-service",    "lang": "java", "port": 50154, "desc": "SMART on FHIR / SAML SSO" }
+      ]
+    },
+    {
+      "domain": "compliance",
+      "owner": "compliance-team",
+      "services": [
+        { "name": "consent-service",      "lang": "java", "port": 50160, "desc": "FHIR Consent — patient consent + scope" },
+        { "name": "data-retention",       "lang": "java", "port": 50161, "desc": "Retention policy engine (HIPAA 6-year minimum)" },
+        { "name": "hipaa-audit-service",  "lang": "java", "port": 50162, "desc": "HIPAA audit query + reporting" },
+        { "name": "gdpr-service",         "lang": "java", "port": 50163, "desc": "Right-to-erasure for EU patients" }
+      ]
+    }
+  ]
+}

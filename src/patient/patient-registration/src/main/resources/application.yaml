@@ -1,0 +1,14 @@
+server:
+  port: ${PORT:50010}
+spring:
+  application:
+    name: patient-registration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true

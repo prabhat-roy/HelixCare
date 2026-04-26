@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.billing.events",
+  "name": "InvoiceIssued",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "invoice_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "amount_minor_units", "type": "long" },
+    { "name": "currency_code",  "type": "string" },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

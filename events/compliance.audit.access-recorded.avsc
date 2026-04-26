@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.compliance.events",
+  "name": "AuditAccessRecorded",
+  "doc": "HIPAA §164.312(b) — every PHI access lands here. Append-only Cassandra partition. 6+ year retention.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "target_ref",     "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "action",         "type": "string", "doc": "read | create | update | delete" },
+    { "name": "consent_ref",    "type": ["null", "com.helixcare.common.events.FhirReference"], "default": null },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

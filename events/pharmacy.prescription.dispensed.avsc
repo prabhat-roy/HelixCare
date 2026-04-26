@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.pharmacy.events",
+  "name": "PrescriptionDispensed",
+  "doc": "pharmacy.prescription.dispensed — emitted on FHIR MedicationDispense.completed.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "dispense_ref",   "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "prescription_ref","type": "com.helixcare.common.events.FhirReference" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" },
+    { "name": "encrypted_payload_kek_id", "type": ["null","string"], "default": null }
+  ]
+}

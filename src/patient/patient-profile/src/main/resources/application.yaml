@@ -1,0 +1,3 @@
+server: { port: ${PORT:50011} }
+spring: { application: { name: patient-profile } }
+management: { endpoints: { web: { exposure: { include: health,info,metrics,prometheus } } } }

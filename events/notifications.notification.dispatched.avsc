@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.communications.events",
+  "name": "NotificationDispatched",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "channel",        "type": { "type": "enum", "name": "Channel", "symbols": ["sms","email","push","in_app"] } },
+    { "name": "recipient_ref",  "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "template_id",    "type": "string" },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

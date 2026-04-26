@@ -1,0 +1,3 @@
+server: { port: ${PORT:50021} }
+spring: { application: { name: slot-management } }
+management: { endpoints: { web: { exposure: { include: health,info,metrics,prometheus } } } }

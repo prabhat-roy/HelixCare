@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.telehealth.events",
+  "name": "TelehealthSessionStarted",
+  "doc": "telehealth.session.started — published by signalling on session connect; consumed by audit-trail.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "encounter_ref",  "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "practitioner_ref","type": "com.helixcare.common.events.FhirReference" },
+    { "name": "sfu_node",       "type": "string", "doc": "SFU pod name handling the media path; stateless — used for SLO tracing." },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

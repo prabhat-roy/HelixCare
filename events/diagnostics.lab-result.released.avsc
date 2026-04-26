@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.diagnostics.events",
+  "name": "LabResultReleased",
+  "doc": "diagnostics.lab-result.released — FHIR DiagnosticReport.final/amended.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "report_ref",     "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "abnormal_flag",  "type": "boolean", "default": false },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" },
+    { "name": "encrypted_payload_kek_id", "type": ["null","string"], "default": null }
+  ]
+}

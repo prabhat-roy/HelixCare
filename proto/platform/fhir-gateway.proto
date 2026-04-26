@@ -1,0 +1,17 @@
+syntax = "proto3";
+package helixcare.platform.v1;
+import "common/types.proto";
+import "google/protobuf/timestamp.proto";
+option java_package = "com.helixcare.platform.v1";
+option java_multiple_files = true;
+
+// fhir-gateway — HL7 FHIR R4 REST facade. Translates internal gRPC to FHIR Bundle.
+service FhirGatewayService {
+  rpc Health(HealthRequest) returns (HealthResponse);
+  // Read a FHIR resource by reference (audit + consent enforced upstream).
+  rpc ReadResource(ReadResourceRequest) returns (ReadResourceResponse);
+}
+message HealthRequest  {}
+message HealthResponse { string status = 1; string version = 2; google.protobuf.Timestamp checked_at = 3; }
+message ReadResourceRequest  { helixcare.common.v1.FhirReference reference = 1; helixcare.common.v1.ConsentRef consent = 2; }
+message ReadResourceResponse { string fhir_json = 1; }

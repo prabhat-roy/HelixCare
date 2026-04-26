@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.analytics.events",
+  "name": "RiskScoreUpdated",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "model_id",       "type": "string", "doc": "ml/models/registry.md model id" },
+    { "name": "model_version",  "type": "string" },
+    { "name": "score",          "type": "double" },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.compliance.events",
+  "name": "ConsentGranted",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "consent_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "scope",          "type": "string" },
+    { "name": "expires_at",     "type": { "type": "long", "logicalType": "timestamp-millis" } },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.common.events",
+  "name": "AuditMetadata",
+  "fields": [
+    { "name": "actor_id",   "type": "string" },
+    { "name": "actor_role", "type": "string" },
+    { "name": "ip_address", "type": ["null","string"], "default": null },
+    { "name": "user_agent", "type": ["null","string"], "default": null },
+    { "name": "purpose",    "type": "string", "doc": "treatment | payment | operations | research" },
+    { "name": "event_time", "type": { "type": "long", "logicalType": "timestamp-millis" } }
+  ]
+}

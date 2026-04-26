@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.common.events",
+  "name": "FhirReference",
+  "doc": "Shared envelope reference. Every clinical event on the bus carries FhirReference, never raw PHI.",
+  "fields": [
+    { "name": "resource_type", "type": "string", "doc": "FHIR resource type (Patient, Encounter, Observation, MedicationRequest, ...)" },
+    { "name": "id",            "type": "string", "doc": "Logical FHIR id; NOT a raw MRN/national-id" },
+    { "name": "version_id",    "type": ["null","string"], "default": null },
+    { "name": "region",        "type": "string", "doc": "PHI MUST stay within this region (HIPAA + state laws)" },
+    { "name": "display",       "type": ["null","string"], "default": null, "doc": "Safe-for-logs label only — never PHI" }
+  ]
+}

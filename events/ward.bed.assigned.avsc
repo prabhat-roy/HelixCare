@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.helixcare.ward.events",
+  "name": "BedAssigned",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "patient_ref",    "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "encounter_ref",  "type": "com.helixcare.common.events.FhirReference" },
+    { "name": "bed_id",         "type": "string" },
+    { "name": "ward_id",        "type": "string" },
+    { "name": "audit",          "type": "com.helixcare.common.events.AuditMetadata" }
+  ]
+}

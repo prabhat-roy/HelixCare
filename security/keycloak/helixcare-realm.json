@@ -1,0 +1,46 @@
+{
+  "realm": "helixcare",
+  "enabled": true,
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "maxFailureWaitSeconds": 900,
+  "minimumQuickLoginWaitSeconds": 60,
+  "waitIncrementSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "maxDeltaTimeSeconds": 43200,
+  "failureFactor": 5,
+  "passwordPolicy": "length(12) and digits(1) and upperCase(1) and specialChars(1) and notUsername and passwordHistory(10)",
+  "otpPolicyType": "totp",
+  "otpPolicyAlgorithm": "HmacSHA256",
+  "otpPolicyDigits": 6,
+  "requiredCredentials": ["password","otp"],
+  "smtpServer": { "host": "smtp.helixcare.internal", "port": "587", "from": "no-reply@helixcare.io", "starttls": "true", "auth": "true" },
+  "clients": [
+    { "clientId": "patient-portal",  "publicClient": true,  "redirectUris": ["https://patient.helixcare.io/*"], "webOrigins": ["+"], "fullScopeAllowed": false, "defaultClientScopes": ["openid","email","patient-portal","fhir-r4-read"] },
+    { "clientId": "clinician-app",   "publicClient": false, "redirectUris": ["https://clinician.helixcare.io/*"], "secret": "REDACTED", "fullScopeAllowed": false, "defaultClientScopes": ["openid","email","clinician-app","fhir-r4-read","fhir-r4-write"] },
+    { "clientId": "admin-console",   "publicClient": false, "redirectUris": ["https://admin.helixcare.io/*"], "secret": "REDACTED" }
+  ],
+  "roles": {
+    "realm": [
+      { "name": "patient" },
+      { "name": "clinician" },
+      { "name": "nurse" },
+      { "name": "pharmacist" },
+      { "name": "admin" },
+      { "name": "billing-clerk" },
+      { "name": "auditor" },
+      { "name": "break-glass-emergency" }
+    ]
+  },
+  "clientScopes": [
+    { "name": "fhir-r4-read",  "description": "FHIR R4 read access" },
+    { "name": "fhir-r4-write", "description": "FHIR R4 write access" },
+    { "name": "patient-portal","description": "Patient-portal scope" },
+    { "name": "clinician-app", "description": "Clinician scope" }
+  ]
+}

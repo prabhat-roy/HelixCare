@@ -1,0 +1,13 @@
+image: { repository: helixcare/prescription-service, tag: "", pullPolicy: IfNotPresent }
+replicaCount: 3
+service: { type: ClusterIP, port: 50500, targetPort: 50500 }
+resources: { requests: { cpu: 250m, memory: 512Mi }, limits: { cpu: 2000m, memory: 1Gi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50500 }, initialDelaySeconds: 30 }
+  readiness: { httpGet: { path: /healthz, port: 50500 }, initialDelaySeconds: 10 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: prescription-service, app.kubernetes.io/part-of: helixcare, helixcare.io/domain: pharmacy, helixcare.io/owner-team: pharmacy, helixcare.io/phi: "true", helixcare.io/deploy-strategy: blue-green }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config: { LOG_LEVEL: info }
+cloud: { provider: "", region: "" }

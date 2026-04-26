@@ -1,0 +1,34 @@
+{
+  "$id": "https://helixcare.io/schemas/fhir-bundle-envelope.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HelixCare FHIR Bundle Envelope",
+  "description": "Standard envelope for every clinical event published on Kafka",
+  "type": "object",
+  "required": ["meta","fhir_bundle"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["event_id","occurred_at","source_service","region","phi_class","schema_version"],
+      "properties": {
+        "event_id":       { "type": "string", "format": "uuid" },
+        "occurred_at":    { "type": "string", "format": "date-time" },
+        "source_service": { "type": "string" },
+        "region":         { "type": "string", "examples": ["us-east-1","eu-west-1","us-central1","eastus"] },
+        "phi_class":      { "type": "string", "enum": ["phi","de-identified","non-phi"] },
+        "schema_version": { "type": "string" },
+        "encryption":     { "type": "object", "properties": { "kms_key_id": { "type": "string" }, "wrapped_dek": { "type": "string" } } },
+        "audit":          { "type": "object", "properties": { "subject": { "type": "string" }, "purpose": { "type": "string" } } }
+      }
+    },
+    "fhir_bundle": {
+      "type": "object",
+      "required": ["resourceType","type","entry"],
+      "properties": {
+        "resourceType": { "const": "Bundle" },
+        "type":         { "type": "string", "enum": ["transaction","collection","message"] },
+        "entry":        { "type": "array" }
+      }
+    }
+  }
+}

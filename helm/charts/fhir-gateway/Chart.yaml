@@ -1,0 +1,6 @@
+apiVersion: v2
+name: fhir-gateway
+description: HelixCare FHIR R4 boundary gateway (validation, terminology, SMART on FHIR)
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

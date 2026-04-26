@@ -1,0 +1,13 @@
+image: { repository: helixcare/patient-registration, tag: "", pullPolicy: IfNotPresent }
+replicaCount: 2
+service: { type: ClusterIP, port: 50100, targetPort: 50100 }
+resources: { requests: { cpu: 250m, memory: 512Mi }, limits: { cpu: 1500m, memory: 1Gi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50100 }, initialDelaySeconds: 30, periodSeconds: 20 }
+  readiness: { httpGet: { path: /healthz, port: 50100 }, initialDelaySeconds: 10, periodSeconds: 10 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: patient-registration, app.kubernetes.io/part-of: helixcare, helixcare.io/domain: patient, helixcare.io/owner-team: patient, helixcare.io/phi: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config: { LOG_LEVEL: info, SPRING_PROFILES_ACTIVE: prod }
+cloud: { provider: "", region: "" }

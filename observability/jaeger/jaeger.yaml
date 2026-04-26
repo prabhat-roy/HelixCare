@@ -1,0 +1,11 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata: { name: helixcare-jaeger, namespace: observability }
+spec:
+  strategy: production
+  storage:
+    type: elasticsearch
+    options: { es: { server-urls: "https://elasticsearch.observability:9200", index-prefix: jaeger-helixcare } }
+  ingress: { enabled: true, hosts: [tracing.helixcare.internal] }
+  sampling:
+    options: { default_strategy: { type: probabilistic, param: 0.05 } }

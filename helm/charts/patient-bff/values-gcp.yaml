@@ -1,0 +1,6 @@
+cloud: { provider: gcp, storageClass: pd-ssd, ingressClass: gce, region: us-central1 }
+serviceAccount:
+  annotations: { iam.gke.io/gcp-service-account: helixcare-patient-bff@PROJECT.iam.gserviceaccount.com }
+podLabels: { topology.kubernetes.io/region: us-central1 }
+nodeSelector: { topology.kubernetes.io/region: us-central1 }
+envFrom: [{ secretRef: { name: patient-bff-gcp-secrets } }]

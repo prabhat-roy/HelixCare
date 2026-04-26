@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata: { name: api-gateway, namespace: helixcare-platform }
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: helm/charts/api-gateway
+      sourceRef: { kind: GitRepository, name: helixcare, namespace: flux-system }
+  valuesFrom:
+    - { kind: ConfigMap, name: api-gateway-cloud-overlay }
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata: { name: fhir-gateway, namespace: helixcare-platform }
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: helm/charts/fhir-gateway
+      sourceRef: { kind: GitRepository, name: helixcare, namespace: flux-system }

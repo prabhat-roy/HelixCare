@@ -1,0 +1,35 @@
+{{- define "api-gateway.name" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "api-gateway.fullname" -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+
+{{- define "api-gateway.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+{{- include "api-gateway.fullname" . -}}
+{{- else -}}
+{{- default "default" .Values.serviceAccount.name -}}
+{{- end -}}
+{{- end -}}
+
+{{- define "api-gateway.labels" -}}
+helm.sh/chart: {{ printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" }}
+app.kubernetes.io/name: {{ include "api-gateway.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/part-of: helixcare
+helixcare.io/domain: platform
+{{- end -}}
+
+{{- define "api-gateway.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "api-gateway.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}

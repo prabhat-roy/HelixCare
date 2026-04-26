@@ -1,0 +1,39 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata: { name: helixcare-developer }
+rules:
+  - apiGroups: [""]
+    resources: [pods, pods/log, services, configmaps]
+    verbs: [get, list, watch]
+  - apiGroups: ["apps"]
+    resources: [deployments, statefulsets, replicasets]
+    verbs: [get, list, watch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata: { name: helixcare-clinician-readonly }
+rules:
+  - apiGroups: [""]
+    resources: [services]
+    verbs: [get, list]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata: { name: helixcare-phi-viewer }
+rules:
+  # Reads only via service - never direct pod exec for PHI namespaces
+  - apiGroups: [""]
+    resources: [services]
+    verbs: [get, list]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: { name: helixcare-deployer, namespace: helixcare-platform }
+rules:
+  - apiGroups: ["apps"]
+    resources: [deployments]
+    verbs: [get, list, watch, patch, update]
+  - apiGroups: ["argoproj.io"]
+    resources: [rollouts, rollouts/status]
+    verbs: [get, list, watch, patch, update]

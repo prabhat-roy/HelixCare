@@ -1,0 +1,18 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata: { name: helixcare-default-deny, namespace: helixcare-clinical }
+spec: { action: DENY, rules: [{}] }
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata: { name: allow-from-bff, namespace: helixcare-clinical }
+spec:
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals:
+              - "cluster.local/ns/helixcare-platform/sa/api-gateway"
+              - "cluster.local/ns/helixcare-platform/sa/clinician-bff"
+              - "cluster.local/ns/helixcare-platform/sa/patient-bff"
+              - "cluster.local/ns/helixcare-platform/sa/fhir-gateway"

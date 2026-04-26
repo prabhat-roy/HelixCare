@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: conduktor-gateway, namespace: messaging }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: conduktor-gateway } }
+  template:
+    metadata: { labels: { app: conduktor-gateway } }
+    spec:
+      containers:
+        - name: gateway
+          image: conduktor/conduktor-gateway:latest
+          env:
+            - { name: KAFKA_BOOTSTRAP_SERVERS, value: helixcare-kafka-bootstrap.messaging:9093 }
+            - { name: GATEWAY_MODE, value: "policy-enforcement" }
+          ports: [{ containerPort: 6969 }]

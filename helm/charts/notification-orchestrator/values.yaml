@@ -1,0 +1,13 @@
+image: { repository: helixcare/notification-orchestrator, tag: "", pullPolicy: IfNotPresent }
+replicaCount: 3
+service: { type: ClusterIP, port: 51300, targetPort: 51300 }
+resources: { requests: { cpu: 200m, memory: 256Mi }, limits: { cpu: 1000m, memory: 768Mi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 51300 }, initialDelaySeconds: 15 }
+  readiness: { httpGet: { path: /healthz, port: 51300 }, initialDelaySeconds: 5 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: notification-orchestrator, app.kubernetes.io/part-of: helixcare, helixcare.io/domain: communications, helixcare.io/owner-team: comms, helixcare.io/phi: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config: { LOG_LEVEL: info, NATS_URL: "nats://nats.messaging:4222" }
+cloud: { provider: "", region: "" }

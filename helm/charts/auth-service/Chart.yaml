@@ -1,0 +1,6 @@
+apiVersion: v2
+name: auth-service
+description: HelixCare auth (Keycloak-fronted, MFA-aware)
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

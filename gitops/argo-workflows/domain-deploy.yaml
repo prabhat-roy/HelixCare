@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata: { generateName: helixcare-domain-deploy-, namespace: argo }
+spec:
+  entrypoint: deploy
+  arguments: { parameters: [{ name: domain }, { name: cloud, value: aws }, { name: region, value: us-east-1 }, { name: tag, value: latest }] }
+  templates:
+    - name: deploy
+      steps:
+        - - { name: sync, template: argo-sync }
+        - - { name: smoke, template: smoke-test }
+    - name: argo-sync
+      container:
+        image: argoproj/argocd:latest
+        command: ["argocd","app","sync","-l","domain={{workflow.parameters.domain}},cloud={{workflow.parameters.cloud}},region={{workflow.parameters.region}}"]
+    - name: smoke-test
+      container:
+        image: harbor.helixcare.internal/helixcare/smoke-tests:latest
+        env: [{ name: TARGET_DOMAIN, value: "{{workflow.parameters.domain}}" }]

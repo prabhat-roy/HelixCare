@@ -1,0 +1,46 @@
+apiVersion: nats.io/v1alpha2
+kind: NatsCluster
+metadata: { name: helixcare-nats, namespace: messaging }
+spec:
+  size: 5
+  natsConfig:
+    jetstream:
+      enabled: true
+      memStorage:  { enabled: true, size: 4Gi }
+      fileStorage: { enabled: true, size: 200Gi, storageClassName: gp3 }
+    cluster: { authorization: { token: REDACTED } }
+    tls: { enabled: true }
+---
+apiVersion: jetstream.nats.io/v1beta2
+kind: Stream
+metadata: { name: telehealth-signalling, namespace: messaging }
+spec:
+  name: telehealth-signalling
+  subjects: ["telehealth.signal.>","telehealth.session.>"]
+  storage: file
+  retention: workqueue
+  maxAge: 1h
+  replicas: 3
+  discard: old
+---
+apiVersion: jetstream.nats.io/v1beta2
+kind: Stream
+metadata: { name: clinical-alerts, namespace: messaging }
+spec:
+  name: clinical-alerts
+  subjects: ["clinical.alert.>","ward.alert.>"]
+  storage: file
+  retention: limits
+  maxAge: 24h
+  replicas: 3
+---
+apiVersion: jetstream.nats.io/v1beta2
+kind: Stream
+metadata: { name: vitals-stream, namespace: messaging }
+spec:
+  name: vitals-stream
+  subjects: ["vitals.>","remote-monitoring.>"]
+  storage: file
+  retention: limits
+  maxAge: 168h
+  replicas: 3

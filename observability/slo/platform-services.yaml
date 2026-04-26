@@ -1,0 +1,22 @@
+apiVersion: sloth.slok.dev/v1
+kind: PrometheusServiceLevel
+metadata: { name: api-gateway-slo, namespace: helixcare-platform }
+spec:
+  service: api-gateway
+  labels: { team: platform }
+  slos:
+    - name: availability
+      objective: 99.9
+      sli:
+        events:
+          error_query: 'sum(rate(http_requests_total{service="api-gateway",status=~"5.."}[{{.window}}]))'
+          total_query: 'sum(rate(http_requests_total{service="api-gateway"}[{{.window}}]))'
+      alerting:
+        page_alert:   { labels: { severity: page } }
+        ticket_alert: { labels: { severity: ticket } }
+    - name: latency-p95-300ms
+      objective: 99.0
+      sli:
+        events:
+          error_query: 'sum(rate(http_request_duration_seconds_bucket{service="api-gateway",le="0.3"}[{{.window}}]))'
+          total_query: 'sum(rate(http_request_duration_seconds_count{service="api-gateway"}[{{.window}}]))'

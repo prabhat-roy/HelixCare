@@ -1,0 +1,16 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata: { name: helixcare-timescale, namespace: databases }
+spec:
+  instances: 3
+  imageName: timescale/timescaledb-ha:pg16
+  postgresql: { parameters: { shared_preload_libraries: "timescaledb", max_connections: "300" } }
+  bootstrap:
+    initdb:
+      database: vitals
+      owner: helixcare
+      secret: { name: timescale-credentials }
+      postInitSQL:
+        - "CREATE EXTENSION IF NOT EXISTS timescaledb;"
+        - "CREATE EXTENSION IF NOT EXISTS timescaledb_toolkit;"
+  storage: { size: 2Ti, storageClass: gp3 }

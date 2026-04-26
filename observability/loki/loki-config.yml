@@ -1,0 +1,21 @@
+auth_enabled: false
+server: { http_listen_port: 3100 }
+common:
+  path_prefix: /loki
+  storage:
+    s3:
+      endpoint: s3.us-east-1.amazonaws.com
+      bucketnames: helixcare-loki-us-east-1
+      region: us-east-1
+      sse: { type: SSE-KMS, kms_key_id: alias/helixcare-prod-us-east-1 }
+schema_config:
+  configs:
+    - from: 2025-01-01
+      store: tsdb
+      object_store: s3
+      schema: v13
+      index: { prefix: index_, period: 24h }
+limits_config:
+  retention_period: 2557d   # ~7y for HIPAA log retention
+  reject_old_samples: true
+  reject_old_samples_max_age: 168h

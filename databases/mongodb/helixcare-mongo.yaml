@@ -1,0 +1,23 @@
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata: { name: helixcare-mongo, namespace: databases }
+spec:
+  members: 3
+  type: ReplicaSet
+  version: "7.0.12"
+  security:
+    authentication: { modes: [SCRAM, X509] }
+    tls: { enabled: true, certificateKeySecretRef: { name: mongo-tls } }
+  users:
+    - name: helixcare
+      db: admin
+      passwordSecretRef: { name: mongo-helixcare-password }
+      roles:
+        - { name: readWrite, db: helixcare_clinical_notes }
+        - { name: readWrite, db: helixcare_fhir_cache }
+        - { name: readWrite, db: helixcare_lab_results }
+  statefulSet:
+    spec:
+      volumeClaimTemplates:
+        - metadata: { name: data-volume }
+          spec: { storageClassName: gp3, resources: { requests: { storage: 500Gi } } }

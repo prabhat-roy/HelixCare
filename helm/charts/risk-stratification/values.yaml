@@ -1,0 +1,13 @@
+image: { repository: helixcare/risk-stratification, tag: "", pullPolicy: IfNotPresent }
+replicaCount: 2
+service: { type: ClusterIP, port: 51400, targetPort: 51400 }
+resources: { requests: { cpu: 500m, memory: 1Gi }, limits: { cpu: 4000m, memory: 4Gi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 51400 }, initialDelaySeconds: 30 }
+  readiness: { httpGet: { path: /healthz, port: 51400 }, initialDelaySeconds: 10 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: risk-stratification, app.kubernetes.io/part-of: helixcare, helixcare.io/domain: analytics, helixcare.io/owner-team: ml, helixcare.io/phi: "true", helixcare.io/ml: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config: { LOG_LEVEL: info, MODEL_REGISTRY: "mlflow.ml.svc:5000" }
+cloud: { provider: "", region: "" }

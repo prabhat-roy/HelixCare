@@ -1,0 +1,13 @@
+image: { repository: helixcare/bed-service, tag: "", pullPolicy: IfNotPresent }
+replicaCount: 2
+service: { type: ClusterIP, port: 51000, targetPort: 51000 }
+resources: { requests: { cpu: 200m, memory: 256Mi }, limits: { cpu: 1000m, memory: 768Mi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 51000 }, initialDelaySeconds: 20 }
+  readiness: { httpGet: { path: /healthz, port: 51000 }, initialDelaySeconds: 5 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: bed-service, app.kubernetes.io/part-of: helixcare, helixcare.io/domain: ward-management, helixcare.io/owner-team: ward-management, helixcare.io/phi: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config: { LOG_LEVEL: info }
+cloud: { provider: "", region: "" }

@@ -1,0 +1,4 @@
+cloud: { provider: azure, region: eastus }
+serviceAccount: { annotations: { azure.workload.identity/client-id: 00000000-0000-0000-0000-000000000000 } }
+nodeSelector: { topology.kubernetes.io/region: eastus }
+envFrom: [{ secretRef: { name: encounter-service-azure-secrets } }]

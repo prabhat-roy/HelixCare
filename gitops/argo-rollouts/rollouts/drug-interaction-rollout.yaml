@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata: { name: drug-interaction, namespace: helixcare-pharmacy }
+spec:
+  replicas: 3
+  strategy:
+    blueGreen:
+      activeService: drug-interaction-active
+      previewService: drug-interaction-preview
+      autoPromotionEnabled: false
+      prePromotionAnalysis: { templates: [{ templateName: helixcare-canary-analysis }], args: [{ name: service-name, value: drug-interaction }] }
+  selector: { matchLabels: { app.kubernetes.io/name: drug-interaction } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: drug-interaction } }
+    spec:
+      containers:
+        - { name: drug-interaction, image: harbor.helixcare.internal/helixcare/drug-interaction:latest, ports: [{ containerPort: 50501 }] }

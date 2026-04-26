@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata: { name: helixcare-azure-eastus, namespace: argocd }
+spec:
+  generators:
+    - git: { repoURL: https://github.com/prabhat-roy/HelixCare.git, revision: HEAD, directories: [{ path: helm/charts/* }] }
+  template:
+    metadata: { name: '{{path.basename}}-azure-eastus', labels: { cloud: azure, region: eastus } }
+    spec:
+      project: helixcare
+      source:
+        repoURL: https://github.com/prabhat-roy/HelixCare.git
+        targetRevision: HEAD
+        path: '{{path}}'
+        helm: { valueFiles: [values.yaml, values-azure.yaml] }
+      destination: { name: helixcare-azure-eastus, namespace: 'helixcare-{{path.basename}}' }
+      syncPolicy: { automated: { prune: true, selfHeal: true }, syncOptions: [CreateNamespace=true, ServerSideApply=true] }

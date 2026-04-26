@@ -1,0 +1,22 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata: { name: helixcare-postgres, namespace: databases }
+spec:
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4
+  postgresql: { parameters: { max_connections: "500", shared_buffers: "8GB", work_mem: "32MB" } }
+  bootstrap:
+    initdb:
+      database: helixcare
+      owner: helixcare
+      secret: { name: helixcare-postgres-credentials }
+  storage: { size: 1Ti, storageClass: gp3 }
+  monitoring: { enablePodMonitor: true }
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://helixcare-pg-backup-us-east-1
+      s3Credentials:
+        accessKeyId:     { name: pg-backup-creds, key: AWS_ACCESS_KEY_ID }
+        secretAccessKey: { name: pg-backup-creds, key: AWS_SECRET_ACCESS_KEY }
+      wal: { compression: gzip }
+    retentionPolicy: "35d"

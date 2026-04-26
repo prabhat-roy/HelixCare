@@ -1,0 +1,6 @@
+apiVersion: v2
+name: patient-bff
+description: HelixCare patient portal BFF (Go)
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

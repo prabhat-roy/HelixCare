@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata: { name: e-prescription, namespace: helixcare-telehealth }
+spec:
+  replicas: 3
+  strategy:
+    blueGreen:
+      activeService: e-prescription-active
+      previewService: e-prescription-preview
+      autoPromotionEnabled: false
+      prePromotionAnalysis: { templates: [{ templateName: helixcare-canary-analysis }], args: [{ name: service-name, value: e-prescription }] }
+  selector: { matchLabels: { app.kubernetes.io/name: e-prescription } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: e-prescription } }
+    spec:
+      containers:
+        - { name: e-prescription, image: harbor.helixcare.internal/helixcare/e-prescription:latest, ports: [{ containerPort: 50605 }] }

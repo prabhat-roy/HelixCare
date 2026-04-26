@@ -1,0 +1,41 @@
+stages: [lint, test, build, scan, deploy]
+
+variables:
+  REGISTRY: "harbor.helixcare.internal"
+  PROJECT:  "helixcare"
+
+lint:
+  stage: lint
+  script: ["make lint"]
+
+test:
+  stage: test
+  script: ["make test"]
+
+build:
+  stage: build
+  image: docker:25
+  services: [docker:25-dind]
+  script:
+    - docker build -t $REGISTRY/$PROJECT/$SERVICE:$CI_COMMIT_SHA src/$SERVICE
+    - docker push $REGISTRY/$PROJECT/$SERVICE:$CI_COMMIT_SHA
+  parallel:
+    matrix:
+      - SERVICE: [api-gateway, fhir-gateway, ehr-core, prescription-service, video-consultation, hipaa-audit-service]
+
+trivy:
+  stage: scan
+  script: ["trivy image --severity HIGH,CRITICAL --exit-code 1 $REGISTRY/$PROJECT/$SERVICE:$CI_COMMIT_SHA"]
+
+phi-leak:
+  stage: scan
+  script: ["scripts/phi-leak-scan.sh"]
+
+deploy:
+  stage: deploy
+  script: ["argocd app sync $SERVICE-$CLOUD-$REGION"]
+  parallel:
+    matrix:
+      - { CLOUD: aws,   REGION: us-east-1   }
+      - { CLOUD: gcp,   REGION: us-central1 }
+      - { CLOUD: azure, REGION: eastus      }

@@ -1,0 +1,21 @@
+{
+  "index_patterns": ["clinical-notes-*","lab-reports-*","imaging-reports-*"],
+  "template": {
+    "settings": { "number_of_shards": 3, "number_of_replicas": 2, "index.refresh_interval": "5s" },
+    "mappings": {
+      "properties": {
+        "ts":           { "type": "date" },
+        "patient_id_h": { "type": "keyword" },
+        "encounter_id": { "type": "keyword" },
+        "author":       { "type": "keyword" },
+        "section":      { "type": "keyword" },
+        "snomed_codes": { "type": "keyword" },
+        "icd10_codes":  { "type": "keyword" },
+        "loinc_codes":  { "type": "keyword" },
+        "text":         { "type": "text", "analyzer": "english" },
+        "facility":     { "type": "keyword" },
+        "region":       { "type": "keyword" }
+      }
+    }
+  }
+}

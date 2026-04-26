@@ -1,0 +1,13 @@
+image: { repository: helixcare/ehr-core, tag: "", pullPolicy: IfNotPresent }
+replicaCount: 4
+service: { type: ClusterIP, port: 50900, targetPort: 50900 }
+resources: { requests: { cpu: 500m, memory: 1Gi }, limits: { cpu: 4000m, memory: 4Gi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50900 }, initialDelaySeconds: 60 }
+  readiness: { httpGet: { path: /healthz, port: 50900 }, initialDelaySeconds: 20 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: ehr-core, app.kubernetes.io/part-of: helixcare, helixcare.io/domain: ehr, helixcare.io/owner-team: ehr, helixcare.io/phi: "true", helixcare.io/fhir-r4: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config: { LOG_LEVEL: info, FHIR_VERSION: R4 }
+cloud: { provider: "", region: "" }

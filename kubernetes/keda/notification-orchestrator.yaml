@@ -1,0 +1,14 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata: { name: notification-orchestrator, namespace: helixcare-communications }
+spec:
+  scaleTargetRef: { name: notification-orchestrator }
+  minReplicaCount: 3
+  maxReplicaCount: 50
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka.messaging:9092
+        consumerGroup: notification-orchestrator
+        topic: notifications.dispatch.requested
+        lagThreshold: "100"

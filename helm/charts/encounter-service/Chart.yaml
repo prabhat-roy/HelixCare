@@ -1,0 +1,6 @@
+apiVersion: v2
+name: encounter-service
+description: HelixCare clinical encounter (Java/Spring)
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

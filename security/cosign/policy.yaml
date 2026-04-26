@@ -1,0 +1,10 @@
+apiVersion: policy.sigstore.dev/v1beta1
+kind: ClusterImagePolicy
+metadata: { name: helixcare-image-policy }
+spec:
+  images: [{ glob: "harbor.helixcare.internal/helixcare/*" }]
+  authorities:
+    - keyless:
+        url: https://fulcio.sigstore.dev
+        identities: [{ issuer: https://accounts.google.com, subject: ci@helixcare.io }]
+      ctlog: { url: https://rekor.sigstore.dev }

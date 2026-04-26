@@ -1,0 +1,15 @@
+apiVersion: redis.redis.opstreelabs.in/v1beta2
+kind: RedisCluster
+metadata: { name: helixcare-redis, namespace: databases }
+spec:
+  clusterSize: 3
+  redisExporter: { enabled: true }
+  storage:
+    volumeClaimTemplate:
+      spec: { storageClassName: gp3, resources: { requests: { storage: 50Gi } } }
+  redisConfig:
+    additionalRedisConfig: |
+      maxmemory-policy allkeys-lru
+      tls-port 6379
+      tls-cert-file /tls/tls.crt
+      tls-key-file  /tls/tls.key

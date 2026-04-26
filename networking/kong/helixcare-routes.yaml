@@ -1,0 +1,16 @@
+_format_version: "3.0"
+services:
+  - name: fhir-gateway
+    url: http://fhir-gateway.helixcare-platform:50005
+    routes:
+      - { name: fhir-r4, paths: ["/R4"], strip_path: false }
+    plugins:
+      - { name: jwt }
+      - { name: rate-limiting, config: { minute: 200, policy: redis } }
+      - { name: request-transformer, config: { add: { headers: ["X-FHIR-Version: R4"] } } }
+  - name: telehealth-signalling
+    url: http://telehealth-signalling.helixcare-telehealth:50601
+    routes:
+      - { name: telehealth-ws, paths: ["/telehealth"], protocols: [https, wss] }
+    plugins:
+      - { name: jwt }

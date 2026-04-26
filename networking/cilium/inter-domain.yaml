@@ -1,0 +1,13 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata: { name: helixcare-cross-domain-bff-only }
+spec:
+  endpointSelector: { matchLabels: { app.kubernetes.io/part-of: helixcare } }
+  ingress:
+    - fromEndpoints:
+        - matchLabels: { app.kubernetes.io/name: api-gateway }
+        - matchLabels: { app.kubernetes.io/name: fhir-gateway }
+        - matchLabels: { app.kubernetes.io/name: patient-bff }
+        - matchLabels: { app.kubernetes.io/name: clinician-bff }
+        - matchLabels: { app.kubernetes.io/name: admin-bff }
+        - matchLabels: { app.kubernetes.io/name: graphql-gateway }

@@ -1,0 +1,27 @@
+apiVersion: cassandra.datastax.com/v1beta1
+kind: CassandraDatacenter
+metadata: { name: helixcare-audit, namespace: databases }
+spec:
+  clusterName: helixcare
+  serverType: cassandra
+  serverVersion: "5.0.1"
+  size: 6
+  storageConfig:
+    cassandraDataVolumeClaimSpec:
+      storageClassName: gp3
+      accessModes: [ReadWriteOnce]
+      resources: { requests: { storage: 2Ti } }
+  config:
+    cassandra-yaml:
+      authenticator: PasswordAuthenticator
+      authorizer: CassandraAuthorizer
+      role_manager: CassandraRoleManager
+      hinted_handoff_enabled: true
+      compaction_throughput_mb_per_sec: 32
+    jvm-server-options:
+      initial_heap_size: "8G"
+      max_heap_size: "8G"
+  racks:
+    - { name: rack1, zone: us-east-1a }
+    - { name: rack2, zone: us-east-1b }
+    - { name: rack3, zone: us-east-1c }

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata: { name: helixcare-azure-westeurope, namespace: argocd }
+spec:
+  generators:
+    - git: { repoURL: https://github.com/prabhat-roy/HelixCare.git, revision: HEAD, directories: [{ path: helm/charts/* }] }
+  template:
+    metadata: { name: '{{path.basename}}-azure-westeurope', labels: { cloud: azure, region: westeurope, gdpr: required } }
+    spec:
+      project: helixcare
+      source:
+        repoURL: https://github.com/prabhat-roy/HelixCare.git
+        targetRevision: HEAD
+        path: '{{path}}'
+        helm: { valueFiles: [values.yaml, values-azure.yaml, values-azure-westeurope.yaml] }
+      destination: { name: helixcare-azure-westeurope, namespace: 'helixcare-{{path.basename}}' }
+      syncPolicy: { automated: { prune: true, selfHeal: true }, syncOptions: [CreateNamespace=true, ServerSideApply=true] }

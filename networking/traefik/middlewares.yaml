@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata: { name: helixcare-fhir-middleware, namespace: helixcare-platform }
+spec:
+  rateLimit: { average: 200, burst: 400 }
+  forwardAuth:
+    address: http://auth-service.helixcare-identity:51500/validate
+    trustForwardHeader: true
+    authResponseHeaders: ["X-User-Id","X-Roles","X-Patient-Context"]
+  headers:
+    customRequestHeaders: { X-FHIR-Version: "R4" }
+    sslRedirect: true
+    stsSeconds: 31536000
+    contentTypeNosniff: true
+    frameDeny: true

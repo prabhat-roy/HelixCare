@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata: { name: helixcare, namespace: argocd }
+spec:
+  description: HelixCare healthcare platform
+  sourceRepos: ["https://github.com/prabhat-roy/HelixCare.git"]
+  destinations:
+    - { namespace: "helixcare-*", server: "*" }
+    - { namespace: "kube-system", server: "*" }
+  clusterResourceWhitelist:
+    - { group: "*", kind: "*" }
+  roles:
+    - name: deployer
+      policies:
+        - "p, proj:helixcare:deployer, applications, sync, helixcare/*, allow"
+        - "p, proj:helixcare:deployer, applications, action/*, helixcare/*, allow"

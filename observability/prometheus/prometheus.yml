@@ -1,0 +1,27 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels: { cluster: helixcare, project: helixcare }
+
+rule_files:
+  - rules/*.yml
+
+scrape_configs:
+  - job_name: kubernetes-pods
+    kubernetes_sd_configs: [{ role: pod }]
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: "true"
+      - source_labels: [__meta_kubernetes_namespace]
+        target_label: namespace
+      - source_labels: [__meta_kubernetes_pod_label_helixcare_io_domain]
+        target_label: domain
+      - source_labels: [__meta_kubernetes_pod_label_helixcare_io_phi]
+        target_label: phi
+      - source_labels: [__meta_kubernetes_pod_label_topology_kubernetes_io_region]
+        target_label: region
+
+alerting:
+  alertmanagers:
+    - static_configs: [{ targets: ["alertmanager.observability:9093"] }]

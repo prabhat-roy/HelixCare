@@ -1,0 +1,69 @@
+# Topic naming: {domain}.{entity}.{event}
+# All payloads are FHIR Bundle resources wrapped in an envelope:
+#   { meta: { event_id, occurred_at, source_service, region, phi_class }, fhir_bundle: { ... } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: clinical-encounter-completed, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 24, replicas: 3, config: { retention.ms: 2592000000, compression.type: zstd } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: pharmacy-prescription-dispensed, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 12, replicas: 3, config: { retention.ms: 7776000000, compression.type: zstd } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: diagnostics-lab-result-released, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 12, replicas: 3, config: { retention.ms: 7776000000, compression.type: zstd } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: claims-claim-adjudicated, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 12, replicas: 3, config: { retention.ms: 7776000000, compression.type: zstd } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: appointment-booked, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 12, replicas: 3, config: { retention.ms: 2592000000, compression.type: zstd } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: patient-registered, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 12, replicas: 3, config: { retention.ms: 7776000000, compression.type: zstd } }
+---
+# HIPAA audit topic - 6+ year retention (220752000000 ms ~= 7 years)
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: compliance-audit-access-recorded, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 36, replicas: 3, config: { retention.ms: 220752000000, compression.type: zstd, min.insync.replicas: 2 } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: compliance-consent-granted, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 6, replicas: 3, config: { retention.ms: 220752000000, compression.type: zstd } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: ward-bed-assigned, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 6, replicas: 3, config: { retention.ms: 2592000000 } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: telehealth-session-started, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 12, replicas: 3, config: { retention.ms: 604800000 } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: analytics-risk-score-updated, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 12, replicas: 3, config: { retention.ms: 7776000000 } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: notifications-notification-dispatched, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 24, replicas: 3, config: { retention.ms: 604800000 } }
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata: { name: billing-invoice-issued, namespace: messaging, labels: { strimzi.io/cluster: helixcare-kafka } }
+spec: { partitions: 12, replicas: 3, config: { retention.ms: 7776000000 } }

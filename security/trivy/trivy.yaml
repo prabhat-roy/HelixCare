@@ -1,0 +1,10 @@
+format: json
+severity: HIGH,CRITICAL
+exit-code: 1
+ignore-unfixed: true
+vulnerability:
+  type: ["os","library"]
+secret:
+  config: trivy-secret.yaml
+misconfiguration:
+  policy: ["security/opa/policies"]

@@ -1,0 +1,4 @@
+cloud: { provider: aws, region: us-east-1 }
+serviceAccount: { annotations: { eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT:role/helixcare-patient-registration } }
+nodeSelector: { topology.kubernetes.io/region: us-east-1 }
+envFrom: [{ secretRef: { name: patient-registration-aws-secrets } }]

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hipaa-audit-service
+  namespace: helixcare-compliance
+  labels: { app.kubernetes.io/name: hipaa-audit-service, helixcare.io/domain: compliance, helixcare.io/phi: "true", helixcare.io/audit: "true" }
+spec:
+  replicas: 3
+  selector: { matchLabels: { app.kubernetes.io/name: hipaa-audit-service } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: hipaa-audit-service, helixcare.io/audit: "true", topology.kubernetes.io/region: us-east-1 } }
+    spec:
+      serviceAccountName: hipaa-audit-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+      nodeSelector: { topology.kubernetes.io/region: us-east-1 }
+      containers:
+        - name: hipaa-audit-service
+          image: harbor.helixcare.internal/helixcare/hipaa-audit-service:latest
+          ports: [{ containerPort: 51600, name: http }]
+          env:
+            - { name: KAFKA_TOPIC, value: compliance.audit.access-recorded }
+            - { name: CASSANDRA_KEYSPACE, value: helixcare_audit }
+            - { name: RETENTION_YEARS, value: "6" }
+          livenessProbe:  { httpGet: { path: /healthz, port: 51600 }, initialDelaySeconds: 20 }
+          readinessProbe: { httpGet: { path: /healthz, port: 51600 }, initialDelaySeconds: 5 }
+          resources: { requests: { cpu: 250m, memory: 512Mi }, limits: { cpu: 1500m, memory: 1Gi } }
+          securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }

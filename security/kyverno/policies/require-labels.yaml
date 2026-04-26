@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v2beta1
+kind: ClusterPolicy
+metadata: { name: require-helixcare-labels }
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: require-domain-and-region-on-phi
+      match: { any: [{ resources: { kinds: [Deployment, StatefulSet] } }] }
+      validate:
+        message: "PHI workloads require helixcare.io/domain, helixcare.io/phi, topology.kubernetes.io/region labels"
+        deny:
+          conditions:
+            any:
+              - key: "{{ request.object.spec.template.metadata.labels.\"helixcare.io/phi\" }}"
+                operator: Equals
+                value: "true"
+              - key: "{{ request.object.spec.template.metadata.labels.\"topology.kubernetes.io/region\" }}"
+                operator: Equals
+                value: ""

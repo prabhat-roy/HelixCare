@@ -1,0 +1,35 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata: { name: helixcare-build }
+spec:
+  params:
+    - { name: service, type: string }
+    - { name: revision, type: string, default: main }
+  workspaces: [{ name: source }]
+  tasks:
+    - name: clone
+      taskRef: { name: git-clone, kind: ClusterTask }
+      workspaces: [{ name: output, workspace: source }]
+      params: [{ name: url, value: "https://github.com/prabhat-roy/HelixCare" }, { name: revision, value: $(params.revision) }]
+    - name: lint
+      runAfter: [clone]
+      taskRef: { name: golangci-lint }
+      workspaces: [{ name: source, workspace: source }]
+    - name: test
+      runAfter: [lint]
+      taskRef: { name: go-test }
+      workspaces: [{ name: source, workspace: source }]
+    - name: build-image
+      runAfter: [test]
+      taskRef: { name: kaniko, kind: ClusterTask }
+      params:
+        - { name: IMAGE, value: "harbor.helixcare.internal/helixcare/$(params.service):$(tasks.clone.results.commit)" }
+      workspaces: [{ name: source, workspace: source }]
+    - name: cosign-sign
+      runAfter: [build-image]
+      taskRef: { name: cosign-sign }
+      params: [{ name: image, value: "harbor.helixcare.internal/helixcare/$(params.service):$(tasks.clone.results.commit)" }]
+    - name: trivy-scan
+      runAfter: [build-image]
+      taskRef: { name: trivy-scanner }
+      params: [{ name: IMAGE_PATH, value: "harbor.helixcare.internal/helixcare/$(params.service):$(tasks.clone.results.commit)" }]

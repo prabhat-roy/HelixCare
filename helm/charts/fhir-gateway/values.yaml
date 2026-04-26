@@ -1,0 +1,22 @@
+image: { repository: helixcare/fhir-gateway, tag: "", pullPolicy: IfNotPresent }
+replicaCount: 3
+service: { type: ClusterIP, port: 50005, targetPort: 50005 }
+resources: { requests: { cpu: 200m, memory: 256Mi }, limits: { cpu: 2000m, memory: 1Gi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50005 }, initialDelaySeconds: 20, periodSeconds: 20 }
+  readiness: { httpGet: { path: /healthz, port: 50005 }, initialDelaySeconds: 5,  periodSeconds: 10 }
+serviceAccount: { create: true, annotations: {} }
+podLabels:
+  app.kubernetes.io/name: fhir-gateway
+  app.kubernetes.io/part-of: helixcare
+  helixcare.io/domain: platform
+  helixcare.io/owner-team: ehr
+  helixcare.io/phi: "true"
+  helixcare.io/fhir-r4: "true"
+podAnnotations: {}
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+env: []
+envFrom: []
+config: { LOG_LEVEL: info, FHIR_VERSION: R4 }
+cloud: { provider: "", storageClass: "", ingressClass: "", region: "" }

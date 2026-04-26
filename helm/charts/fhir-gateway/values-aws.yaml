@@ -1,0 +1,6 @@
+cloud: { provider: aws, storageClass: gp3, ingressClass: alb, region: us-east-1 }
+serviceAccount:
+  annotations: { eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT:role/helixcare-fhir-gateway }
+podLabels: { topology.kubernetes.io/region: us-east-1 }
+nodeSelector: { topology.kubernetes.io/region: us-east-1 }
+envFrom: [{ secretRef: { name: fhir-gateway-aws-secrets } }]

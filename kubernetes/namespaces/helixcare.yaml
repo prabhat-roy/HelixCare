@@ -1,0 +1,102 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-platform
+  labels: { helixcare.io/domain: platform, pod-security.kubernetes.io/enforce: restricted, pod-security.kubernetes.io/warn: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-patient
+  labels: { helixcare.io/domain: patient, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-appointments
+  labels: { helixcare.io/domain: appointments, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-clinical
+  labels: { helixcare.io/domain: clinical, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-diagnostics
+  labels: { helixcare.io/domain: diagnostics, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-pharmacy
+  labels: { helixcare.io/domain: pharmacy, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-telehealth
+  labels: { helixcare.io/domain: telehealth, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-billing
+  labels: { helixcare.io/domain: billing, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-insurance
+  labels: { helixcare.io/domain: insurance, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-ehr
+  labels: { helixcare.io/domain: ehr, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-ward-management
+  labels: { helixcare.io/domain: ward-management, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-staff
+  labels: { helixcare.io/domain: staff, pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-inventory
+  labels: { helixcare.io/domain: inventory, pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-communications
+  labels: { helixcare.io/domain: communications, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-analytics
+  labels: { helixcare.io/domain: analytics, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-identity
+  labels: { helixcare.io/domain: identity, pod-security.kubernetes.io/enforce: restricted }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helixcare-compliance
+  labels: { helixcare.io/domain: compliance, helixcare.io/phi: "true", pod-security.kubernetes.io/enforce: restricted }

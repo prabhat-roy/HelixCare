@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata: { name: api-gateway, namespace: helixcare-platform }
+spec:
+  hosts: ["api.helixcare.io","fhir.helixcare.io"]
+  gateways: ["istio-system/helixcare-gateway"]
+  http:
+    - match: [{ uri: { prefix: /fhir/R4/ } }]
+      route: [{ destination: { host: fhir-gateway.helixcare-platform.svc.cluster.local, port: { number: 50005 } } }]
+      timeout: 30s
+      retries: { attempts: 2, perTryTimeout: 10s, retryOn: "connect-failure,refused-stream,5xx" }
+    - match: [{ uri: { prefix: / } }]
+      route: [{ destination: { host: api-gateway.helixcare-platform.svc.cluster.local, port: { number: 50000 } } }]

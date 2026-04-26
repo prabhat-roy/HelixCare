@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata: { name: helixcare-fhir, namespace: helixcare-platform }
+spec:
+  entryPoints: [websecure]
+  routes:
+    - match: Host(`fhir.helixcare.io`) && PathPrefix(`/R4`)
+      kind: Rule
+      services: [{ name: fhir-gateway, port: 50005 }]
+      middlewares: [{ name: helixcare-fhir-middleware }]
+  tls: { secretName: helixcare-tls }

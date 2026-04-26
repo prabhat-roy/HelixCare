@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-consultation
+  namespace: helixcare-telehealth
+  labels: { app.kubernetes.io/name: video-consultation, helixcare.io/domain: telehealth, helixcare.io/phi: "true", helixcare.io/latency-tier: ultra-low }
+spec:
+  replicas: 4
+  selector: { matchLabels: { app.kubernetes.io/name: video-consultation } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: video-consultation, helixcare.io/phi: "true", topology.kubernetes.io/region: us-east-1 } }
+    spec:
+      serviceAccountName: video-consultation
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+      nodeSelector: { topology.kubernetes.io/region: us-east-1, helixcare.io/node-class: telehealth }
+      containers:
+        - name: video-consultation
+          image: harbor.helixcare.internal/helixcare/video-consultation:latest
+          ports: [{ containerPort: 50600, name: http }]
+          env:
+            - { name: NATS_URL, value: "nats://nats.messaging:4222" }
+          livenessProbe:  { httpGet: { path: /healthz, port: 50600 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50600 }, initialDelaySeconds: 5 }
+          resources: { requests: { cpu: 500m, memory: 512Mi }, limits: { cpu: 2000m, memory: 2Gi } }
+          securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }

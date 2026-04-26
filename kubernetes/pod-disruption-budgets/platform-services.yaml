@@ -1,0 +1,25 @@
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: api-gateway-pdb, namespace: helixcare-platform }
+spec: { minAvailable: 2, selector: { matchLabels: { app.kubernetes.io/name: api-gateway } } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: fhir-gateway-pdb, namespace: helixcare-platform }
+spec: { minAvailable: 2, selector: { matchLabels: { app.kubernetes.io/name: fhir-gateway } } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: ehr-core-pdb, namespace: helixcare-ehr }
+spec: { minAvailable: 3, selector: { matchLabels: { app.kubernetes.io/name: ehr-core } } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: hipaa-audit-pdb, namespace: helixcare-compliance }
+spec: { minAvailable: 2, selector: { matchLabels: { app.kubernetes.io/name: hipaa-audit-service } } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: video-consultation-pdb, namespace: helixcare-telehealth }
+spec: { minAvailable: 3, selector: { matchLabels: { app.kubernetes.io/name: video-consultation } } }

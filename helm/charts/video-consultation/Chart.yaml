@@ -1,0 +1,6 @@
+apiVersion: v2
+name: video-consultation
+description: HelixCare telehealth video consultation (Go) — sub-200ms
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

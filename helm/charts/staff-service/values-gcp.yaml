@@ -1,0 +1,4 @@
+cloud: { provider: gcp, region: us-central1 }
+serviceAccount: { annotations: { iam.gke.io/gcp-service-account: helixcare-staff-service@PROJECT.iam.gserviceaccount.com } }
+nodeSelector: { topology.kubernetes.io/region: us-central1 }
+envFrom: [{ secretRef: { name: staff-service-gcp-secrets } }]

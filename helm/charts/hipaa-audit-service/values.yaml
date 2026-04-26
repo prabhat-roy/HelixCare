@@ -1,0 +1,13 @@
+image: { repository: helixcare/hipaa-audit-service, tag: "", pullPolicy: IfNotPresent }
+replicaCount: 3
+service: { type: ClusterIP, port: 51600, targetPort: 51600 }
+resources: { requests: { cpu: 250m, memory: 512Mi }, limits: { cpu: 1500m, memory: 1Gi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 51600 }, initialDelaySeconds: 20 }
+  readiness: { httpGet: { path: /healthz, port: 51600 }, initialDelaySeconds: 5 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: hipaa-audit-service, app.kubernetes.io/part-of: helixcare, helixcare.io/domain: compliance, helixcare.io/owner-team: compliance, helixcare.io/phi: "true", helixcare.io/audit: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config: { LOG_LEVEL: info, KAFKA_TOPIC: compliance.audit.access-recorded, CASSANDRA_KEYSPACE: helixcare_audit, RETENTION_YEARS: "6" }
+cloud: { provider: "", region: "" }

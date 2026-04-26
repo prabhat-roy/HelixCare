@@ -1,0 +1,4 @@
+cloud: { provider: aws, region: us-east-1 }
+serviceAccount: { annotations: { eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT:role/helixcare-hipaa-audit-service } }
+nodeSelector: { topology.kubernetes.io/region: us-east-1 }
+envFrom: [{ secretRef: { name: hipaa-audit-service-aws-secrets } }]

@@ -1,0 +1,4 @@
+cloud: { provider: aws, region: us-east-1 }
+serviceAccount: { annotations: { eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT:role/helixcare-risk-stratification } }
+nodeSelector: { topology.kubernetes.io/region: us-east-1, helixcare.io/node-class: ml }
+envFrom: [{ secretRef: { name: risk-stratification-aws-secrets } }]

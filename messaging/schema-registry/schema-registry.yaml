@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: schema-registry, namespace: messaging }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: schema-registry } }
+  template:
+    metadata: { labels: { app: schema-registry } }
+    spec:
+      containers:
+        - name: schema-registry
+          image: confluentinc/cp-schema-registry:7.7.0
+          ports: [{ containerPort: 8081 }]
+          env:
+            - { name: SCHEMA_REGISTRY_HOST_NAME, value: schema-registry }
+            - { name: SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS, value: "PLAINTEXT://helixcare-kafka-bootstrap.messaging:9092" }
+            - { name: SCHEMA_REGISTRY_SCHEMA_COMPATIBILITY_LEVEL, value: BACKWARD }
+            - { name: SCHEMA_REGISTRY_SCHEMA_REGISTRY_GROUP_ID, value: helixcare }

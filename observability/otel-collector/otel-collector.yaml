@@ -1,0 +1,19 @@
+receivers:
+  otlp: { protocols: { grpc: {}, http: {} } }
+processors:
+  batch: {}
+  resource:
+    attributes:
+      - { key: deployment.environment, value: prod, action: insert }
+      - { key: service.namespace, from_attribute: k8s.namespace.name, action: insert }
+  attributes/redact:
+    actions:
+      - { key: http.url, pattern: "(?i)(mrn|ssn|dob|national_id)=[^&]+", action: hash }
+      - { key: db.statement, pattern: "(\\d{3}-\\d{2}-\\d{4})", action: hash }
+exporters:
+  otlp/tempo: { endpoint: tempo.observability:4317, tls: { insecure: true } }
+  prometheus: { endpoint: "0.0.0.0:8889" }
+service:
+  pipelines:
+    traces:  { receivers: [otlp], processors: [resource, attributes/redact, batch], exporters: [otlp/tempo] }
+    metrics: { receivers: [otlp], processors: [resource, batch], exporters: [prometheus] }

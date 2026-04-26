@@ -1,0 +1,26 @@
+groups:
+  - name: helixcare-slo
+    rules:
+      - alert: APIHighErrorRate
+        expr: sum by (service) (rate(http_requests_total{status=~"5.."}[5m])) / sum by (service) (rate(http_requests_total[5m])) > 0.01
+        for: 10m
+        labels: { severity: page, slo: availability }
+        annotations: { summary: "{{$labels.service}}: error rate >1%" }
+
+      - alert: TelehealthLatencyHigh
+        expr: histogram_quantile(0.95, sum by (le) (rate(telehealth_signalling_duration_seconds_bucket[5m]))) > 0.2
+        for: 5m
+        labels: { severity: page, slo: latency, domain: telehealth }
+        annotations: { summary: "Telehealth p95 > 200ms" }
+
+      - alert: FHIRGatewayValidationFailureSpike
+        expr: rate(fhir_validation_failures_total[5m]) > 10
+        for: 5m
+        labels: { severity: ticket, slo: data-quality, domain: ehr }
+        annotations: { summary: "FHIR validation failures elevated" }
+
+      - alert: AuditWriteLag
+        expr: kafka_consumergroup_lag{group="hipaa-audit-service"} > 10000
+        for: 10m
+        labels: { severity: page, slo: compliance, domain: compliance }
+        annotations: { summary: "HIPAA audit consumer lag > 10000" }

@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata: { generateName: helixcare-ci-, namespace: argo }
+spec:
+  entrypoint: build
+  arguments: { parameters: [{ name: service }, { name: revision, value: main }] }
+  templates:
+    - name: build
+      steps:
+        - - { name: clone, template: clone }
+        - - { name: lint,  template: lint  }
+        - - { name: test,  template: test  }
+        - - { name: image, template: image }
+        - - { name: sign,  template: sign  }
+    - name: clone
+      container: { image: alpine/git, command: ["git","clone","https://github.com/prabhat-roy/HelixCare","/work"] }
+    - name: lint
+      container: { image: golangci/golangci-lint, command: ["golangci-lint","run","./..."] }
+    - name: test
+      container: { image: golang:1.23, command: ["go","test","-race","./..."] }
+    - name: image
+      container: { image: gcr.io/kaniko-project/executor, args: ["--dockerfile=Dockerfile","--destination=harbor.helixcare.internal/helixcare/{{workflow.parameters.service}}:{{workflow.parameters.revision}}"] }
+    - name: sign
+      container: { image: ghcr.io/sigstore/cosign/cosign, command: ["cosign","sign","--yes","harbor.helixcare.internal/helixcare/{{workflow.parameters.service}}:{{workflow.parameters.revision}}"] }

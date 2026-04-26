@@ -1,0 +1,5 @@
+server: { http_listen_port: 4040 }
+storage:
+  backend: s3
+  s3: { bucket_name: helixcare-pyroscope-us-east-1, endpoint: s3.us-east-1.amazonaws.com }
+limits: { ingestion_rate_mb: 100, max_global_series_per_user: 200000 }

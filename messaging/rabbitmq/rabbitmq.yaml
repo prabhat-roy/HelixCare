@@ -1,0 +1,11 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata: { name: helixcare-rabbitmq, namespace: messaging }
+spec:
+  replicas: 3
+  resources: { requests: { cpu: "1", memory: 2Gi }, limits: { cpu: "2", memory: 4Gi } }
+  persistence: { storageClassName: gp3, storage: 50Gi }
+  rabbitmq:
+    additionalConfig: |
+      cluster_partition_handling = pause_minority
+      vm_memory_high_watermark.relative = 0.7

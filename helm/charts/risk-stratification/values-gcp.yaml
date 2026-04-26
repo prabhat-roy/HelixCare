@@ -1,0 +1,4 @@
+cloud: { provider: gcp, region: us-central1 }
+serviceAccount: { annotations: { iam.gke.io/gcp-service-account: helixcare-risk-stratification@PROJECT.iam.gserviceaccount.com } }
+nodeSelector: { topology.kubernetes.io/region: us-central1, helixcare.io/node-class: ml }
+envFrom: [{ secretRef: { name: risk-stratification-gcp-secrets } }]

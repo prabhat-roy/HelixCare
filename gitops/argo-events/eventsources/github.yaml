@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata: { name: github, namespace: argo-events }
+spec:
+  service: { ports: [{ port: 12000, targetPort: 12000 }] }
+  github:
+    helixcare:
+      repositories: [{ owner: prabhat-roy, names: [HelixCare] }]
+      webhook: { endpoint: /push, port: "12000", method: POST, url: https://argo-events.helixcare.internal }
+      events: [push, pull_request]
+      apiToken: { name: github-token, key: token }
+      insecure: false
+      active: true
+      contentType: json

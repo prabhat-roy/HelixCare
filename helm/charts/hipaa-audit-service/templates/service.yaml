@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hipaa-audit-service.fullname" . }}
+  labels: {{- include "hipaa-audit-service.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports: [{ port: {{ .Values.service.port }}, targetPort: http, protocol: TCP, name: http }]
+  selector: {{- include "hipaa-audit-service.selectorLabels" . | nindent 4 }}

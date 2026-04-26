@@ -1,0 +1,14 @@
+apiVersion: spire.spiffe.io/v1alpha1
+kind: SpireServer
+metadata: { name: helixcare-spire-server, namespace: spire-system }
+spec:
+  trustDomain: helixcare.internal
+  caKeyType: ec-p384
+  caTTL: 24h
+  defaultX509SVIDTTL: 1h
+  dataStore: { sql: { databaseType: postgres, connectionString: "postgresql://spire:CHANGE@postgres-spire.svc:5432/spire" } }
+  registration:
+    entries:
+      - parentID: spiffe://helixcare.internal/ns/spire-system/sa/spire-agent
+        spiffeID: spiffe://helixcare.internal/ns/{{namespace}}/sa/{{serviceaccount}}
+        selectors: [{ type: k8s, value: "ns:helixcare-*" }]

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "clinician-bff.fullname" . }}
+  labels: {{- include "clinician-bff.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports: [{ port: {{ .Values.service.port }}, targetPort: http, protocol: TCP, name: http }]
+  selector: {{- include "clinician-bff.selectorLabels" . | nindent 4 }}

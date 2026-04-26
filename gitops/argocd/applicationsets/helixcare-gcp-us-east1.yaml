@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata: { name: helixcare-gcp-us-east1, namespace: argocd }
+spec:
+  generators:
+    - git: { repoURL: https://github.com/prabhat-roy/HelixCare.git, revision: HEAD, directories: [{ path: helm/charts/* }] }
+  template:
+    metadata: { name: '{{path.basename}}-gcp-us-east1', labels: { cloud: gcp, region: us-east1 } }
+    spec:
+      project: helixcare
+      source:
+        repoURL: https://github.com/prabhat-roy/HelixCare.git
+        targetRevision: HEAD
+        path: '{{path}}'
+        helm: { valueFiles: [values.yaml, values-gcp.yaml, values-gcp-us-east1.yaml] }
+      destination: { name: helixcare-gcp-us-east1, namespace: 'helixcare-{{path.basename}}' }
+      syncPolicy: { automated: { prune: true, selfHeal: true }, syncOptions: [CreateNamespace=true, ServerSideApply=true] }

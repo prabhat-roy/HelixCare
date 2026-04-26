@@ -1,0 +1,14 @@
+groups:
+  - name: helixcare-phi-residency
+    rules:
+      - alert: CrossRegionPHIEgress
+        expr: sum by (src_region, dst_region) (rate(cilium_drop_count_total{reason="cross_region_phi"}[5m])) > 0
+        for: 1m
+        labels: { severity: page, compliance: HIPAA }
+        annotations: { summary: "Cross-region PHI egress attempt detected" }
+
+      - alert: RegionLabelMissingOnPHIPod
+        expr: sum by (namespace, pod) (kube_pod_labels{label_helixcare_io_phi="true",label_topology_kubernetes_io_region=""}) > 0
+        for: 5m
+        labels: { severity: page }
+        annotations: { summary: "PHI pod {{$labels.pod}} missing region label" }

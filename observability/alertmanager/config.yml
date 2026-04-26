@@ -1,0 +1,25 @@
+global:
+  resolve_timeout: 5m
+route:
+  receiver: pagerduty-default
+  group_by: [alertname, service, region]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  routes:
+    - matchers: [severity="page", compliance="HIPAA"]
+      receiver: pagerduty-compliance
+    - matchers: [domain="telehealth"]
+      receiver: pagerduty-telehealth
+    - matchers: [severity="ticket"]
+      receiver: jira
+
+receivers:
+  - name: pagerduty-default
+    pagerduty_configs: [{ service_key: REDACTED }]
+  - name: pagerduty-compliance
+    pagerduty_configs: [{ service_key: REDACTED, severity: critical }]
+  - name: pagerduty-telehealth
+    pagerduty_configs: [{ service_key: REDACTED }]
+  - name: jira
+    webhook_configs: [{ url: "https://jira-webhook.helixcare.internal/alerts" }]

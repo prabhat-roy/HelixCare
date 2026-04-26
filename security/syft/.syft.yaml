@@ -1,0 +1,8 @@
+output:
+  - spdx-json
+  - cyclonedx-json
+file:
+  metadata:
+    selection: owned-by-package
+package:
+  search-unindexed-archives: true

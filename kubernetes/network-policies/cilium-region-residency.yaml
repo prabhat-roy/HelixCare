@@ -1,0 +1,82 @@
+# Per-region Cilium policy: PHI workloads MUST only egress to endpoints in the same region.
+# 'topology.kubernetes.io/region' label is required on every pod (set in Helm values).
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata: { name: phi-region-residency-us-east-1, namespace: helixcare-clinical }
+spec:
+  endpointSelector:
+    matchLabels:
+      helixcare.io/phi: "true"
+      topology.kubernetes.io/region: us-east-1
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            topology.kubernetes.io/region: us-east-1
+    - toEntities: [kube-apiserver]
+    - toFQDNs:
+        - matchPattern: "*.us-east-1.amazonaws.com"
+        - matchPattern: "*.us-east-1.compute.internal"
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            topology.kubernetes.io/region: us-east-1
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata: { name: phi-region-residency-eu-west-1, namespace: helixcare-clinical }
+spec:
+  endpointSelector:
+    matchLabels:
+      helixcare.io/phi: "true"
+      topology.kubernetes.io/region: eu-west-1
+  egress:
+    - toEndpoints: [{ matchLabels: { topology.kubernetes.io/region: eu-west-1 } }]
+    - toEntities: [kube-apiserver]
+    - toFQDNs:
+        - matchPattern: "*.eu-west-1.amazonaws.com"
+  ingress:
+    - fromEndpoints: [{ matchLabels: { topology.kubernetes.io/region: eu-west-1 } }]
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata: { name: phi-region-residency-us-central1, namespace: helixcare-clinical }
+spec:
+  endpointSelector:
+    matchLabels:
+      helixcare.io/phi: "true"
+      topology.kubernetes.io/region: us-central1
+  egress:
+    - toEndpoints: [{ matchLabels: { topology.kubernetes.io/region: us-central1 } }]
+    - toFQDNs: [{ matchPattern: "*.googleapis.com" }]
+  ingress:
+    - fromEndpoints: [{ matchLabels: { topology.kubernetes.io/region: us-central1 } }]
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata: { name: phi-region-residency-eastus, namespace: helixcare-clinical }
+spec:
+  endpointSelector:
+    matchLabels:
+      helixcare.io/phi: "true"
+      topology.kubernetes.io/region: eastus
+  egress:
+    - toEndpoints: [{ matchLabels: { topology.kubernetes.io/region: eastus } }]
+    - toFQDNs:
+        - matchPattern: "*.eastus.azmk8s.io"
+        - matchPattern: "*.eastus.cloudapp.azure.com"
+  ingress:
+    - fromEndpoints: [{ matchLabels: { topology.kubernetes.io/region: eastus } }]
+---
+# Cluster-wide blanket deny: any PHI pod attempting to egress to a different region is dropped.
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata: { name: deny-cross-region-phi }
+spec:
+  endpointSelector: { matchLabels: { helixcare.io/phi: "true" } }
+  egressDeny:
+    - toEndpoints:
+        - matchExpressions:
+            - { key: topology.kubernetes.io/region, operator: Exists }
+      # Any region label on destination different from source is denied; enforced via
+      # paired allow-policies above - this is the failsafe deny.

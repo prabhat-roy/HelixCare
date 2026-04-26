@@ -1,0 +1,14 @@
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata: { name: ehr-core, namespace: helixcare-ehr }
+spec:
+  podSelector: { matchLabels: { app.kubernetes.io/name: ehr-core } }
+  port: http
+  proxyProtocol: HTTP/2
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata: { name: ehr-core-bff, namespace: helixcare-ehr }
+spec:
+  server: { name: ehr-core }
+  client: { meshTLS: { serviceAccounts: [{ name: api-gateway, namespace: helixcare-platform }, { name: clinician-bff, namespace: helixcare-platform }] } }

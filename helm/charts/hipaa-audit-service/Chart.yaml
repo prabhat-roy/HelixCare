@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hipaa-audit-service
+description: HelixCare HIPAA audit-trail writer (append-only, 6+ year retention)
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

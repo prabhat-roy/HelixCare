@@ -1,0 +1,14 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata: { name: cilium, namespace: kube-system }
+spec:
+  valuesContent: |-
+    hubble:
+      enabled: true
+      metrics:
+        enabled: [dns:query, drop, tcp, flow, port-distribution, icmp, http]
+      relay: { enabled: true }
+      ui: { enabled: true }
+      tls:
+        enabled: true
+        auto: { enabled: true, method: cronJob, schedule: "0 0 1 */4 *" }

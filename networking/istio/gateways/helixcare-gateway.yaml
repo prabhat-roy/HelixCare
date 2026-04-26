@@ -1,0 +1,9 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata: { name: helixcare-gateway, namespace: istio-system }
+spec:
+  selector: { istio: ingressgateway }
+  servers:
+    - port: { number: 443, name: https-fhir, protocol: HTTPS }
+      hosts: ["fhir.helixcare.io","patient.helixcare.io","clinician.helixcare.io","admin.helixcare.io"]
+      tls: { mode: SIMPLE, credentialName: helixcare-tls }

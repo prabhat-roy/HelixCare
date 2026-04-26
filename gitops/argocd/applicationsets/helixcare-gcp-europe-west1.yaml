@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata: { name: helixcare-gcp-europe-west1, namespace: argocd }
+spec:
+  generators:
+    - git: { repoURL: https://github.com/prabhat-roy/HelixCare.git, revision: HEAD, directories: [{ path: helm/charts/* }] }
+  template:
+    metadata: { name: '{{path.basename}}-gcp-europe-west1', labels: { cloud: gcp, region: europe-west1, gdpr: required } }
+    spec:
+      project: helixcare
+      source:
+        repoURL: https://github.com/prabhat-roy/HelixCare.git
+        targetRevision: HEAD
+        path: '{{path}}'
+        helm: { valueFiles: [values.yaml, values-gcp.yaml, values-gcp-europe-west1.yaml] }
+      destination: { name: helixcare-gcp-europe-west1, namespace: 'helixcare-{{path.basename}}' }
+      syncPolicy: { automated: { prune: true, selfHeal: true }, syncOptions: [CreateNamespace=true, ServerSideApply=true] }

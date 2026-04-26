@@ -1,0 +1,25 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata: { name: helixcare-clinical-search, namespace: databases }
+spec:
+  version: 8.15.2
+  nodeSets:
+    - name: master
+      count: 3
+      config: { node.roles: ["master"] }
+      volumeClaimTemplates:
+        - metadata: { name: elasticsearch-data }
+          spec: { storageClassName: gp3, accessModes: [ReadWriteOnce], resources: { requests: { storage: 50Gi } } }
+    - name: data
+      count: 6
+      config: { node.roles: ["data","ingest","ml"] }
+      podTemplate:
+        spec:
+          containers:
+            - name: elasticsearch
+              env: [{ name: ES_JAVA_OPTS, value: "-Xms8g -Xmx8g" }]
+              resources: { requests: { memory: 16Gi, cpu: 4 }, limits: { memory: 32Gi, cpu: 8 } }
+      volumeClaimTemplates:
+        - metadata: { name: elasticsearch-data }
+          spec: { storageClassName: gp3, accessModes: [ReadWriteOnce], resources: { requests: { storage: 1Ti } } }
+  http: { tls: { selfSignedCertificate: { disabled: false } } }

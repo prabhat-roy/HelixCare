@@ -1,0 +1,8 @@
+server: { http_listen_port: 3200 }
+distributor: { receivers: { otlp: { protocols: { grpc: {}, http: {} } } } }
+ingester: { trace_idle_period: 10s, max_block_duration: 5m }
+compactor: { compaction: { block_retention: 720h } }
+storage:
+  trace:
+    backend: s3
+    s3: { bucket: helixcare-tempo-us-east-1, endpoint: s3.us-east-1.amazonaws.com, sse: { kms_key_id: alias/helixcare-prod-us-east-1 } }

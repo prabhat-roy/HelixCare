@@ -1,0 +1,25 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata: { name: helixcare-daily, namespace: velero }
+spec:
+  schedule: "0 2 * * *"
+  template:
+    includedNamespaces:
+      - helixcare-platform
+      - helixcare-patient
+      - helixcare-clinical
+      - helixcare-ehr
+      - helixcare-pharmacy
+      - helixcare-telehealth
+      - helixcare-billing
+      - helixcare-insurance
+      - helixcare-ward-management
+      - helixcare-staff
+      - helixcare-inventory
+      - helixcare-communications
+      - helixcare-analytics
+      - helixcare-identity
+      - helixcare-compliance
+    storageLocation: default
+    ttl: 720h
+    snapshotVolumes: true

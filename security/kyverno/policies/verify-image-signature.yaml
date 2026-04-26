@@ -1,0 +1,14 @@
+apiVersion: kyverno.io/v2beta1
+kind: ClusterPolicy
+metadata: { name: verify-image-signature }
+spec:
+  validationFailureAction: Enforce
+  webhookTimeoutSeconds: 30
+  rules:
+    - name: verify-cosign
+      match: { any: [{ resources: { kinds: [Pod, Deployment, StatefulSet, DaemonSet] } }] }
+      verifyImages:
+        - imageReferences: ["harbor.helixcare.internal/helixcare/*"]
+          attestors:
+            - entries:
+                - keys: { publicKeys: "k8s://kyverno/cosign-public-key" }

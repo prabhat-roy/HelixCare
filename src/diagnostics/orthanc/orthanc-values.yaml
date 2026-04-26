@@ -1,0 +1,11 @@
+# Orthanc — open DICOM server for medical imaging
+image: { repository: jodogne/orthanc-plugins, tag: 1.12.4 }
+plugins:
+  postgresql: true
+  dicomweb:   true
+  authorization: true
+postgresql: { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: orthanc.helixcare.internal }]
+persistence: { enabled: true, storageClass: gp3, size: 1Ti }

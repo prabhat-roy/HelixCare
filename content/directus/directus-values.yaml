@@ -1,0 +1,6 @@
+image: { repository: directus/directus, tag: 11.1.2 }
+postgresql: { enabled: true }
+redis:      { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: directus.helixcare.internal }]

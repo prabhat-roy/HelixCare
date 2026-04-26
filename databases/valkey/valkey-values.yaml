@@ -1,0 +1,5 @@
+image: { repository: bitnami/valkey, tag: 8.0 }
+architecture: replication
+master:  { persistence: { storageClass: gp3, size: 50Gi } }
+replica: { replicaCount: 2 }
+sentinel: { enabled: true, quorum: 2 }

@@ -1,0 +1,11 @@
+apiServer:
+  image: { repository: dependencytrack/apiserver, tag: 4.11.0 }
+  resources: { requests: { cpu: 1, memory: 4Gi }, limits: { cpu: 4, memory: 16Gi } }
+frontend:
+  image: { repository: dependencytrack/frontend, tag: 4.11.0 }
+  ingress:
+    enabled: true
+    hosts: [{ host: dtrack.helixcare.internal }]
+postgresql:
+  enabled: true
+  auth: { database: dtrack, username: dtrack }

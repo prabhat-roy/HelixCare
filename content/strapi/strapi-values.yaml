@@ -1,0 +1,9 @@
+image: { repository: strapi/strapi, tag: 5 }
+postgresql: { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: cms.helixcare.internal }]
+persistence:
+  enabled: true
+  storageClass: gp3
+  size: 50Gi

@@ -1,0 +1,7 @@
+creation_rules:
+  - path_regex: secrets/helixcare/.*\.yaml
+    kms: arn:aws:kms:us-east-1:111111111111:alias/helixcare-sops
+  - path_regex: secrets/helixcare/gcp/.*\.yaml
+    gcp_kms: projects/helixcare-prod/locations/global/keyRings/helixcare/cryptoKeys/sops
+  - path_regex: secrets/helixcare/azure/.*\.yaml
+    azure_keyvault: https://helixcare-kv.vault.azure.net/keys/sops/abc123

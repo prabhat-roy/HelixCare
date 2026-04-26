@@ -1,0 +1,5 @@
+image: { repository: flowable/flowable-rest, tag: 7.1.0 }
+postgresql: { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: flowable.helixcare.internal }]

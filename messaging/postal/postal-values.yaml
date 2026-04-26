@@ -1,0 +1,7 @@
+image: { repository: ghcr.io/postalserver/postal, tag: 3.3.4 }
+hostname: postal.helixcare.internal
+mariadb: { enabled: true }
+rabbitmq: { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: postal.helixcare.internal }]

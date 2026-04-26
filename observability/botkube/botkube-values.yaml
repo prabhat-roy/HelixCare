@@ -1,0 +1,15 @@
+image: { repository: ghcr.io/kubeshop/botkube, tag: v1.13.0 }
+communications:
+  default-group:
+    socketSlack:
+      enabled: true
+      channels:
+        default:
+          name: helixcare-alerts
+          notification: { type: short }
+          bindings: { executors: [k8s-default-tools], sources: [k8s-events] }
+sources:
+  k8s-events:
+    botkube/kubernetes:
+      enabled: true
+      config: { namespaces: { include: [helixcare, helixcare-*] } }

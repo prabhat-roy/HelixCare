@@ -1,0 +1,13 @@
+server:
+  image: { repository: woodpeckerci/woodpecker-server, tag: v2.7.3 }
+  env:
+    WOODPECKER_HOST:        https://woodpecker.helixcare.internal
+    WOODPECKER_GITHUB:      true
+    WOODPECKER_GITHUB_CLIENT: change-me
+    WOODPECKER_AGENT_SECRET:  change-me
+agent:
+  image: { repository: woodpeckerci/woodpecker-agent, tag: v2.7.3 }
+  replicaCount: 2
+ingress:
+  enabled: true
+  hosts: [{ host: woodpecker.helixcare.internal }]

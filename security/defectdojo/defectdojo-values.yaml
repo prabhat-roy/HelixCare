@@ -1,0 +1,10 @@
+tag: 2.36.0
+host: defectdojo.helixcare.internal
+extraEnv:
+  - { name: DD_DATABASE_URL, valueFrom: { secretKeyRef: { name: defectdojo-postgres, key: url } } }
+redis: { enabled: true }
+celery:
+  worker: { replicaCount: 2 }
+ingress:
+  enabled: true
+  hosts: [{ host: defectdojo.helixcare.internal, paths: [{ path: /, pathType: Prefix }] }]

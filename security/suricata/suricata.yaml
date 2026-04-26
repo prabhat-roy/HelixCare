@@ -1,0 +1,12 @@
+%YAML 1.1
+---
+default-log-dir: /var/log/suricata
+af-packet:
+  - { interface: eth0, threads: auto, cluster-id: 99, cluster-type: cluster_flow, defrag: yes }
+detect-engine:
+  - { profile: medium }
+outputs:
+  - eve-log:
+      enabled: yes
+      filename: eve.json
+      types: [alert, http, dns, tls, files]

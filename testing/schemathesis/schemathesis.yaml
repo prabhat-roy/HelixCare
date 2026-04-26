@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata: { name: schemathesis, namespace: helixcare-testing }
+spec:
+  schedule: "0 6 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: schemathesis
+              image: schemathesis/schemathesis:stable
+              args:
+                - run
+                - https://api.helixcare.com/openapi.json
+                - --checks=all
+                - --hypothesis-deadline=10000

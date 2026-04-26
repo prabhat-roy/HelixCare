@@ -1,0 +1,11 @@
+image: { repository: kestra/kestra, tag: latest-full }
+postgresql: { enabled: true }
+elasticsearch: { enabled: true }
+configuration:
+  kestra:
+    server: { basicAuth: { enabled: false } }
+    repository: { type: postgres }
+    storage: { type: minio }
+ingress:
+  enabled: true
+  hosts: [{ host: kestra.helixcare.internal }]

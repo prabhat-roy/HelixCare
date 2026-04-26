@@ -1,0 +1,5 @@
+severity_overrides:
+  aws-s3-encryption-customer-key: HIGH
+  aws-rds-encrypt-instance-storage-data: CRITICAL
+exclude:
+  - aws-s3-enable-versioning   # versioning is set in storage.tf via aws_s3_bucket_versioning

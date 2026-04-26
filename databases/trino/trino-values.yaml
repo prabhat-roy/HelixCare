@@ -1,0 +1,13 @@
+image: { repository: trinodb/trino, tag: 462 }
+coordinator: { jvm: { maxHeapSize: 8G } }
+worker:      { replicas: 3, jvm: { maxHeapSize: 16G } }
+catalogs:
+  postgresql: |
+    connector.name=postgresql
+    connection-url=jdbc:postgresql://postgres-helixcare/helixcare
+  clickhouse: |
+    connector.name=clickhouse
+    connection-url=jdbc:clickhouse://clickhouse:8123/helixcare_analytics
+ingress:
+  enabled: true
+  hosts: [{ host: trino.helixcare.internal, paths: [{ path: /, pathType: Prefix }] }]

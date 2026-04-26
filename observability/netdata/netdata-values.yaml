@@ -1,0 +1,10 @@
+image: { repository: netdata/netdata, tag: stable }
+parent:
+  enabled: true
+  resources: { requests: { cpu: 200m, memory: 512Mi } }
+child:
+  enabled: true
+  daemonset: true
+ingress:
+  enabled: true
+  hosts: [{ host: netdata.helixcare.internal }]

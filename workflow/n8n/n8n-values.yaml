@@ -1,0 +1,8 @@
+image: { repository: n8nio/n8n, tag: 1.66.0 }
+config:
+  n8n:
+    encryption_key: { existingSecret: n8n-secrets, key: encryption_key }
+postgresql: { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: n8n.helixcare.internal }]

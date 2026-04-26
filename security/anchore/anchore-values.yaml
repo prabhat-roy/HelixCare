@@ -1,0 +1,5 @@
+image: { repository: docker.io/anchore/enterprise, tag: v5.5.0 }
+postgresql: { enabled: true, postgresPassword: change-me }
+ingress:
+  enabled: true
+  hosts: [{ host: anchore.helixcare.internal }]

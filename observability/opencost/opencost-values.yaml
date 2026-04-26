@@ -1,0 +1,9 @@
+opencost:
+  prometheus: { internal: { enabled: false }, external: { url: http://prometheus.observability:9090 } }
+  ui: { enabled: true }
+  exporter:
+    cloudProviderApiKey: ""
+    defaultClusterId: helixcare-prod
+ingress:
+  enabled: true
+  hosts: [{ host: opencost.helixcare.internal, paths: [{ path: /, pathType: Prefix }] }]

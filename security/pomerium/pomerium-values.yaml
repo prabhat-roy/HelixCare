@@ -1,0 +1,8 @@
+config:
+  rootDomain: pomerium.helixcare.internal
+  generateSignedJWT: true
+authenticate:
+  idp:
+    provider: oidc
+    url: https://keycloak.helixcare.internal
+ingressController: { enabled: true }

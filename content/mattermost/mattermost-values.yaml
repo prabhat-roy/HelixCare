@@ -1,0 +1,6 @@
+image: { repository: mattermost/mattermost-team-edition, tag: 9.11.5 }
+postgresql: { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: chat.helixcare.internal }]
+mysql: { enabled: false }

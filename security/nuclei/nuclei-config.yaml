@@ -1,0 +1,6 @@
+templates: ~/nuclei-templates
+severity: [critical, high, medium]
+rate-limit: 150
+concurrency: 25
+exclude-tags: [intrusive]
+report-config: { reporting: [{ type: github, repo: prabhat-roy/HelixCare }] }

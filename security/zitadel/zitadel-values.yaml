@@ -1,0 +1,9 @@
+zitadel:
+  masterkey: change-me-32-bytes-minimum
+  configmapConfig:
+    ExternalDomain: zitadel.helixcare.internal
+    ExternalSecure: true
+    ExternalPort: 443
+ingress:
+  enabled: true
+  hosts: [{ host: zitadel.helixcare.internal }]

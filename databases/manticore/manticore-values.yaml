@@ -1,0 +1,7 @@
+image: { repository: manticoresearch/manticore, tag: 6.3.6 }
+replicaCount: 2
+persistence:
+  enabled: true
+  storageClass: gp3
+  size: 100Gi
+service: { type: ClusterIP, ports: { sphinx: 9312, mysql: 9306, http: 9308 } }

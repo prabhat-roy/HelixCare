@@ -1,0 +1,6 @@
+global:
+  novuVersion: 1.0.0
+api: { ingress: { enabled: true, hosts: [{ host: novu-api.helixcare.internal }] } }
+web: { ingress: { enabled: true, hosts: [{ host: novu.helixcare.internal }] } }
+mongodb: { enabled: true }
+redis:   { enabled: true }

@@ -1,0 +1,9 @@
+agent:
+  enabled: true
+  acquisition:
+    - { namespace: helixcare, podName: api-gateway-* }
+lapi:
+  enabled: true
+  dashboard: { enabled: true }
+bouncers:
+  - { name: crowdsec-traefik-bouncer, image: crowdsecurity/traefik-bouncer:latest }

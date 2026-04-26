@@ -1,0 +1,11 @@
+apiVersion: policy.sigstore.dev/v1beta1
+kind: ClusterImagePolicy
+metadata: { name: helixcare-slsa-l3 }
+spec:
+  images: [{ glob: harbor.helixcare.internal/helixcare/* }]
+  authorities:
+    - name: slsa-provenance
+      keyless:
+        url: https://fulcio.sigstore.dev
+      attestations:
+        - { name: slsa-l3, predicateType: https://slsa.dev/provenance/v1 }

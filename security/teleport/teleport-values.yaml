@@ -1,0 +1,10 @@
+clusterName: helixcare.teleport.internal
+authentication:
+  type: github
+  githubConnector:
+    name: github
+    redirectUrl: https://teleport.helixcare.internal/v1/webapi/github/callback
+kubeClusterName: helixcare-prod
+ingress:
+  enabled: true
+  hostname: teleport.helixcare.internal

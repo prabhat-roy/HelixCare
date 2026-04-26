@@ -1,0 +1,6 @@
+image: { repository: infisical/infisical, tag: latest }
+mongodb: { enabled: true }
+redis:   { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: infisical.helixcare.internal }]

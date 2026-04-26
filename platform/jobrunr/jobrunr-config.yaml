@@ -1,0 +1,10 @@
+# JobRunr (Java) — distributed job queue config
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres.helixcare:5432/jobrunr
+    username: jobrunr
+org:
+  jobrunr:
+    background-job-server: { enabled: true, worker-count: 16 }
+    dashboard: { enabled: true, port: 8000 }
+    database: { skip-create: false, table-prefix: jr_ }

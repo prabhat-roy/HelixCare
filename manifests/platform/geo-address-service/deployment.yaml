@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geo-address-service
+  namespace: helixcare
+  labels:
+    app.kubernetes.io/name: geo-address-service
+    app.kubernetes.io/part-of: helixcare
+    helixcare.io/domain: platform
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: geo-address-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: geo-address-service, helixcare.io/domain: platform }
+    spec:
+      serviceAccountName: geo-address-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: geo-address-service
+          image: harbor.helixcare.internal/helixcare/geo-address-service:latest
+          ports: [{ containerPort: 51013, name: http }]
+          envFrom: [{ configMapRef: { name: geo-address-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 51013 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 51013 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

@@ -1,0 +1,3 @@
+image: { repository: quay.io/projectquay/clair, tag: 4.7.4 }
+postgresql: { enabled: true }
+ingress: { hosts: [{ host: clair.helixcare.internal }] }

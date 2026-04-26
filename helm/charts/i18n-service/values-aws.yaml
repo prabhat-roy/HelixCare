@@ -1,0 +1,8 @@
+cloud:
+  provider: aws
+  storageClass: gp3
+  ingressClass: alb
+
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.aws.accountId }}:role/helixcare-i18n-service

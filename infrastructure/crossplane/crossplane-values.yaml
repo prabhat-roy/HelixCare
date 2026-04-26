@@ -1,0 +1,10 @@
+image: { repository: xpkg.upbound.io/crossplane/crossplane, tag: v1.18.0 }
+provider:
+  packages:
+    - xpkg.upbound.io/upbound/provider-aws-ec2:v1.13.0
+    - xpkg.upbound.io/upbound/provider-aws-rds:v1.13.0
+    - xpkg.upbound.io/upbound/provider-gcp-compute:v1.6.0
+    - xpkg.upbound.io/upbound/provider-azure-network:v1.6.0
+configuration:
+  packages: []
+metrics: { enabled: true }

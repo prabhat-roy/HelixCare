@@ -1,0 +1,10 @@
+cr:
+  create: true
+  namespace: istio-system
+  spec:
+    auth: { strategy: openid }
+    deployment: { ingress_enabled: true, ingress: { override_yaml: { metadata: { annotations: { kubernetes.io/ingress.class: traefik } } } } }
+    external_services:
+      prometheus: { url: http://prometheus.observability:9090 }
+      grafana:    { in_cluster_url: http://grafana.observability:3000 }
+      tracing:    { in_cluster_url: http://jaeger-query.observability:16686 }

@@ -1,0 +1,9 @@
+image: { repository: ghcr.io/projectnessie/nessie, tag: 0.99.0 }
+versionStoreType: ROCKSDB
+ingress:
+  enabled: true
+  hosts: [{ host: nessie.helixcare.internal }]
+persistence:
+  enabled: true
+  storageClass: gp3
+  size: 50Gi

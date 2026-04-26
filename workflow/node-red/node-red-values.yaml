@@ -1,0 +1,8 @@
+image: { repository: nodered/node-red, tag: 4.0.5 }
+persistence:
+  enabled: true
+  storageClass: gp3
+  size: 5Gi
+ingress:
+  enabled: true
+  hosts: [{ host: nodered.helixcare.internal }]

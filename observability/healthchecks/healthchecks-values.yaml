@@ -1,0 +1,7 @@
+image: { repository: healthchecks/healthchecks, tag: latest }
+postgresql: { enabled: true }
+env:
+  - { name: SITE_ROOT, value: https://hchk.helixcare.internal }
+ingress:
+  enabled: true
+  hosts: [{ host: hchk.helixcare.internal }]

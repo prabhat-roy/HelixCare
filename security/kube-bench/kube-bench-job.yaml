@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata: { name: kube-bench, namespace: helixcare-security }
+spec:
+  template:
+    spec:
+      hostPID: true
+      restartPolicy: Never
+      containers:
+        - name: kube-bench
+          image: aquasec/kube-bench:latest
+          command: ["kube-bench","--benchmark","cis-1.24"]
+          volumeMounts:
+            - { name: var-lib-etcd, mountPath: /var/lib/etcd, readOnly: true }
+            - { name: var-lib-kubelet, mountPath: /var/lib/kubelet, readOnly: true }
+      volumes:
+        - { name: var-lib-etcd,    hostPath: { path: /var/lib/etcd } }
+        - { name: var-lib-kubelet, hostPath: { path: /var/lib/kubelet } }

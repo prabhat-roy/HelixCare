@@ -1,0 +1,8 @@
+image: { repository: apache/druid, tag: 30.0.1 }
+zkHosts: zookeeper:2181
+historical:    { replicaCount: 3, persistence: { storageClass: gp3, size: 1Ti } }
+middleManager: { replicaCount: 2 }
+broker:        { replicaCount: 2 }
+coordinator:   { replicaCount: 1 }
+overlord:      { replicaCount: 1 }
+router:        { replicaCount: 1, ingress: { enabled: true, hosts: [{ host: druid.helixcare.internal }] } }

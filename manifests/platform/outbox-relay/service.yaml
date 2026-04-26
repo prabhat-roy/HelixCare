@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: outbox-relay
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: outbox-relay, helixcare.io/domain: platform }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 51002, targetPort: 51002 }]
+  selector: { app.kubernetes.io/name: outbox-relay }

@@ -1,0 +1,10 @@
+# Asynq (Go) — distributed job queue config (consumed by the asynq Go services)
+redis:
+  addr: redis.helixcare.svc.cluster.local:6379
+  db: 2
+queues:
+  critical: 6
+  default: 3
+  low: 1
+concurrency: 10
+strict_priority: false

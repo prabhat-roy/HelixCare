@@ -1,0 +1,8 @@
+manager:
+  hostname: wazuh-manager
+  cluster: { name: helixcare-wazuh, key: change-me }
+indexer:
+  replicas: 3
+dashboard:
+  hosts:
+    - { host: wazuh.helixcare.internal }

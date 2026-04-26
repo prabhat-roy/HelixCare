@@ -1,0 +1,13 @@
+image: { repository: docker.redpanda.com/redpandadata/redpanda, tag: v24.2.7 }
+statefulset:
+  replicas: 3
+  initContainers: { tuning: { enabled: true } }
+storage:
+  persistentVolume: { enabled: true, size: 1Ti, storageClass: gp3 }
+config:
+  cluster: { auto_create_topics_enabled: false }
+listeners:
+  kafka: { external: { default: { advertisedPorts: [31092] } } }
+console:
+  enabled: true
+  ingress: { enabled: true, hosts: [{ host: redpanda.helixcare.internal }] }

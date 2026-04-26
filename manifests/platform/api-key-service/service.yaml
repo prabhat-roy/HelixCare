@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-key-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: api-key-service, helixcare.io/domain: platform }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 51003, targetPort: 51003 }]
+  selector: { app.kubernetes.io/name: api-key-service }

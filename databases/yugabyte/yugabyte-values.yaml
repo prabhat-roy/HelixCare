@@ -1,0 +1,8 @@
+image: { repository: yugabytedb/yugabyte, tag: 2.21.1.0-b271 }
+replicas: { master: 3, tserver: 3 }
+storage:
+  master:  { count: 1, size: 50Gi,  storageClass: gp3 }
+  tserver: { count: 1, size: 500Gi, storageClass: gp3 }
+resource:
+  master:  { requests: { cpu: 1, memory: 4Gi } }
+  tserver: { requests: { cpu: 2, memory: 8Gi } }

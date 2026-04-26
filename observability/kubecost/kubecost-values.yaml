@@ -1,0 +1,8 @@
+global:
+  prometheus: { enabled: false, fqdn: http://prometheus.observability:9090 }
+  grafana:    { enabled: false, fqdn: http://grafana.observability:3000 }
+kubecostProductConfigs:
+  clusterName: helixcare-prod
+ingress:
+  enabled: true
+  hosts: [kubecost.helixcare.internal]

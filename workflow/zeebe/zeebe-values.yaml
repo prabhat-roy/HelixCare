@@ -1,0 +1,6 @@
+image: { repository: camunda/zeebe, tag: 8.6.0 }
+clusterSize: 3
+partitionCount: 3
+replicationFactor: 3
+persistence: { enabled: true, storageClass: gp3, size: 50Gi }
+service: { type: ClusterIP, port: 26500 }

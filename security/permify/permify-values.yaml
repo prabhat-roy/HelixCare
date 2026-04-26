@@ -1,0 +1,7 @@
+image: { repository: ghcr.io/permify/permify, tag: latest }
+database:
+  engine: postgres
+  uri: { secretKeyRef: { name: permify-postgres, key: uri } }
+ingress:
+  enabled: true
+  hosts: [{ host: permify.helixcare.internal }]

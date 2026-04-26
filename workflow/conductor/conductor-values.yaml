@@ -1,0 +1,8 @@
+conductorServer:
+  image: { repository: conductoross/conductor-server, tag: 3.21.13 }
+  replicas: 2
+elasticsearch: { enabled: true }
+postgres:      { enabled: true }
+ui:
+  enabled: true
+  ingress: { enabled: true, hosts: [{ host: conductor.helixcare.internal }] }

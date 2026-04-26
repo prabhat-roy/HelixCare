@@ -1,0 +1,10 @@
+dagsterWebserver: { replicaCount: 2 }
+dagsterDaemon:    { enabled: true }
+postgresql: { enabled: true }
+runLauncher:
+  type: K8sRunLauncher
+  config:
+    k8sRunLauncher: { jobNamespace: helixcare-dagster, imagePullSecrets: [{ name: harbor-pull }] }
+ingress:
+  enabled: true
+  dagsterWebserver: { host: dagster.helixcare.internal }

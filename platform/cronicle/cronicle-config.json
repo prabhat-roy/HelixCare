@@ -1,0 +1,11 @@
+{
+  "base_app_url": "http://cronicle.helixcare.internal",
+  "log_dir": "logs",
+  "pid_file": "logs/cronicled.pid",
+  "debug_level": 7,
+  "Storage": {
+    "engine": "Filesystem",
+    "Filesystem": { "base_dir": "data" }
+  },
+  "User": { "free_accounts": false }
+}

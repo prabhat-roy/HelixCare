@@ -1,0 +1,8 @@
+image: { repository: docker.io/emissaryingress/emissary, tag: 3.9.1 }
+replicaCount: 2
+service: { type: LoadBalancer }
+ambassadorConfig:
+  apiVersion: getambassador.io/v3alpha1
+  kind: Module
+  name: ambassador
+  config: { use_remote_address: true }

@@ -1,0 +1,8 @@
+image: { repository: ghcr.io/coroot/coroot, tag: 1.5.4 }
+coroot:
+  prometheus: { url: http://prometheus.observability:9090 }
+  clickhouse: { address: clickhouse.observability:9000 }
+ingress:
+  enabled: true
+  hosts: [{ host: coroot.helixcare.internal }]
+nodeAgent: { enabled: true, image: { repository: ghcr.io/coroot/coroot-node-agent } }

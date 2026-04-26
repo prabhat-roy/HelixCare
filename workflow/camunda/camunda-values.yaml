@@ -1,0 +1,10 @@
+global:
+  identity:
+    auth: { issuerBackendUrl: https://keycloak.helixcare.internal/realms/camunda-platform }
+zeebe:           { clusterSize: 3, partitionCount: 3 }
+zeebe-gateway:   { replicas: 2 }
+operate:         { replicas: 1 }
+tasklist:        { replicas: 1 }
+optimize:        { replicas: 1 }
+identity:        { ingress: { enabled: true, host: camunda.helixcare.internal } }
+elasticsearch:   { master: { replicaCount: 3 } }

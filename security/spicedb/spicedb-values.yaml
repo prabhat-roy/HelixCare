@@ -1,0 +1,5 @@
+image: { repository: authzed/spicedb, tag: v1.34.0 }
+datastore: { engine: postgres }
+ingress:
+  enabled: true
+  hosts: [{ host: spicedb.helixcare.internal }]

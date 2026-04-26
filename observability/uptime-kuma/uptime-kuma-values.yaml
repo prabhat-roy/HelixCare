@@ -1,0 +1,8 @@
+image: { repository: louislam/uptime-kuma, tag: 1.23.13 }
+persistence:
+  enabled: true
+  storageClass: gp3
+  size: 10Gi
+ingress:
+  enabled: true
+  hosts: [{ host: uptime.helixcare.internal }]

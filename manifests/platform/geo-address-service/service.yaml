@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: geo-address-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: geo-address-service, helixcare.io/domain: platform }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 51013, targetPort: 51013 }]
+  selector: { app.kubernetes.io/name: geo-address-service }

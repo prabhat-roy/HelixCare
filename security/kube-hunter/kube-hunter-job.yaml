@@ -1,0 +1,11 @@
+apiVersion: batch/v1
+kind: Job
+metadata: { name: kube-hunter, namespace: helixcare-security }
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: kube-hunter
+          image: aquasec/kube-hunter:latest
+          command: ["kube-hunter","--pod","--report","yaml"]

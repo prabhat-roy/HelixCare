@@ -1,0 +1,8 @@
+discovery: { enabled: true }
+gateway: { enabled: true }
+gatewayProxies:
+  gatewayProxy:
+    service: { type: LoadBalancer }
+settings:
+  integrations:
+    consul: { enabled: false }

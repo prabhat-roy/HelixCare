@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: geo-address-service
+  namespace: helixcare
+  labels: { app.kubernetes.io/name: geo-address-service, helixcare.io/domain: platform }
+data:
+  LOG_LEVEL: info
+  PORT: "51013"

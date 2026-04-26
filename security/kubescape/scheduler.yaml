@@ -1,0 +1,6 @@
+apiVersion: spdx.softwarecomposition.kubescape.io/v1beta1
+kind: ConfigurationScanScheduler
+metadata: { name: helixcare-daily, namespace: kubescape }
+spec:
+  schedule: "0 4 * * *"
+  framework: nsa

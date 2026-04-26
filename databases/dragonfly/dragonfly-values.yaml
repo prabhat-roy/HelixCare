@@ -1,0 +1,5 @@
+image: { repository: docker.dragonflydb.io/dragonflydb/dragonfly, tag: latest }
+replicaCount: 3
+resources: { requests: { cpu: 1, memory: 4Gi }, limits: { cpu: 4, memory: 16Gi } }
+service: { type: ClusterIP }
+extraArgs: [--cache_mode, --maxmemory=12gb]

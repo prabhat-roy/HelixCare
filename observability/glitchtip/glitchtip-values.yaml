@@ -1,0 +1,7 @@
+image: { repository: glitchtip/glitchtip, tag: v4.1.0 }
+postgresql: { enabled: true }
+redis: { enabled: true }
+worker: { replicaCount: 2 }
+ingress:
+  enabled: true
+  hosts: [{ host: glitchtip.helixcare.internal }]

@@ -1,0 +1,4 @@
+aws_iam_policy.AmazonEKS*
+aws_security_group_rule.allow-self-egress-*
+aws_route_table_association.*
+aws_iam_role_policy_attachment.eks-*

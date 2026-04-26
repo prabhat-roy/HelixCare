@@ -1,0 +1,14 @@
+server:
+  image: { repository: drone/drone, tag: 2.24.0 }
+  env:
+    DRONE_GITHUB_CLIENT_ID:     change-me
+    DRONE_GITHUB_CLIENT_SECRET: change-me
+    DRONE_RPC_SECRET:           change-me
+    DRONE_SERVER_HOST:          drone.helixcare.internal
+    DRONE_SERVER_PROTO:         https
+runner:
+  image: { repository: drone/drone-runner-kube, tag: 1.0.0-rc.3 }
+  env: { DRONE_NAMESPACE_DEFAULT: helixcare-ci }
+ingress:
+  enabled: true
+  hosts: [{ host: drone.helixcare.internal }]

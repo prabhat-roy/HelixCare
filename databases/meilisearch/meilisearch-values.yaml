@@ -1,0 +1,13 @@
+image: { repository: getmeili/meilisearch, tag: v1.10 }
+environment:
+  MEILI_NO_ANALYTICS: "true"
+  MEILI_ENV: production
+auth:
+  existingMasterKeySecret: meili-master-key
+persistence:
+  enabled: true
+  storageClass: gp3
+  size: 100Gi
+ingress:
+  enabled: true
+  hosts: [{ host: meili.helixcare.internal }]

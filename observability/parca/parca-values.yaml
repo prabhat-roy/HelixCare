@@ -1,0 +1,5 @@
+image: { repository: ghcr.io/parca-dev/parca, tag: v0.22.0 }
+agent: { enabled: true, image: { repository: ghcr.io/parca-dev/parca-agent, tag: v0.34.0 } }
+ingress:
+  enabled: true
+  hosts: [{ host: parca.helixcare.internal }]

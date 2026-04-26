@@ -1,0 +1,9 @@
+vmsingle:
+  spec:
+    retentionPeriod: "1y"
+    storage: { storageClassName: gp3, accessModes: [ReadWriteOnce], resources: { requests: { storage: 500Gi } } }
+vmagent:
+  enabled: true
+  spec: { selectAllByDefault: true }
+vmalert:    { enabled: true }
+alertmanager: { enabled: false }

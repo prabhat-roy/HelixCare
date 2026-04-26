@@ -1,0 +1,8 @@
+{
+  "globalConfiguration": {
+    "globalRequestJournalSize": 10000,
+    "asynchronousResponseEnabled": true,
+    "asynchronousResponseThreads": 16
+  },
+  "extensions": ["com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer"]
+}

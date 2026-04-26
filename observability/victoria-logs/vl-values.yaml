@@ -1,0 +1,10 @@
+server:
+  image: { repository: victoriametrics/victoria-logs, tag: v0.30.0 }
+  retentionPeriod: 90d
+  persistence:
+    enabled: true
+    storageClass: gp3
+    size: 1Ti
+ingress:
+  enabled: true
+  hosts: [{ host: vlogs.helixcare.internal }]

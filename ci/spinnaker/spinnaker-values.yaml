@@ -1,0 +1,12 @@
+spinnaker:
+  spinnakerVersion: 1.34.0
+  ingress:
+    enabled: true
+    host: spinnaker.helixcare.internal
+deck:    { replicas: 2 }
+gate:    { replicas: 2 }
+orca:    { replicas: 2 }
+clouddriver: { replicas: 2 }
+front50: { replicas: 1 }
+echo:    { replicas: 1 }
+rosco:   { replicas: 1 }

@@ -1,0 +1,5 @@
+deployKey: ""           # set from secret
+clusterName: helixcare-prod
+cloudAddr: getcosmic.ai
+useEtcdOperator: false
+patches: { vizier-pem: { resources: { requests: { memory: 2Gi } } } }

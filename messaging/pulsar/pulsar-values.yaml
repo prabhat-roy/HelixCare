@@ -1,0 +1,11 @@
+components:
+  zookeeper: true
+  bookkeeper: true
+  broker: true
+  proxy: true
+  pulsar_manager: true
+zookeeper:    { replicaCount: 3, volumes: { data: { size: 50Gi, storageClassName: gp3 } } }
+bookkeeper:   { replicaCount: 3, volumes: { journal: { size: 100Gi, storageClassName: gp3 }, ledgers: { size: 1Ti, storageClassName: gp3 } } }
+broker:       { replicaCount: 3 }
+proxy:        { replicaCount: 2, service: { type: LoadBalancer } }
+pulsar_metadata: { configurationStore: pulsar }

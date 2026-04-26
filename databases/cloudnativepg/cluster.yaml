@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata: { name: helixcare-pg, namespace: helixcare }
+spec:
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4
+  primaryUpdateStrategy: unsupervised
+  storage: { size: 500Gi, storageClass: gp3 }
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://helixcare-pg-backup
+      s3Credentials: { accessKeyId: { name: pg-backup, key: id }, secretAccessKey: { name: pg-backup, key: key } }
+  monitoring: { enablePodMonitor: true }

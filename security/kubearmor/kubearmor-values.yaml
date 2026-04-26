@@ -1,0 +1,7 @@
+kubearmor:
+  enableEnforcerPerNode: true
+  enableHostPolicy: true
+kubearmorOperator: { enabled: true }
+autoDeploy:
+  enabled: true
+  ignoredNamespaces: [kube-system, gatekeeper-system, kyverno]

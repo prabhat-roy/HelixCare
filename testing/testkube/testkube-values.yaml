@@ -1,0 +1,7 @@
+testkube-api:
+  image: { repository: kubeshop/testkube-api-server, tag: 2.1.0 }
+  ingress: { enabled: true, hosts: [{ host: testkube.helixcare.internal }] }
+testkube-dashboard:
+  enabled: true
+  ingress: { enabled: true, hosts: [{ host: testkube-dash.helixcare.internal }] }
+mongodb: { enabled: true }

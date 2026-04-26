@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: apprise, namespace: helixcare-comms }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: apprise } }
+  template:
+    metadata: { labels: { app: apprise } }
+    spec:
+      containers:
+        - name: apprise
+          image: caronc/apprise:latest
+          ports: [{ containerPort: 8000 }]

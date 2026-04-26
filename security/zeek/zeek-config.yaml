@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: { name: zeek-config, namespace: helixcare-security }
+data:
+  local.zeek: |
+    @load policy/protocols/conn/known-hosts
+    @load policy/protocols/ssl/notary
+    @load policy/frameworks/intel/seen
+    @load policy/frameworks/notice/extend-email/notice
+    redef Notice::policy += { [$action = Notice::ACTION_LOG] };

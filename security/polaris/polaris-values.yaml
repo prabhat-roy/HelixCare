@@ -1,0 +1,4 @@
+dashboard: { enable: true, replicas: 1 }
+webhook:  { enable: true, mutate: false, validate: true }
+audit:    { enable: true, format: json }
+image: { repository: quay.io/fairwinds/polaris, tag: 9.0 }

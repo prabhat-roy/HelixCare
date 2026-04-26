@@ -1,0 +1,11 @@
+image: { repository: greenbone/openvas-scanner, tag: latest }
+gvmd: { enabled: true }
+gsa:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts:
+      - { host: openvas.helixcare.internal }
+persistence:
+  storageClass: gp3
+  size: 100Gi

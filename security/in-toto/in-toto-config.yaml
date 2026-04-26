@@ -1,0 +1,8 @@
+rootLayoutFile: root.layout
+workdir: /var/lib/in-toto
+verifiers:
+  - { name: clone, expectedCommand: [git clone] }
+  - { name: build, expectedCommand: [docker build] }
+  - { name: sign,  expectedCommand: [cosign sign] }
+attesters:
+  - { name: provenance, predicateType: https://slsa.dev/provenance/v1 }

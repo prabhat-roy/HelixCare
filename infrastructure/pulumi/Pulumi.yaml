@@ -1,0 +1,8 @@
+name: helixcare
+description: HelixCare — Pulumi alternative IaC (mirrors infra/terraform/{aws,gcp,azure})
+runtime: { name: nodejs, options: { typescript: true } }
+backend:
+  url: s3://helixcare-pulumi-state
+config:
+  helixcare:env: prod
+  helixcare:cloud: aws

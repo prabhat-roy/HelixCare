@@ -1,0 +1,8 @@
+image: { repository: openfga/openfga, tag: v1.5.4 }
+datastore:
+  engine: postgres
+  uri: { secretKeyRef: { name: openfga-postgres, key: uri } }
+ingress:
+  enabled: true
+  hosts: [{ host: openfga.helixcare.internal }]
+replicaCount: 2

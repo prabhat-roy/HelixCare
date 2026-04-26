@@ -1,0 +1,10 @@
+image: { repository: grafana/mimir, tag: 2.13.0 }
+mimir:
+  structuredConfig:
+    multitenancy_enabled: true
+    blocks_storage:
+      backend: s3
+      s3: { bucket_name: helixcare-mimir, region: us-east-1 }
+ingester:    { replicas: 3 }
+distributor: { replicas: 3 }
+querier:     { replicas: 3 }

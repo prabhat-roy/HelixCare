@@ -1,0 +1,10 @@
+image: { repository: kubeshop/tracetest, tag: v1.5.0 }
+postgresql: { enabled: true }
+ingress:
+  enabled: true
+  hosts: [{ host: tracetest.helixcare.internal }]
+config:
+  tracing:
+    dataStore:
+      type: jaeger
+      jaeger: { endpoint: http://jaeger-query.observability:16685 }

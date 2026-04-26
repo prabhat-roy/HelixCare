@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata: { name: grype-scan, namespace: helixcare-security }
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: grype
+              image: anchore/grype:latest
+              args: ["registry:harbor.helixcare.internal/helixcare","-o","json"]

@@ -1,0 +1,8 @@
+﻿apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata: { name: helixcare-node-drain, namespace: litmus }
+spec:
+  appinfo: { appns: helixcare, applabel: "tier=api", appkind: deployment }
+  chaosServiceAccount: litmus-admin
+  experiments:
+    - { name: node-drain, spec: { components: { env: [ { name: TOTAL_CHAOS_DURATION, value: "60" } ] } } }

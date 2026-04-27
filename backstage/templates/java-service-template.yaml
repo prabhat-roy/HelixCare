@@ -1,0 +1,12 @@
+﻿apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata: { name: helixcare_java_service, title: New HelixCare Java/Spring service, tags: [java, helixcare] }
+spec:
+  owner: platform-team
+  type: service
+  parameters:
+    - title: Service info
+      required: [name]
+      properties: { name: { title: Name, type: string } }
+  steps:
+    - { id: fetch, name: Fetch, action: fetch:template, input: { url: ./skeletons/java } }

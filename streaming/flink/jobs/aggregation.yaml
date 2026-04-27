@@ -1,0 +1,10 @@
+﻿apiVersion: flink.apache.org/v1beta1
+kind: FlinkSessionJob
+metadata: { name: helixcare-aggregation, namespace: helixcare }
+spec:
+  deploymentName: helixcare-flink
+  job:
+    jarURI: s3://helixcare-flink-jobs/aggregation.jar
+    parallelism: 8
+    upgradeMode: savepoint
+    args: ["--source-topic", "helixcare.events.enriched", "--sink-topic", "helixcare.metrics.aggregated", "--window", "5m"]

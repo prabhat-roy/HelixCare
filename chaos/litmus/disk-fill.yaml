@@ -1,0 +1,8 @@
+﻿apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata: { name: helixcare-disk-fill, namespace: litmus }
+spec:
+  appinfo: { appns: helixcare, applabel: "tier=data", appkind: statefulset }
+  chaosServiceAccount: litmus-admin
+  experiments:
+    - { name: disk-fill, spec: { components: { env: [ { name: FILL_PERCENTAGE, value: "80" }, { name: TOTAL_CHAOS_DURATION, value: "120" } ] } } }

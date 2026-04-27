@@ -1,0 +1,8 @@
+﻿apiVersion: chaos-mesh.org/v1alpha1
+kind: TimeChaos
+metadata: { name: helixcare-clock-skew, namespace: chaos-mesh }
+spec:
+  mode: one
+  selector: { namespaces: [helixcare] }
+  timeOffset: "+500ms"
+  duration: 3m

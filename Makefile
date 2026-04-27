@@ -1,4 +1,4 @@
-# HelixCare — top-level Makefile
+﻿# HelixCare â€” top-level Makefile
 # Aggregates per-service builds, tests, and deploys. Each service under src/<domain>/<service>
 # has its own Makefile; this file fans out to them.
 
@@ -7,7 +7,7 @@
         scan-images sbom k8s-validate
 
 help:
-	@echo "HelixCare — common targets"
+	@echo "HelixCare â€” common targets"
 	@echo ""
 	@echo "  bootstrap      Install local dev tooling (buf, golangci-lint, yamllint, hadolint)"
 	@echo "  proto          Regenerate gRPC bindings from proto/"
@@ -67,3 +67,25 @@ clean:
 	@find . -name 'bin' -type d -prune -exec rm -rf {} +
 	@find . -name 'target' -type d -prune -exec rm -rf {} +
 	@find . -name 'build' -type d -prune -exec rm -rf {} +
+
+# ----------------------------------------------------------------------------
+# Tool orchestration — added by Wave J
+# ----------------------------------------------------------------------------
+.PHONY: tools-deploy tools-status tools-doctor tools-list
+
+tools-deploy:  ## Deploy every OSS tool registered for HelixCare via ArgoCD
+	kubectl apply -f gitops/argocd/applicationsets/all-tools-applicationset.yaml
+	argocd appset get helixcare-tools --grpc-web
+
+tools-status:  ## Show sync status of every registered tool
+	argocd app list -l "project=helixcare-tools" --grpc-web
+
+tools-doctor:  ## Verify every tool dir has values.yaml + README.md
+	@bash -c 'fail=0; for d in security/* observability/* messaging/* networking/* databases/* data/* supply-chain/* sustainability/* edge/* streaming/* workflow/* domain-oss/*; do \
+		[ -d "$$d" ] || continue; \
+		[ -f "$$d/values.yaml" ] || { echo "MISSING values.yaml: $$d"; fail=1; }; \
+		[ -f "$$d/README.md"   ] || { echo "MISSING README.md:   $$d"; fail=1; }; \
+	done; exit $$fail'
+
+tools-list:  ## Print the tool inventory
+	@cat TOOLS.md

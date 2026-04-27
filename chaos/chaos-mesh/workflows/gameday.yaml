@@ -1,0 +1,11 @@
+﻿apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata: { name: helixcare-gameday, namespace: chaos-mesh }
+spec:
+  entry: gameday-entry
+  templates:
+    - { name: gameday-entry, templateType: Serial, deadline: 30m, children: [pod-kill-step, stress-step, network-step, validate] }
+    - { name: pod-kill-step, templateType: PodChaos, deadline: 5m, podChaos: { action: pod-kill, mode: one, selector: { namespaces: [helixcare] } } }
+    - { name: stress-step, templateType: StressChaos, deadline: 5m, stressChaos: { mode: one, selector: { namespaces: [helixcare] }, stressors: { cpu: { workers: 2, load: 90 } } } }
+    - { name: network-step, templateType: NetworkChaos, deadline: 5m, networkChaos: { action: delay, mode: all, selector: { namespaces: [helixcare] }, delay: { latency: "200ms" } } }
+    - { name: validate, templateType: Task, task: { container: { image: curlimages/curl, command: [sh, -c, "curl -fsS http://api-gateway.helixcare.svc/healthz"] } } }

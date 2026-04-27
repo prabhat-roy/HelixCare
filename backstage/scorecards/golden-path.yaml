@@ -1,0 +1,14 @@
+﻿apiVersion: scorecard.backstage.io/v1
+kind: Scorecard
+metadata: { name: helixcare_golden_path }
+spec:
+  title: HelixCare Golden Path
+  description: Production-readiness checks for every HelixCare service
+  rules:
+    - { id: has-healthz,    title: "Service exposes /healthz",          weight: 5,  query: "has_endpoint('/healthz')" }
+    - { id: has-metrics,    title: "Service exposes /metrics",          weight: 4,  query: "has_endpoint('/metrics')" }
+    - { id: has-otel,       title: "OpenTelemetry instrumentation",     weight: 4,  query: "has_otel_spans()" }
+    - { id: has-helm,       title: "Helm chart in helm/charts/",        weight: 3,  query: "has_helm_chart()" }
+    - { id: has-rollout,    title: "Argo Rollout defined",              weight: 3,  query: "has_argo_rollout()" }
+    - { id: has-runbook,    title: "Runbook in docs/runbooks/",         weight: 2,  query: "has_runbook()" }
+    - { id: has-pact,       title: "At least one Pact contract",        weight: 2,  query: "has_pact_contract()" }

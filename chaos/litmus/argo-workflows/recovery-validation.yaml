@@ -1,0 +1,14 @@
+﻿apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata: { generateName: helixcare-recovery-validation- }
+spec:
+  entrypoint: validate
+  templates:
+    - name: validate
+      steps:
+        - - { name: smoke, template: smoke }
+        - - { name: latency, template: latency }
+    - name: smoke
+      container: { image: curlimages/curl, command: [sh, -c, "for s in api-gateway identity-service; do curl -fsS http://$s.helixcare.svc/healthz; done"] }
+    - name: latency
+      container: { image: grafana/k6, command: [k6, run, "-"] , stdin: true }

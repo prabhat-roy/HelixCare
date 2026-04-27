@@ -1,0 +1,9 @@
+﻿apiVersion: chaos-mesh.org/v1alpha1
+kind: DNSChaos
+metadata: { name: helixcare-dns-error, namespace: chaos-mesh }
+spec:
+  action: error
+  mode: all
+  patterns: ["*.helixcare.svc.cluster.local"]
+  selector: { namespaces: [helixcare] }
+  duration: 2m

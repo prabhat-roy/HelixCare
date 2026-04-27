@@ -1,0 +1,9 @@
+﻿image: { repository: confluentinc/cp-kafka-connect, tag: 7.7.1 }
+replicas: 3
+config:
+  bootstrap.servers: kafka.helixcare.svc:9092
+  group.id: helixcare-connect
+  config.storage.topic: helixcare.connect.configs
+  offset.storage.topic: helixcare.connect.offsets
+  status.storage.topic: helixcare.connect.status
+  plugin.path: /usr/share/connectors,/usr/share/confluent-hub-components

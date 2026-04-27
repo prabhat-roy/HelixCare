@@ -1,0 +1,8 @@
+﻿apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata: { name: helixcare-weekly-gameday, namespace: chaos-mesh }
+spec:
+  schedule: "0 9 * * 6"
+  type: Workflow
+  workflow:
+    entry: gameday-entry

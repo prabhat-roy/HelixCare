@@ -1,0 +1,23 @@
+﻿# Local dev overrides for HelixCare
+# Picked up automatically by `docker compose up`
+version: "3.9"
+
+services:
+  postgres:
+    ports: ["5432:5432"]
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: dev
+    volumes:
+      - "./scripts/seeds:/docker-entrypoint-initdb.d:ro"
+
+  kafka:
+    environment:
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_LOG_RETENTION_HOURS: 4
+
+  grafana:
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin

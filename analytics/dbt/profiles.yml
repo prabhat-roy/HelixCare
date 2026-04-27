@@ -1,0 +1,19 @@
+﻿helixcare:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres.helixcare.svc
+      user: dbt
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      port: 5432
+      dbname: helixcare_warehouse
+      schema: public
+      threads: 8
+    prod:
+      type: trino
+      host: trino.helixcare.svc
+      port: 8080
+      catalog: iceberg
+      schema: helixcare_mart
+      threads: 16

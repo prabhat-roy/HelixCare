@@ -1,0 +1,10 @@
+﻿apiVersion: flink.apache.org/v1beta1
+kind: FlinkSessionJob
+metadata: { name: helixcare-anomaly-detection, namespace: helixcare }
+spec:
+  deploymentName: helixcare-flink
+  job:
+    jarURI: s3://helixcare-flink-jobs/anomaly-detection.jar
+    parallelism: 6
+    upgradeMode: savepoint
+    args: ["--source-topic", "helixcare.metrics.raw", "--sink-topic", "helixcare.alerts.anomaly"]

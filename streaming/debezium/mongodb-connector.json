@@ -1,0 +1,12 @@
+﻿{
+  "name": "helixcare-mongo-cdc",
+  "config": {
+    "connector.class": "io.debezium.connector.mongodb.MongoDbConnector",
+    "mongodb.connection.string": "mongodb://debezium:${file:/secrets/debezium-mongo.password:password}@mongodb.helixcare.svc:27017/?replicaSet=rs0",
+    "topic.prefix": "helixcare.mongo",
+    "capture.mode": "change_streams_update_full",
+    "snapshot.mode": "initial",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter"
+  }
+}

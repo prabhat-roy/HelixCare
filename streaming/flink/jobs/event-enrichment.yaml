@@ -1,0 +1,10 @@
+﻿apiVersion: flink.apache.org/v1beta1
+kind: FlinkSessionJob
+metadata: { name: helixcare-event-enrichment, namespace: helixcare }
+spec:
+  deploymentName: helixcare-flink
+  job:
+    jarURI: s3://helixcare-flink-jobs/event-enrichment.jar
+    parallelism: 4
+    upgradeMode: savepoint
+    args: ["--source-topic", "helixcare.cdc.public.events", "--sink-topic", "helixcare.events.enriched"]

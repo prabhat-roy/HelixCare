@@ -1,0 +1,12 @@
+﻿{
+  "consumer": { "name": "helixcare_api_gateway" },
+  "provider": { "name": "helixcare_identity_service" },
+  "interactions": [
+    {
+      "description": "validate session token",
+      "request": { "method": "POST", "path": "/v1/sessions/validate", "headers": { "Content-Type": "application/json" }, "body": { "token": "abc.def.ghi" } },
+      "response": { "status": 200, "headers": { "Content-Type": "application/json" }, "body": { "valid": true, "user_id": "u-1", "tenant": "t-1" } }
+    }
+  ],
+  "metadata": { "pactSpecification": { "version": "3.0.0" } }
+}

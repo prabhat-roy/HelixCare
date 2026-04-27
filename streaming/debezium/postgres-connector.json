@@ -1,0 +1,20 @@
+﻿{
+  "name": "helixcare-postgres-cdc",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "postgres.helixcare.svc",
+    "database.port": "5432",
+    "database.user": "debezium",
+    "database.password": "${file:/secrets/debezium-pg.password:password}",
+    "database.dbname": "helixcare",
+    "topic.prefix": "helixcare.cdc",
+    "plugin.name": "pgoutput",
+    "publication.autocreate.mode": "filtered",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka.helixcare.svc:9092",
+    "schema.history.internal.kafka.topic": "helixcare.cdc.schema-history",
+    "key.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "key.converter.schema.registry.url": "http://schema-registry.helixcare.svc:8081",
+    "value.converter.schema.registry.url": "http://schema-registry.helixcare.svc:8081"
+  }
+}

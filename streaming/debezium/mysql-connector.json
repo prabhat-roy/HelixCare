@@ -1,0 +1,14 @@
+﻿{
+  "name": "helixcare-mysql-cdc",
+  "config": {
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "database.hostname": "mysql.helixcare.svc",
+    "database.port": "3306",
+    "database.user": "debezium",
+    "database.password": "${file:/secrets/debezium-mysql.password:password}",
+    "database.server.id": "184054",
+    "topic.prefix": "helixcare.mysql",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka.helixcare.svc:9092",
+    "schema.history.internal.kafka.topic": "helixcare.mysql.schema-history"
+  }
+}

@@ -1,0 +1,13 @@
+﻿apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata: { name: helixcare_python_service, title: New HelixCare Python service, tags: [python, helixcare] }
+spec:
+  owner: platform-team
+  type: service
+  parameters:
+    - title: Service info
+      required: [name]
+      properties:
+        name: { title: Name, type: string }
+  steps:
+    - { id: fetch, name: Fetch, action: fetch:template, input: { url: ./skeletons/python, values: { name: "${{ parameters.name }}" } } }

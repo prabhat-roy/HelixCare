@@ -1,0 +1,8 @@
+﻿apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata: { name: helixcare-cpu-stress, namespace: chaos-mesh }
+spec:
+  mode: one
+  selector: { namespaces: [helixcare] }
+  stressors: { cpu: { workers: 4, load: 80 } }
+  duration: 5m

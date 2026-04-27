@@ -1,0 +1,25 @@
+﻿apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: helixcare_go_service
+  title: New HelixCare Go service
+  description: Bootstraps a Go microservice with Dockerfile, Helm chart, OpenAPI, /healthz, /metrics
+  tags: [go, recommended, helixcare]
+spec:
+  owner: platform-team
+  type: service
+  parameters:
+    - title: Service info
+      required: [name, owner]
+      properties:
+        name:  { title: Name, type: string, pattern: "^[a-z0-9-]+$" }
+        owner: { title: Owner, type: string, ui:field: OwnerPicker }
+  steps:
+    - id: fetch
+      name: Fetch base
+      action: fetch:template
+      input: { url: ./skeletons/go, values: { name: ${{ parameters.name }} } }
+    - id: publish
+      name: Publish
+      action: publish:github
+      input: { repoUrl: github.com?repo=${{ parameters.name }}&owner=prabhat-roy }

@@ -1,0 +1,22 @@
+﻿extends: ["spectral:oas"]
+rules:
+  operation-tag-defined: error
+  operation-operationId: error
+  operation-summary: error
+  operation-tags: error
+  oas3-server-not-example.com: error
+  helixcare_paths-kebab-case:
+    description: All paths use kebab-case (HelixCare rule)
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z0-9/{}\\-]+$"
+  helixcare_require-error-response:
+    description: Every operation MUST declare a 4xx error schema
+    severity: warn
+    given: $.paths.*.*.responses
+    then:
+      field: "4XX"
+      function: truthy

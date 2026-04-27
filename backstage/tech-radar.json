@@ -1,0 +1,12 @@
+﻿{
+  "title": "HelixCare Tech Radar",
+  "rings":  [{"id":"adopt","name":"ADOPT","color":"#5BA300"},{"id":"trial","name":"TRIAL","color":"#009EB0"},{"id":"assess","name":"ASSESS","color":"#C7BA00"},{"id":"hold","name":"HOLD","color":"#E09B96"}],
+  "quadrants": [{"id":"languages","name":"Languages"},{"id":"infra","name":"Infrastructure"},{"id":"data","name":"Data"},{"id":"observability","name":"Observability"}],
+  "entries": [
+    { "id": "go",       "title": "Go 1.23",         "quadrant": "languages",     "ring": "adopt" },
+    { "id": "python",   "title": "Python 3.12",     "quadrant": "languages",     "ring": "adopt" },
+    { "id": "kafka",    "title": "Kafka 7.7",       "quadrant": "infra",         "ring": "adopt" },
+    { "id": "iceberg",  "title": "Apache Iceberg",  "quadrant": "data",          "ring": "trial" },
+    { "id": "mimir",    "title": "Grafana Mimir",   "quadrant": "observability", "ring": "trial" }
+  ]
+}

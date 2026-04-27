@@ -1,6 +1,4 @@
-# Chaos — HelixCare
-
-Chaos engineering — Chaos Mesh + LitmusChaos experiments and workflows.
-
-> Skeleton placeholder. Content will be added as the project takes shape.
-> See [../README.md](../README.md) for the HelixCare project overview.
+﻿# Chaos engineering for HelixCare
+- `chaos-mesh/` — pod, network, stress, IO, DNS, time experiments + weekly game-day workflow + cron schedule
+- `litmus/` — alternate experiments + Argo Workflow for post-chaos validation
+Run: `kubectl apply -f chaos-mesh/<experiment>.yaml`

@@ -1,0 +1,11 @@
+﻿apiVersion: scorecard.backstage.io/v1
+kind: Scorecard
+metadata: { name: helixcare_security_baseline }
+spec:
+  title: HelixCare Security Baseline
+  rules:
+    - { id: trivy-clean, title: "No HIGH/CRITICAL CVEs (Trivy)", weight: 5 }
+    - { id: cosign,      title: "Image signed by Cosign",         weight: 4 }
+    - { id: sbom,        title: "SBOM uploaded to Dependency-Track", weight: 3 }
+    - { id: opa-pass,    title: "OPA admission policies pass",    weight: 4 }
+    - { id: vault-only,  title: "All secrets via Vault (no plaintext)", weight: 5 }

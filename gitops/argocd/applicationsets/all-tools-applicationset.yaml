@@ -1,0 +1,43 @@
+﻿apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helixcare-tools
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/prabhat-roy/HelixCare.git
+        revision: HEAD
+        directories:
+          - { path: security/* }
+          - { path: observability/* }
+          - { path: messaging/* }
+          - { path: networking/* }
+          - { path: databases/* }
+          - { path: data/* }
+          - { path: supply-chain/* }
+          - { path: sustainability/* }
+          - { path: edge/* }
+          - { path: streaming/* }
+          - { path: workflow/* }
+          - { path: registry/charts/* }
+          - { path: domain-oss/* }
+  template:
+    metadata:
+      name: "helixcare-tool-{{path.basename}}"
+      labels: { project: helixcare-tools, area: "{{path[0]}}" }
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/prabhat-roy/HelixCare.git
+        targetRevision: HEAD
+        path: "{{path}}"
+        helm:
+          releaseName: "{{path.basename}}"
+          valueFiles: ["values.yaml"]
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "helixcare-tools"
+      syncPolicy:
+        automated: { prune: true, selfHeal: true }
+        syncOptions: [CreateNamespace=true, ServerSideApply=true]

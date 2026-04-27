@@ -1,0 +1,9 @@
+﻿apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata: { name: helixcare-pod-kill, namespace: chaos-mesh }
+spec:
+  action: pod-kill
+  mode: one
+  selector: { namespaces: [helixcare] }
+  duration: 1m
+  scheduler: { cron: "@every 1h" }

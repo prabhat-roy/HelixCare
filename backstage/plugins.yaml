@@ -1,0 +1,6 @@
+﻿plugins:
+  - { id: tech-radar, config: { url: https://github.com/prabhat-roy/HelixCare/raw/main/backstage/tech-radar.json } }
+  - { id: lighthouse, config: { baseUrl: https://lhci.helixcare.internal } }
+  - { id: opencost,   config: { baseUrl: https://opencost.helixcare.internal } }
+  - { id: argocd,     config: { url: https://argocd.helixcare.internal, token: "${ARGOCD_TOKEN}" } }
+  - { id: kubernetes, config: { clusters: [{ name: helixcare-aws, url: https://eks.helixcare.aws.internal }, { name: helixcare-gcp, url: https://gke.helixcare.gcp.internal }, { name: helixcare-azure, url: https://aks.helixcare.azure.internal }] } }

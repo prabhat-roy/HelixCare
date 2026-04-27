@@ -1,8 +1,8 @@
-# i18n-service
+﻿# i18n-service
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51012
+Language: Go Â· Port: 51012
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/i18n-service/](../../../helm/charts/i18n-service/) — Helm chart
-- [manifests/platform/i18n-service/](../../../manifests/platform/i18n-service/) — Raw K8s manifests
+- [helm/charts/i18n-service/](../../../helm/charts/i18n-service/) â€” Helm chart
+- [manifests/platform/i18n-service/](../../../manifests/platform/i18n-service/) â€” Raw K8s manifests

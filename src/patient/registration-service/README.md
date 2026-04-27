@@ -1,8 +1,8 @@
-# registration-service
+﻿# registration-service
 
-Service in the **patient** domain of HelixCare.
+Service in the patient domain of HelixCare.
 
-**Language:** Go · **Port:** 50040
+Language: Go Â· Port: 50040
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/registration-service/](../../../helm/charts/registration-service/) — Helm chart
-- [manifests/patient/registration-service/](../../../manifests/patient/registration-service/) — Raw K8s manifests
+- [helm/charts/registration-service/](../../../helm/charts/registration-service/) â€” Helm chart
+- [manifests/patient/registration-service/](../../../manifests/patient/registration-service/) â€” Raw K8s manifests

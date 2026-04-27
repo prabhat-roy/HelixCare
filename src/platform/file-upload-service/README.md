@@ -1,8 +1,8 @@
-# file-upload-service
+﻿# file-upload-service
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51011
+Language: Go Â· Port: 51011
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/file-upload-service/](../../../helm/charts/file-upload-service/) — Helm chart
-- [manifests/platform/file-upload-service/](../../../manifests/platform/file-upload-service/) — Raw K8s manifests
+- [helm/charts/file-upload-service/](../../../helm/charts/file-upload-service/) â€” Helm chart
+- [manifests/platform/file-upload-service/](../../../manifests/platform/file-upload-service/) â€” Raw K8s manifests

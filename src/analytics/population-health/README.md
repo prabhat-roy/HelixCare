@@ -1,8 +1,8 @@
-# population-health
+﻿# population-health
 
-Service in the **analytics** domain of HelixCare.
+Service in the analytics domain of HelixCare.
 
-**Language:** Go · **Port:** 50300
+Language: Go Â· Port: 50300
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/population-health/](../../../helm/charts/population-health/) — Helm chart
-- [manifests/analytics/population-health/](../../../manifests/analytics/population-health/) — Raw K8s manifests
+- [helm/charts/population-health/](../../../helm/charts/population-health/) â€” Helm chart
+- [manifests/analytics/population-health/](../../../manifests/analytics/population-health/) â€” Raw K8s manifests

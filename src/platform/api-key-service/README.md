@@ -1,8 +1,8 @@
-# api-key-service
+﻿# api-key-service
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51003
+Language: Go Â· Port: 51003
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/api-key-service/](../../../helm/charts/api-key-service/) — Helm chart
-- [manifests/platform/api-key-service/](../../../manifests/platform/api-key-service/) — Raw K8s manifests
+- [helm/charts/api-key-service/](../../../helm/charts/api-key-service/) â€” Helm chart
+- [manifests/platform/api-key-service/](../../../manifests/platform/api-key-service/) â€” Raw K8s manifests

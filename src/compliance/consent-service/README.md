@@ -1,8 +1,8 @@
-# consent-service
+﻿# consent-service
 
-Service in the **compliance** domain of HelixCare.
+Service in the compliance domain of HelixCare.
 
-**Language:** Go · **Port:** 50320
+Language: Go Â· Port: 50320
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/consent-service/](../../../helm/charts/consent-service/) — Helm chart
-- [manifests/compliance/consent-service/](../../../manifests/compliance/consent-service/) — Raw K8s manifests
+- [helm/charts/consent-service/](../../../helm/charts/consent-service/) â€” Helm chart
+- [manifests/compliance/consent-service/](../../../manifests/compliance/consent-service/) â€” Raw K8s manifests

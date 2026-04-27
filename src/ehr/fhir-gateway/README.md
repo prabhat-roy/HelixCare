@@ -1,8 +1,8 @@
-# fhir-gateway
+﻿# fhir-gateway
 
-Service in the **ehr** domain of HelixCare.
+Service in the ehr domain of HelixCare.
 
-**Language:** Go · **Port:** 50200
+Language: Go Â· Port: 50200
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/fhir-gateway/](../../../helm/charts/fhir-gateway/) — Helm chart
-- [manifests/ehr/fhir-gateway/](../../../manifests/ehr/fhir-gateway/) — Raw K8s manifests
+- [helm/charts/fhir-gateway/](../../../helm/charts/fhir-gateway/) â€” Helm chart
+- [manifests/ehr/fhir-gateway/](../../../manifests/ehr/fhir-gateway/) â€” Raw K8s manifests

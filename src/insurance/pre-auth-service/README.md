@@ -1,8 +1,8 @@
-# pre-auth-service
+﻿# pre-auth-service
 
-Service in the **insurance** domain of HelixCare.
+Service in the insurance domain of HelixCare.
 
-**Language:** Go · **Port:** 50181
+Language: Go Â· Port: 50181
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/pre-auth-service/](../../../helm/charts/pre-auth-service/) — Helm chart
-- [manifests/insurance/pre-auth-service/](../../../manifests/insurance/pre-auth-service/) — Raw K8s manifests
+- [helm/charts/pre-auth-service/](../../../helm/charts/pre-auth-service/) â€” Helm chart
+- [manifests/insurance/pre-auth-service/](../../../manifests/insurance/pre-auth-service/) â€” Raw K8s manifests

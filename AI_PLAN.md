@@ -1,4 +1,4 @@
-# AI_PLAN.md — HelixCare (Healthcare Delivery & EHR Platform)
+﻿# AI_PLAN.md â€” HelixCare (Healthcare Delivery & EHR Platform)
 
 > Hierarchical AI/ML strategy. Reuses the Paperclip / OpenClaw / NemoClaw
 > agent platform first defined in [ShopOS/AI.md](../ShopOS/AI.md). This file
@@ -9,20 +9,20 @@
 ## 1. Why AI in HelixCare
 
 Healthcare is the highest-stakes AI domain we operate in. Every model
-ships with explicit human oversight and is treated as **clinical decision
-support**, not a clinician replacement.
+ships with explicit human oversight and is treated as clinical decision
+support, not a clinician replacement.
 
-- **NLP on clinical notes** (HL7 FHIR, EHR free text) to surface missed
+- NLP on clinical notes (HL7 FHIR, EHR free text) to surface missed
   diagnoses and improve documentation quality.
-- **Imaging triage** (CXR, CT, MRI) to prioritise radiologist worklist.
-- **Patient risk stratification** (sepsis, readmission, no-show) to drive
+- Imaging triage (CXR, CT, MRI) to prioritise radiologist worklist.
+- Patient risk stratification (sepsis, readmission, no-show) to drive
   proactive care.
-- **Voice-to-EHR** (ambient scribing) so clinicians spend more time with
+- Voice-to-EHR (ambient scribing) so clinicians spend more time with
   patients and less with the keyboard.
-- **Drug-interaction and allergy alerts** beyond basic rule sets.
+- Drug-interaction and allergy alerts beyond basic rule sets.
 
-**HIPAA, GDPR, MDR/IVDR (EU), 21 CFR Part 11 (FDA), NHS DSPT** — all bind.
-Models that drive clinical decisions are **registered** as software-as-a-
+HIPAA, GDPR, MDR/IVDR (EU), 21 CFR Part 11 (FDA), NHS DSPT â€” all bind.
+Models that drive clinical decisions are registered as software-as-a-
 medical-device (SaMD) where required.
 
 ---
@@ -37,7 +37,7 @@ medical-device (SaMD) where required.
 | 4 | Drug-drug interaction + allergy detection | pharmacy, clinical | Rule engine + Llama 3.1 + RxNorm KG | <500 ms |
 | 5 | Patient risk stratification (sepsis, readmit, NEWS2) | inpatient, ed | XGBoost + LightGBM + rule-fusion | streaming |
 | 6 | Appointment no-show prediction | scheduling, ops | LightGBM | nightly |
-| 7 | Ambient voice scribing (clinic visit → note) | clinical, ehr | Whisper-large-v3 + Llama 3.1 70B + FHIR mapper | <2 min from end of visit |
+| 7 | Ambient voice scribing (clinic visit â†’ note) | clinical, ehr | Whisper-large-v3 + Llama 3.1 70B + FHIR mapper | <2 min from end of visit |
 | 8 | Prior-auth prediction + autopopulation | revenue-cycle | Llama 3.1 + Donut on payer forms | <3 s |
 | 9 | Coding assistance (ICD-10-CM, CPT, HCC) | revenue-cycle | LLM + KG + human-in-loop | <2 s |
 | 10 | Bed / OR / clinic scheduling optimisation | ops | OR-Tools + LightGBM travel-time priors | hourly |
@@ -48,14 +48,14 @@ medical-device (SaMD) where required.
 
 ## 3. Hierarchical Agent Architecture
 
-Reuses **OpenClaw** / **Paperclip** / **NemoClaw** from `ShopOS/AI.md`.
+Reuses OpenClaw / Paperclip / NemoClaw from `ShopOS/AI.md`.
 
-### Tier 0 — Master Architect Agent
+### Tier 0 â€” Master Architect Agent
 
-`helix-architect` — researches AI tooling, proposes services, on-boards
+`helix-architect` â€” researches AI tooling, proposes services, on-boards
 Tier-1 leads, weekly written report. Read-only on prod.
 
-### Tier 1 — Division Leads (5)
+### Tier 1 â€” Division Leads (5)
 
 | Agent | Scope |
 |-------|-------|
@@ -65,31 +65,31 @@ Tier-1 leads, weekly written report. Read-only on prod.
 | `helix-dataml-lead`     | Feature store, training, drift, SaMD lifecycle |
 | `helix-platform-lead`   | Cross-cutting (idempotency, saga, outbox), FHIR runtime |
 
-### Tier 2 — Specialist Agents
+### Tier 2 â€” Specialist Agents
 
-**By language**: Go, Java, Kotlin, Python, Node, Rust, TypeScript, Swift
+By language: Go, Java, Kotlin, Python, Node, Rust, TypeScript, Swift
 (iOS).
 
-**By tool**: PostgreSQL, MongoDB, Redis, Elasticsearch, OpenSearch,
-TimescaleDB, MinIO, Cassandra, Kafka, NATS, RabbitMQ, MQTT, **HAPI FHIR
-server**, OpenEMR-bridge, Mirth Connect (HL7v2), Vault, Keycloak,
+By tool: PostgreSQL, MongoDB, Redis, Elasticsearch, OpenSearch,
+TimescaleDB, MinIO, Cassandra, Kafka, NATS, RabbitMQ, MQTT, HAPI FHIR
+server, OpenEMR-bridge, Mirth Connect (HL7v2), Vault, Keycloak,
 OPA, Kyverno, Falco, Cilium, Istio, ArgoCD, Argo Workflows,
 Prometheus, Grafana, Loki, Jaeger, OpenTelemetry, Trivy, Cosign,
 MONAI Toolkit, Orthanc DICOM, OHIF Viewer, Camunda, OpenFGA, Wazuh,
 Pulsar, Druid.
 
-**By service** — one agent per microservice (~210). Owns README,
+By service â€” one agent per microservice (~210). Owns README,
 OpenAPI, tests, CHANGELOG, deps, /healthz.
 
-### Tier 3 — Ephemeral Workers
+### Tier 3 â€” Ephemeral Workers
 
 Spawned for retraining a CXR classifier on new labelled studies,
 generating clinical-note runbooks, building model bundles for clinic edge.
 
 ### Lifecycle
 
-Research → Document → Implement → Test → Review → Deploy → Monitor →
-Respond → Upgrade → Report. Plus a **clinical-validation gate** before
+Research â†’ Document â†’ Implement â†’ Test â†’ Review â†’ Deploy â†’ Monitor â†’
+Respond â†’ Upgrade â†’ Report. Plus a clinical-validation gate before
 any patient-facing model rolls past shadow.
 
 ---
@@ -98,22 +98,22 @@ any patient-facing model rolls past shadow.
 
 ```
 ai-platform/
-├── cluster: helix-ai-{aws,gcp,azure}     ← cloud GPU pool, HIPAA-eligible
-├── cluster: helix-ai-edge                ← in-clinic / hospital k3s
-├── namespace: helix-ai-control            ← Paperclip
-├── namespace: helix-ai-agents             ← OpenClaw runtime
-├── namespace: helix-ai-sandbox            ← NemoClaw — strict clinical guardrails
-├── namespace: helix-ai-models             ← vLLM, Ollama, LiteLLM, Triton, MONAI
-├── namespace: helix-ai-data               ← Qdrant, Weaviate, MinIO, MLflow
-├── namespace: helix-ai-obs                ← Langfuse, Phoenix
-└── namespace: helix-ai-pipelines          ← Argo Workflows + Kubeflow
+â”œâ”€â”€ cluster: helix-ai-{aws,gcp,azure}     â† cloud GPU pool, HIPAA-eligible
+â”œâ”€â”€ cluster: helix-ai-edge                â† in-clinic / hospital k3s
+â”œâ”€â”€ namespace: helix-ai-control            â† Paperclip
+â”œâ”€â”€ namespace: helix-ai-agents             â† OpenClaw runtime
+â”œâ”€â”€ namespace: helix-ai-sandbox            â† NemoClaw â€” strict clinical guardrails
+â”œâ”€â”€ namespace: helix-ai-models             â† vLLM, Ollama, LiteLLM, Triton, MONAI
+â”œâ”€â”€ namespace: helix-ai-data               â† Qdrant, Weaviate, MinIO, MLflow
+â”œâ”€â”€ namespace: helix-ai-obs                â† Langfuse, Phoenix
+â””â”€â”€ namespace: helix-ai-pipelines          â† Argo Workflows + Kubeflow
 ```
 
 ### Hardware
 
-- **Cloud**: A100 80GB for medical-imaging training (MONAI, nnU-Net);
+- Cloud: A100 80GB for medical-imaging training (MONAI, nnU-Net);
   A10G / L4 for LLM inference.
-- **Hospital edge**: Jetson Orin or RTX A4000 for OR / radiology desk
+- Hospital edge: Jetson Orin or RTX A4000 for OR / radiology desk
   inference, supporting near-zero PHI egress.
 - All clouds in HIPAA-eligible regions (AWS HIPAA, GCP HIPAA, Azure HDS).
 
@@ -126,9 +126,9 @@ ai-platform/
 | DICOM | Orthanc, OHIF | Imaging store + viewer |
 | Local dev | Ollama | Offline / dev |
 | Gateway | LiteLLM | OpenAI-compatible, quota, audit |
-| Orchestrator | **Paperclip** | Task queue, audit |
-| Agent platform | **OpenClaw** | Llama 3.1 70B |
-| Sandbox | **NemoClaw** | NeMo Guardrails — clinical-safe |
+| Orchestrator | Paperclip | Task queue, audit |
+| Agent platform | OpenClaw | Llama 3.1 70B |
+| Sandbox | NemoClaw | NeMo Guardrails â€” clinical-safe |
 | Vector | Qdrant | FHIR cohort embeddings |
 | Vector | Weaviate | Multimodal (image + report) |
 | MLOps | MLflow | Model registry, SaMD provenance |
@@ -140,11 +140,11 @@ ai-platform/
 
 ### Data isolation
 
-- All training data **de-identified** per HIPAA Safe Harbor (Philter
+- All training data de-identified per HIPAA Safe Harbor (Philter
   + manual review) before reaching feature store.
 - PHI never leaves region; HDS / HIPAA-eligible regions only.
 - Vector DB sharded per tenant (hospital). No cross-tenant retrieval.
-- Every prompt + completion → Langfuse + Paperclip with **MRN hashed**.
+- Every prompt + completion â†’ Langfuse + Paperclip with MRN hashed.
 
 ---
 
@@ -171,7 +171,7 @@ ai-platform/
 | 2 | Paperclip + NemoClaw clinical policies; Tier-0 architect live |
 | 3 | Tier-1 leads; CXR triage v0 shadow on retrospective set |
 | 4 | Per-language / per-tool Tier-2 agents |
-| 5 | Per-service Tier-2 agents (ehr → clinical-decision → revenue-cycle first) |
+| 5 | Per-service Tier-2 agents (ehr â†’ clinical-decision â†’ revenue-cycle first) |
 | 6 | Ambient voice scribing pilot in 1 clinic; coding-assist v1 |
 | 7 | CDS v1 prod (low-risk pathways); risk stratification v1 |
 | 8 | SaMD submission pipeline; multi-cloud failover drill |
@@ -180,9 +180,9 @@ ai-platform/
 
 ## 7. Cost Envelope (target)
 
-- **Cloud infra**: $6,500 – $9,500 / month per primary cloud (HIPAA-region premium)
-- **Hospital edge**: $4,000 one-time + $80/month ops
-- **No** subscription LLM spend
+- Cloud infra: $6,500 â€“ $9,500 / month per primary cloud (HIPAA-region premium)
+- Hospital edge: $4,000 one-time + $80/month ops
+- No subscription LLM spend
 
 ---
 

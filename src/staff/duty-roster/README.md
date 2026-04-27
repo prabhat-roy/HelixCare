@@ -1,8 +1,8 @@
-# duty-roster
+﻿# duty-roster
 
-Service in the **staff** domain of HelixCare.
+Service in the staff domain of HelixCare.
 
-**Language:** Go · **Port:** 50241
+Language: Go Â· Port: 50241
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/duty-roster/](../../../helm/charts/duty-roster/) — Helm chart
-- [manifests/staff/duty-roster/](../../../manifests/staff/duty-roster/) — Raw K8s manifests
+- [helm/charts/duty-roster/](../../../helm/charts/duty-roster/) â€” Helm chart
+- [manifests/staff/duty-roster/](../../../manifests/staff/duty-roster/) â€” Raw K8s manifests

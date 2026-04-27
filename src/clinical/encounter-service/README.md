@@ -1,8 +1,8 @@
-# encounter-service
+﻿# encounter-service
 
-Service in the **clinical** domain of HelixCare.
+Service in the clinical domain of HelixCare.
 
-**Language:** Go · **Port:** 50080
+Language: Go Â· Port: 50080
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/encounter-service/](../../../helm/charts/encounter-service/) — Helm chart
-- [manifests/clinical/encounter-service/](../../../manifests/clinical/encounter-service/) — Raw K8s manifests
+- [helm/charts/encounter-service/](../../../helm/charts/encounter-service/) â€” Helm chart
+- [manifests/clinical/encounter-service/](../../../manifests/clinical/encounter-service/) â€” Raw K8s manifests

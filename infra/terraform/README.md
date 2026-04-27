@@ -1,4 +1,4 @@
-# terraform — Per-cloud, per-region
+﻿# terraform â€” Per-cloud, per-region
 
 ```
 infra/terraform/
@@ -11,5 +11,5 @@ infra/terraform/
 Each region directory contains: versions.tf, variables.tf, network.tf,
 kubernetes.tf, databases.tf, storage.tf, secrets.tf, outputs.tf, prod.tfvars.
 
-**HIPAA residency contract**: backends and providers are pinned to the directory's
+HIPAA residency contract: backends and providers are pinned to the directory's
 region. No `provider` blocks span regions for PHI buckets, discs, or queues.

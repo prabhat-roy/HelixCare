@@ -1,8 +1,8 @@
-# dicom-viewer
+﻿# dicom-viewer
 
-Service in the **diagnostics** domain of HelixCare.
+Service in the diagnostics domain of HelixCare.
 
-**Language:** Go · **Port:** 50103
+Language: Go Â· Port: 50103
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/dicom-viewer/](../../../helm/charts/dicom-viewer/) — Helm chart
-- [manifests/diagnostics/dicom-viewer/](../../../manifests/diagnostics/dicom-viewer/) — Raw K8s manifests
+- [helm/charts/dicom-viewer/](../../../helm/charts/dicom-viewer/) â€” Helm chart
+- [manifests/diagnostics/dicom-viewer/](../../../manifests/diagnostics/dicom-viewer/) â€” Raw K8s manifests

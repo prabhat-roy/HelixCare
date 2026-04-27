@@ -1,8 +1,8 @@
-# sms-service
+﻿# sms-service
 
-Service in the **communications** domain of HelixCare.
+Service in the communications domain of HelixCare.
 
-**Language:** Go · **Port:** 50280
+Language: Go Â· Port: 50280
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/sms-service/](../../../helm/charts/sms-service/) — Helm chart
-- [manifests/communications/sms-service/](../../../manifests/communications/sms-service/) — Raw K8s manifests
+- [helm/charts/sms-service/](../../../helm/charts/sms-service/) â€” Helm chart
+- [manifests/communications/sms-service/](../../../manifests/communications/sms-service/) â€” Raw K8s manifests

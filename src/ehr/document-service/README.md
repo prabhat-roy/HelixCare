@@ -1,8 +1,8 @@
-# document-service
+﻿# document-service
 
-Service in the **ehr** domain of HelixCare.
+Service in the ehr domain of HelixCare.
 
-**Language:** Go · **Port:** 50201
+Language: Go Â· Port: 50201
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/document-service/](../../../helm/charts/document-service/) — Helm chart
-- [manifests/ehr/document-service/](../../../manifests/ehr/document-service/) — Raw K8s manifests
+- [helm/charts/document-service/](../../../helm/charts/document-service/) â€” Helm chart
+- [manifests/ehr/document-service/](../../../manifests/ehr/document-service/) â€” Raw K8s manifests

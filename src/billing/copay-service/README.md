@@ -1,8 +1,8 @@
-# copay-service
+﻿# copay-service
 
-Service in the **billing** domain of HelixCare.
+Service in the billing domain of HelixCare.
 
-**Language:** Go · **Port:** 50162
+Language: Go Â· Port: 50162
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/copay-service/](../../../helm/charts/copay-service/) — Helm chart
-- [manifests/billing/copay-service/](../../../manifests/billing/copay-service/) — Raw K8s manifests
+- [helm/charts/copay-service/](../../../helm/charts/copay-service/) â€” Helm chart
+- [manifests/billing/copay-service/](../../../manifests/billing/copay-service/) â€” Raw K8s manifests

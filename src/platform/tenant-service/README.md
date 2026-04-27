@@ -1,8 +1,8 @@
-# tenant-service
+﻿# tenant-service
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51006
+Language: Go Â· Port: 51006
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/tenant-service/](../../../helm/charts/tenant-service/) — Helm chart
-- [manifests/platform/tenant-service/](../../../manifests/platform/tenant-service/) — Raw K8s manifests
+- [helm/charts/tenant-service/](../../../helm/charts/tenant-service/) â€” Helm chart
+- [manifests/platform/tenant-service/](../../../manifests/platform/tenant-service/) â€” Raw K8s manifests

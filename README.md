@@ -1,8 +1,8 @@
-# HelixCare — Enterprise Healthcare Management Platform
+﻿# HelixCare â€” Enterprise Healthcare Management Platform
 
 Enterprise-grade, cloud-native healthcare platform built on open source technologies. Covers the
-full patient lifecycle — appointment booking, clinical workflows, diagnostics, pharmacy, billing,
-and insurance — across hospital networks, clinics, and telehealth. HIPAA and HL7 FHIR R4 compliant.
+full patient lifecycle â€” appointment booking, clinical workflows, diagnostics, pharmacy, billing,
+and insurance â€” across hospital networks, clinics, and telehealth. HIPAA and HL7 FHIR R4 compliant.
 
 ---
 
@@ -50,33 +50,33 @@ and insurance — across hospital networks, clinics, and telehealth. HIPAA and H
 ## Architecture
 
 ```
-                ┌────────────────────────────────────────────┐
-                │              API Gateway                    │
-                │   (OAuth2 · mTLS · Rate Limit · WAF)        │
-                └──────┬─────────────┬───────────────┬────────┘
-                       │             │               │
-              ┌────────▼───┐  ┌──────▼──────┐  ┌────▼──────────┐
-              │ Patient BFF│  │Clinician BFF│  │  Admin BFF    │
-              │  (React)   │  │  (Angular)  │  │  (React)      │
-              └────────┬───┘  └──────┬──────┘  └────┬──────────┘
-                       │             │               │
-        ┌──────────────▼─────────────▼───────────────▼──────────────┐
-        │               Internal gRPC Mesh (Istio mTLS)              │
-        │  ┌──────────┐  ┌────────────┐  ┌──────────┐  ┌─────────┐  │
-        │  │ Clinical │  │ Diagnostics│  │ Pharmacy │  │ Billing │  │
-        │  │ Services │  │  Services  │  │ Services │  │ Services│  │
-        │  └──────────┘  └────────────┘  └──────────┘  └─────────┘  │
-        └──────────────────────┬─────────────────────────────────────┘
-                               │ Kafka Events (PHI encrypted at rest)
-                     ┌─────────▼──────────┐
-                     │    FHIR Gateway     │
-                     │  (HL7 FHIR R4 API) │
-                     └─────────┬──────────┘
-                               │
-           ┌───────────────────▼──────────────────────┐
-           │           Clinical Analytics             │
-           │  ClickHouse · Spark · Airflow · MLflow   │
-           └──────────────────────────────────────────┘
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚              API Gateway                    â”‚
+                â”‚   (OAuth2 Â· mTLS Â· Rate Limit Â· WAF)        â”‚
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â”‚             â”‚               â”‚
+              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+              â”‚ Patient BFFâ”‚  â”‚Clinician BFFâ”‚  â”‚  Admin BFF    â”‚
+              â”‚  (React)   â”‚  â”‚  (Angular)  â”‚  â”‚  (React)      â”‚
+              â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â”‚             â”‚               â”‚
+        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+        â”‚               Internal gRPC Mesh (Istio mTLS)              â”‚
+        â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+        â”‚  â”‚ Clinical â”‚  â”‚ Diagnosticsâ”‚  â”‚ Pharmacy â”‚  â”‚ Billing â”‚  â”‚
+        â”‚  â”‚ Services â”‚  â”‚  Services  â”‚  â”‚ Services â”‚  â”‚ Servicesâ”‚  â”‚
+        â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                               â”‚ Kafka Events (PHI encrypted at rest)
+                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                     â”‚    FHIR Gateway     â”‚
+                     â”‚  (HL7 FHIR R4 API) â”‚
+                     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                               â”‚
+           â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+           â”‚           Clinical Analytics             â”‚
+           â”‚  ClickHouse Â· Spark Â· Airflow Â· MLflow   â”‚
+           â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -84,59 +84,59 @@ and insurance — across hospital networks, clinics, and telehealth. HIPAA and H
 ## Tech Stack
 
 ### Healthcare Standards & Interoperability
-- **FHIR R4**: All clinical data exposed via HL7 FHIR R4 REST API (HAPI FHIR server)
-- **DICOM**: Medical imaging stored in Orthanc DICOM server; viewer via OHIF
-- **HL7 v2**: Legacy hospital integration via Mirth Connect (HL7 v2 ↔ FHIR adapter)
-- **SNOMED CT / ICD-10**: Terminology service backed by Snowstorm
-- **CDA / CCDA**: Clinical document exchange for referrals and transitions of care
+- FHIR R4: All clinical data exposed via HL7 FHIR R4 REST API (HAPI FHIR server)
+- DICOM: Medical imaging stored in Orthanc DICOM server; viewer via OHIF
+- HL7 v2: Legacy hospital integration via Mirth Connect (HL7 v2 â†” FHIR adapter)
+- SNOMED CT / ICD-10: Terminology service backed by Snowstorm
+- CDA / CCDA: Clinical document exchange for referrals and transitions of care
 
 ### Infrastructure
-- **Kubernetes**: EKS (primary) + AKS — multi-AZ, dedicated node pools per domain
-- **Service Mesh**: Istio (mTLS mandatory — PHI never travels unencrypted in-cluster)
-- **Database Encryption**: PostgreSQL with TDE; MongoDB encrypted at rest (AES-256)
-- **Audit Logging**: Immutable audit trail via Apache Kafka → Elasticsearch (tamper-evident)
-- **Backup**: Velero (K8s state) + automated daily PostgreSQL dumps to encrypted S3
+- Kubernetes: EKS (primary) + AKS â€” multi-AZ, dedicated node pools per domain
+- Service Mesh: Istio (mTLS mandatory â€” PHI never travels unencrypted in-cluster)
+- Database Encryption: PostgreSQL with TDE; MongoDB encrypted at rest (AES-256)
+- Audit Logging: Immutable audit trail via Apache Kafka â†’ Elasticsearch (tamper-evident)
+- Backup: Velero (K8s state) + automated daily PostgreSQL dumps to encrypted S3
 
 ### CI/CD & GitOps
-- **CI**: Jenkins (primary), GitHub Actions, GitLab CI
-- **CD**: ArgoCD (App-of-Apps), Argo Rollouts (blue-green for clinical services — zero downtime mandatory)
-- **IaC**: Terraform (EKS/AKS), Ansible (node hardening to CIS benchmarks)
-- **Secrets**: HashiCorp Vault with auto-rotation; External Secrets Operator
+- CI: Jenkins (primary), GitHub Actions, GitLab CI
+- CD: ArgoCD (App-of-Apps), Argo Rollouts (blue-green for clinical services â€” zero downtime mandatory)
+- IaC: Terraform (EKS/AKS), Ansible (node hardening to CIS benchmarks)
+- Secrets: HashiCorp Vault with auto-rotation; External Secrets Operator
 
 ### Observability
-- **Metrics**: Prometheus + Thanos + Grafana (dedicated SLO dashboards per domain)
-- **Logs**: Loki + Fluent Bit (PHI fields masked at collection via Fluent Bit Lua filters)
-- **Traces**: Jaeger + OpenTelemetry (trace every clinical transaction end-to-end)
-- **Uptime**: 99.99% SLA for critical paths (appointment booking, prescription, emergency)
-- **On-call**: Grafana OnCall + PagerDuty escalation for P1 clinical system outages
+- Metrics: Prometheus + Thanos + Grafana (dedicated SLO dashboards per domain)
+- Logs: Loki + Fluent Bit (PHI fields masked at collection via Fluent Bit Lua filters)
+- Traces: Jaeger + OpenTelemetry (trace every clinical transaction end-to-end)
+- Uptime: 99.99% SLA for critical paths (appointment booking, prescription, emergency)
+- On-call: Grafana OnCall + PagerDuty escalation for P1 clinical system outages
 
 ### Security (HIPAA-aligned)
-- **Identity**: Keycloak (patient/staff SSO with SMART on FHIR), MFA enforced for all clinical staff
-- **Secrets**: HashiCorp Vault + AWS KMS (PHI encryption keys)
-- **Network**: Cilium eBPF (zero-trust L3/L4), Istio mTLS (L7), no lateral movement between domains
-- **Scanning**: Trivy, Semgrep (HIPAA-specific rules), OWASP ZAP, SonarQube
-- **Policy**: OPA/Gatekeeper (enforce no PHI in logs), Kyverno, Falco (runtime anomaly detection)
-- **Pen Testing**: kube-bench (CIS K8s), kube-hunter, OpenVAS
-- **SBOM**: Syft + Dependency-Track (every image, every release)
+- Identity: Keycloak (patient/staff SSO with SMART on FHIR), MFA enforced for all clinical staff
+- Secrets: HashiCorp Vault + AWS KMS (PHI encryption keys)
+- Network: Cilium eBPF (zero-trust L3/L4), Istio mTLS (L7), no lateral movement between domains
+- Scanning: Trivy, Semgrep (HIPAA-specific rules), OWASP ZAP, SonarQube
+- Policy: OPA/Gatekeeper (enforce no PHI in logs), Kyverno, Falco (runtime anomaly detection)
+- Pen Testing: kube-bench (CIS K8s), kube-hunter, OpenVAS
+- SBOM: Syft + Dependency-Track (every image, every release)
 
 ### AI / ML (Clinical Decision Support)
-- **Risk Stratification**: ML model predicting 30-day readmission risk (Python + scikit-learn + MLflow)
-- **Clinical NLP**: Named entity recognition on physician notes (spaCy + BERT fine-tuned on MIMIC-III)
-- **Sepsis Alert**: Real-time early warning via Apache Flink (NEWS2 score + ML model on vital signs)
-- **Drug Interaction**: Graph-based interaction checker (Neo4j + RxNorm dataset)
-- **Medical Imaging AI**: Chest X-ray anomaly detection (PyTorch + MONAI framework)
-- **Population Health**: Cohort analytics on ClickHouse — chronic disease management dashboards
+- Risk Stratification: ML model predicting 30-day readmission risk (Python + scikit-learn + MLflow)
+- Clinical NLP: Named entity recognition on physician notes (spaCy + BERT fine-tuned on MIMIC-III)
+- Sepsis Alert: Real-time early warning via Apache Flink (NEWS2 score + ML model on vital signs)
+- Drug Interaction: Graph-based interaction checker (Neo4j + RxNorm dataset)
+- Medical Imaging AI: Chest X-ray anomaly detection (PyTorch + MONAI framework)
+- Population Health: Cohort analytics on ClickHouse â€” chronic disease management dashboards
 
 ---
 
 ## Key Design Decisions
 
-1. **PHI never in logs**: Fluent Bit Lua filter strips/masks PHI fields (patient ID, DOB, diagnosis) before shipping to Loki
-2. **Blue-green only for clinical services**: Canary rollouts too risky for prescription and order services — blue-green with instant rollback
-3. **FHIR as integration layer**: All external system integrations (insurance, lab, pharmacy chain) go through FHIR gateway — no direct DB access
-4. **Consent-first data model**: Every data access checked against patient consent store before processing
-5. **Immutable audit trail**: Every PHI access event published to Kafka → append-only Elasticsearch index (tamper-evident, HIPAA §164.312(b))
-6. **Telehealth isolation**: Video consultation runs in separate node pool with no access to clinical data plane (Zoom SDK / Jitsi)
+1. PHI never in logs: Fluent Bit Lua filter strips/masks PHI fields (patient ID, DOB, diagnosis) before shipping to Loki
+2. Blue-green only for clinical services: Canary rollouts too risky for prescription and order services â€” blue-green with instant rollback
+3. FHIR as integration layer: All external system integrations (insurance, lab, pharmacy chain) go through FHIR gateway â€” no direct DB access
+4. Consent-first data model: Every data access checked against patient consent store before processing
+5. Immutable audit trail: Every PHI access event published to Kafka â†’ append-only Elasticsearch index (tamper-evident, HIPAA Â§164.312(b))
+6. Telehealth isolation: Video consultation runs in separate node pool with no access to clinical data plane (Zoom SDK / Jitsi)
 
 ---
 
@@ -144,10 +144,10 @@ and insurance — across hospital networks, clinics, and telehealth. HIPAA and H
 
 | Requirement        | Implementation                                                   |
 |--------------------|------------------------------------------------------------------|
-| HIPAA §164.312(a)  | Keycloak RBAC + MFA, session timeout 15 min for clinical staff   |
-| HIPAA §164.312(b)  | Immutable audit log (Kafka → Elasticsearch, tamper-evident)      |
-| HIPAA §164.312(c)  | Cosign image signing, OPA policy enforcement, Kyverno admission  |
-| HIPAA §164.312(e)  | Istio mTLS (in-transit), AES-256 at rest, AWS KMS key management |
+| HIPAA Â§164.312(a)  | Keycloak RBAC + MFA, session timeout 15 min for clinical staff   |
+| HIPAA Â§164.312(b)  | Immutable audit log (Kafka â†’ Elasticsearch, tamper-evident)      |
+| HIPAA Â§164.312(c)  | Cosign image signing, OPA policy enforcement, Kyverno admission  |
+| HIPAA Â§164.312(e)  | Istio mTLS (in-transit), AES-256 at rest, AWS KMS key management |
 | GDPR Art. 17       | Automated data deletion workflows via gdpr-service               |
 | ISO 27001 A.12.4   | Centralized logging with Loki, 7-year retention on audit logs    |
 

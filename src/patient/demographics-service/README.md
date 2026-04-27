@@ -1,8 +1,8 @@
-# demographics-service
+﻿# demographics-service
 
-Service in the **patient** domain of HelixCare.
+Service in the patient domain of HelixCare.
 
-**Language:** Go · **Port:** 50043
+Language: Go Â· Port: 50043
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/demographics-service/](../../../helm/charts/demographics-service/) — Helm chart
-- [manifests/patient/demographics-service/](../../../manifests/patient/demographics-service/) — Raw K8s manifests
+- [helm/charts/demographics-service/](../../../helm/charts/demographics-service/) â€” Helm chart
+- [manifests/patient/demographics-service/](../../../manifests/patient/demographics-service/) â€” Raw K8s manifests

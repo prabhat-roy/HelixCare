@@ -1,8 +1,8 @@
-# geo-address-service
+﻿# geo-address-service
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51013
+Language: Go Â· Port: 51013
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/geo-address-service/](../../../helm/charts/geo-address-service/) — Helm chart
-- [manifests/platform/geo-address-service/](../../../manifests/platform/geo-address-service/) — Raw K8s manifests
+- [helm/charts/geo-address-service/](../../../helm/charts/geo-address-service/) â€” Helm chart
+- [manifests/platform/geo-address-service/](../../../manifests/platform/geo-address-service/) â€” Raw K8s manifests

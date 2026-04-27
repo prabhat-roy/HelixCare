@@ -1,8 +1,8 @@
-# billing-service
+﻿# billing-service
 
-Service in the **billing** domain of HelixCare.
+Service in the billing domain of HelixCare.
 
-**Language:** Go · **Port:** 50160
+Language: Go Â· Port: 50160
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/billing-service/](../../../helm/charts/billing-service/) — Helm chart
-- [manifests/billing/billing-service/](../../../manifests/billing/billing-service/) — Raw K8s manifests
+- [helm/charts/billing-service/](../../../helm/charts/billing-service/) â€” Helm chart
+- [manifests/billing/billing-service/](../../../manifests/billing/billing-service/) â€” Raw K8s manifests

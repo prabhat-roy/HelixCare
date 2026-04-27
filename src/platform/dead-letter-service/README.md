@@ -1,8 +1,8 @@
-# dead-letter-service
+﻿# dead-letter-service
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51010
+Language: Go Â· Port: 51010
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/dead-letter-service/](../../../helm/charts/dead-letter-service/) — Helm chart
-- [manifests/platform/dead-letter-service/](../../../manifests/platform/dead-letter-service/) — Raw K8s manifests
+- [helm/charts/dead-letter-service/](../../../helm/charts/dead-letter-service/) â€” Helm chart
+- [manifests/platform/dead-letter-service/](../../../manifests/platform/dead-letter-service/) â€” Raw K8s manifests

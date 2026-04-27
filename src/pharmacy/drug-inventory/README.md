@@ -1,8 +1,8 @@
-# drug-inventory
+﻿# drug-inventory
 
-Service in the **pharmacy** domain of HelixCare.
+Service in the pharmacy domain of HelixCare.
 
-**Language:** Go · **Port:** 50121
+Language: Go Â· Port: 50121
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/drug-inventory/](../../../helm/charts/drug-inventory/) — Helm chart
-- [manifests/pharmacy/drug-inventory/](../../../manifests/pharmacy/drug-inventory/) — Raw K8s manifests
+- [helm/charts/drug-inventory/](../../../helm/charts/drug-inventory/) â€” Helm chart
+- [manifests/pharmacy/drug-inventory/](../../../manifests/pharmacy/drug-inventory/) â€” Raw K8s manifests

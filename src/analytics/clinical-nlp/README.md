@@ -1,8 +1,8 @@
-# clinical-nlp
+﻿# clinical-nlp
 
-Service in the **analytics** domain of HelixCare.
+Service in the analytics domain of HelixCare.
 
-**Language:** Go · **Port:** 50303
+Language: Go Â· Port: 50303
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/clinical-nlp/](../../../helm/charts/clinical-nlp/) — Helm chart
-- [manifests/analytics/clinical-nlp/](../../../manifests/analytics/clinical-nlp/) — Raw K8s manifests
+- [helm/charts/clinical-nlp/](../../../helm/charts/clinical-nlp/) â€” Helm chart
+- [manifests/analytics/clinical-nlp/](../../../manifests/analytics/clinical-nlp/) â€” Raw K8s manifests

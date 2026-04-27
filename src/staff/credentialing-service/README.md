@@ -1,8 +1,8 @@
-# credentialing-service
+﻿# credentialing-service
 
-Service in the **staff** domain of HelixCare.
+Service in the staff domain of HelixCare.
 
-**Language:** Go · **Port:** 50242
+Language: Go Â· Port: 50242
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/credentialing-service/](../../../helm/charts/credentialing-service/) — Helm chart
-- [manifests/staff/credentialing-service/](../../../manifests/staff/credentialing-service/) — Raw K8s manifests
+- [helm/charts/credentialing-service/](../../../helm/charts/credentialing-service/) â€” Helm chart
+- [manifests/staff/credentialing-service/](../../../manifests/staff/credentialing-service/) â€” Raw K8s manifests

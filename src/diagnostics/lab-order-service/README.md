@@ -1,8 +1,8 @@
-# lab-order-service
+﻿# lab-order-service
 
-Service in the **diagnostics** domain of HelixCare.
+Service in the diagnostics domain of HelixCare.
 
-**Language:** Go · **Port:** 50100
+Language: Go Â· Port: 50100
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/lab-order-service/](../../../helm/charts/lab-order-service/) — Helm chart
-- [manifests/diagnostics/lab-order-service/](../../../manifests/diagnostics/lab-order-service/) — Raw K8s manifests
+- [helm/charts/lab-order-service/](../../../helm/charts/lab-order-service/) â€” Helm chart
+- [manifests/diagnostics/lab-order-service/](../../../manifests/diagnostics/lab-order-service/) â€” Raw K8s manifests

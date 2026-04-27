@@ -1,8 +1,8 @@
-# rate-limit-service
+﻿# rate-limit-service
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51007
+Language: Go Â· Port: 51007
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/rate-limit-service/](../../../helm/charts/rate-limit-service/) — Helm chart
-- [manifests/platform/rate-limit-service/](../../../manifests/platform/rate-limit-service/) — Raw K8s manifests
+- [helm/charts/rate-limit-service/](../../../helm/charts/rate-limit-service/) â€” Helm chart
+- [manifests/platform/rate-limit-service/](../../../manifests/platform/rate-limit-service/) â€” Raw K8s manifests

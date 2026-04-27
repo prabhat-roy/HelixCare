@@ -1,8 +1,8 @@
-# refund-service
+﻿# refund-service
 
-Service in the **billing** domain of HelixCare.
+Service in the billing domain of HelixCare.
 
-**Language:** Go · **Port:** 50163
+Language: Go Â· Port: 50163
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/refund-service/](../../../helm/charts/refund-service/) — Helm chart
-- [manifests/billing/refund-service/](../../../manifests/billing/refund-service/) — Raw K8s manifests
+- [helm/charts/refund-service/](../../../helm/charts/refund-service/) â€” Helm chart
+- [manifests/billing/refund-service/](../../../manifests/billing/refund-service/) â€” Raw K8s manifests

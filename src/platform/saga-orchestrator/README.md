@@ -1,8 +1,8 @@
-# saga-orchestrator
+﻿# saga-orchestrator
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51001
+Language: Go Â· Port: 51001
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/saga-orchestrator/](../../../helm/charts/saga-orchestrator/) — Helm chart
-- [manifests/platform/saga-orchestrator/](../../../manifests/platform/saga-orchestrator/) — Raw K8s manifests
+- [helm/charts/saga-orchestrator/](../../../helm/charts/saga-orchestrator/) â€” Helm chart
+- [manifests/platform/saga-orchestrator/](../../../manifests/platform/saga-orchestrator/) â€” Raw K8s manifests

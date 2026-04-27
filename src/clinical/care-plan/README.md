@@ -1,8 +1,8 @@
-# care-plan
+﻿# care-plan
 
-Service in the **clinical** domain of HelixCare.
+Service in the clinical domain of HelixCare.
 
-**Language:** Go · **Port:** 50082
+Language: Go Â· Port: 50082
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/care-plan/](../../../helm/charts/care-plan/) — Helm chart
-- [manifests/clinical/care-plan/](../../../manifests/clinical/care-plan/) — Raw K8s manifests
+- [helm/charts/care-plan/](../../../helm/charts/care-plan/) â€” Helm chart
+- [manifests/clinical/care-plan/](../../../manifests/clinical/care-plan/) â€” Raw K8s manifests

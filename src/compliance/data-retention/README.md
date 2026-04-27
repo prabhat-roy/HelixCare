@@ -1,8 +1,8 @@
-# data-retention
+﻿# data-retention
 
-Service in the **compliance** domain of HelixCare.
+Service in the compliance domain of HelixCare.
 
-**Language:** Go · **Port:** 50321
+Language: Go Â· Port: 50321
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/data-retention/](../../../helm/charts/data-retention/) — Helm chart
-- [manifests/compliance/data-retention/](../../../manifests/compliance/data-retention/) — Raw K8s manifests
+- [helm/charts/data-retention/](../../../helm/charts/data-retention/) â€” Helm chart
+- [manifests/compliance/data-retention/](../../../manifests/compliance/data-retention/) â€” Raw K8s manifests

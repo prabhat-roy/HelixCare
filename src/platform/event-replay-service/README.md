@@ -1,8 +1,8 @@
-# event-replay-service
+﻿# event-replay-service
 
-Service in the **platform** domain of HelixCare.
+Service in the platform domain of HelixCare.
 
-**Language:** Go · **Port:** 51009
+Language: Go Â· Port: 51009
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/event-replay-service/](../../../helm/charts/event-replay-service/) — Helm chart
-- [manifests/platform/event-replay-service/](../../../manifests/platform/event-replay-service/) — Raw K8s manifests
+- [helm/charts/event-replay-service/](../../../helm/charts/event-replay-service/) â€” Helm chart
+- [manifests/platform/event-replay-service/](../../../manifests/platform/event-replay-service/) â€” Raw K8s manifests

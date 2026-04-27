@@ -1,8 +1,8 @@
-# adjudication-service
+﻿# adjudication-service
 
-Service in the **insurance** domain of HelixCare.
+Service in the insurance domain of HelixCare.
 
-**Language:** Go · **Port:** 50183
+Language: Go Â· Port: 50183
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/adjudication-service/](../../../helm/charts/adjudication-service/) — Helm chart
-- [manifests/insurance/adjudication-service/](../../../manifests/insurance/adjudication-service/) — Raw K8s manifests
+- [helm/charts/adjudication-service/](../../../helm/charts/adjudication-service/) â€” Helm chart
+- [manifests/insurance/adjudication-service/](../../../manifests/insurance/adjudication-service/) â€” Raw K8s manifests

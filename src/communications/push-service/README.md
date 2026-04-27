@@ -1,8 +1,8 @@
-# push-service
+﻿# push-service
 
-Service in the **communications** domain of HelixCare.
+Service in the communications domain of HelixCare.
 
-**Language:** Go · **Port:** 50282
+Language: Go Â· Port: 50282
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/push-service/](../../../helm/charts/push-service/) — Helm chart
-- [manifests/communications/push-service/](../../../manifests/communications/push-service/) — Raw K8s manifests
+- [helm/charts/push-service/](../../../helm/charts/push-service/) â€” Helm chart
+- [manifests/communications/push-service/](../../../manifests/communications/push-service/) â€” Raw K8s manifests

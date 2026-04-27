@@ -1,8 +1,8 @@
-# shift-management
+﻿# shift-management
 
-Service in the **staff** domain of HelixCare.
+Service in the staff domain of HelixCare.
 
-**Language:** Go · **Port:** 50240
+Language: Go Â· Port: 50240
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/shift-management/](../../../helm/charts/shift-management/) — Helm chart
-- [manifests/staff/shift-management/](../../../manifests/staff/shift-management/) — Raw K8s manifests
+- [helm/charts/shift-management/](../../../helm/charts/shift-management/) â€” Helm chart
+- [manifests/staff/shift-management/](../../../manifests/staff/shift-management/) â€” Raw K8s manifests

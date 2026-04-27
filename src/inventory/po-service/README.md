@@ -1,8 +1,8 @@
-# po-service
+﻿# po-service
 
-Service in the **inventory** domain of HelixCare.
+Service in the inventory domain of HelixCare.
 
-**Language:** Go · **Port:** 50262
+Language: Go Â· Port: 50262
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/po-service/](../../../helm/charts/po-service/) — Helm chart
-- [manifests/inventory/po-service/](../../../manifests/inventory/po-service/) — Raw K8s manifests
+- [helm/charts/po-service/](../../../helm/charts/po-service/) â€” Helm chart
+- [manifests/inventory/po-service/](../../../manifests/inventory/po-service/) â€” Raw K8s manifests

@@ -1,8 +1,8 @@
-# risk-stratification
+﻿# risk-stratification
 
-Service in the **analytics** domain of HelixCare.
+Service in the analytics domain of HelixCare.
 
-**Language:** Go · **Port:** 50301
+Language: Go Â· Port: 50301
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/risk-stratification/](../../../helm/charts/risk-stratification/) — Helm chart
-- [manifests/analytics/risk-stratification/](../../../manifests/analytics/risk-stratification/) — Raw K8s manifests
+- [helm/charts/risk-stratification/](../../../helm/charts/risk-stratification/) â€” Helm chart
+- [manifests/analytics/risk-stratification/](../../../manifests/analytics/risk-stratification/) â€” Raw K8s manifests
